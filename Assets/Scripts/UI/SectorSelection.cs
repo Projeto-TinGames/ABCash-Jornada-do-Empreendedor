@@ -7,6 +7,10 @@ public class SectorSelection : MonoBehaviour {
 
     public GameObject descriptionWindow;
 
+    private void Start() {
+        GetComponent<Button>().interactable = true;
+    }
+
     public void EnterSector() {
         descriptionWindow.SetActive(true);
     }
