@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Alien : MonoBehaviour {
 
-    [System.NonSerialized]public AlienStats stats;
+    public AlienStats stats;
 
     //Implementar lógicas de trabalho do alien
 

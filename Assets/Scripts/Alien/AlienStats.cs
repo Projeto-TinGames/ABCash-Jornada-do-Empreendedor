@@ -6,36 +6,36 @@ using UnityEngine;
 public class AlienStats : ScriptableObject {
 
     //Race variables
-    public string[] possibleNames;
+    [SerializeField]private string[] possibleNames;
     public string race;
-    public int agilityModifier = 1;
-    public int knowledgeModifier = 1;
+
+    [SerializeField]private int agilityModifier = 1;
+    [SerializeField]private int knowledgeModifier = 1;
+    
     public Sprite sprite;
 
     //Stats strings
-    [System.NonSerialized]public string name;
+    [System.NonSerialized]public new string name;
     [System.NonSerialized]public string planet;
-    [System.NonSerialized]public string status;
-    [System.NonSerialized]public string[] likes;
-    [System.NonSerialized]public string[] dislikes;
+    [System.NonSerialized]public string sector;
     
     //Stats ints
     [System.NonSerialized]public int age;
     [System.NonSerialized]public int rank;
-    [System.NonSerialized]public int exigence;
+    [System.NonSerialized]public int status = 100;
     [System.NonSerialized]public int agility;
     [System.NonSerialized]public int knowledge;
+    [System.NonSerialized]public int salary;
 
     public void Randomize() {
         GenerateName();
         GeneratePlanet();
-        GenerateLikes();
-        GenerateDislikes();
+        GenerateSector();
         GenerateAge();
         GenerateRank();
-        GenerateExigence();
         GenerateAgility();
         GenerateKnowledge();
+        GenerateSalary();
     }
 
     private void GenerateName() {
@@ -47,12 +47,8 @@ public class AlienStats : ScriptableObject {
         planet = possiblePlanets[Random.Range(0,possibleNames.Length)];
     }
 
-    private void GenerateLikes() {
-        likes = new string[]{"TestLikes"};
-    }
-
-    private void GenerateDislikes() {
-        dislikes = new string[]{"TestDislikes"};
+    private void GenerateSector() {
+        sector = "Test";
     }
 
     private void GenerateAge() {
@@ -60,19 +56,31 @@ public class AlienStats : ScriptableObject {
     }
 
     private void GenerateRank() {
-        rank = Random.Range(1,4);
-    }
-
-    private void GenerateExigence() {
-        exigence = Random.Range(1,25*rank);
+        int randomInt = Random.Range(1,100);
+        if (randomInt <= 50) {
+            rank = 1;
+        }
+        else if (randomInt <= 80) {
+            rank = 2;
+        }
+        else if (randomInt <= 95) {
+            rank = 3;
+        }
+        else {
+            rank = 4;
+        }
     }
 
     private void GenerateAgility() {
-        agility = Random.Range(1,25*rank)*agilityModifier - (age/25);
+        agility = Random.Range(1,25)*rank*agilityModifier - (age/25);
     }
 
     private void GenerateKnowledge() {
-        knowledge = Random.Range(1,25*rank)*knowledgeModifier + (age/25);
+        knowledge = Random.Range(1,25)*rank*knowledgeModifier + (age/25);
+    }
+
+    private void GenerateSalary() { //Precisa criar lógica para levar em conta a distância do planeta em que mora
+        salary = (agility+knowledge)*100;
     }
 
 }
