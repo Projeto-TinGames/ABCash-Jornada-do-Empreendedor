@@ -146,6 +146,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4492565212138136490, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492565212138136490, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492565212138136490, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492565212138136490, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190335
+      objectReference: {fileID: 0}
     - target: {fileID: 5754723107757527054, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

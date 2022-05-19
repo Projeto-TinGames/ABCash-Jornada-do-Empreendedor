@@ -2,32 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AlienStats")]
-public class AlienStats : ScriptableObject {
-
+public class AlienStats {
     //Race variables
-    [SerializeField]private string[] possibleNames;
-    public string race;
+    private string[] namesArray;
+    private int agilityMultiplier = 1;
+    private int knowledgeMultiplier = 1;
 
-    [SerializeField]private int agilityModifier = 1;
-    [SerializeField]private int knowledgeModifier = 1;
-    
+    //Alien stats
     public Sprite sprite;
+    public string name;
+    public string race;
+    public string planet;
+    public string sector;
+    public int age;
+    public int rank;
+    public int status = 100;
+    public int agility;
+    public int knowledge;
+    public int salary;
 
-    //Stats strings
-    [System.NonSerialized]public new string name;
-    [System.NonSerialized]public string planet;
-    [System.NonSerialized]public string sector;
-    
-    //Stats ints
-    [System.NonSerialized]public int age;
-    [System.NonSerialized]public int rank;
-    [System.NonSerialized]public int status = 100;
-    [System.NonSerialized]public int agility;
-    [System.NonSerialized]public int knowledge;
-    [System.NonSerialized]public int salary;
+    public AlienStats(Sprite sprite, string[] namesArray, string race, int agilityMultiplier, int knowledgeMultiplier) {
+        this.sprite = sprite;
+        this.namesArray = namesArray;
+        this.race = race;
+        this.agilityMultiplier = agilityMultiplier;
+        this.knowledgeMultiplier = knowledgeMultiplier;
 
-    public void Randomize() {
+        Randomize();
+    }
+
+    private void Randomize() {
         GenerateName();
         GeneratePlanet();
         GenerateSector();
@@ -39,12 +43,12 @@ public class AlienStats : ScriptableObject {
     }
 
     private void GenerateName() {
-        name = possibleNames[Random.Range(0,possibleNames.Length)];
+        name = namesArray[Random.Range(0,namesArray.Length)];
     }
 
     private void GeneratePlanet() {
-        string[] possiblePlanets = new string[]{"Sinertag","Lemeb Vono", "Amenaip"};
-        planet = possiblePlanets[Random.Range(0,possibleNames.Length)];
+        string[] planets = new string[]{"Sinertag","Lemeb Vono", "Amenaip"};
+        planet = planets[Random.Range(0,planets.Length)];
     }
 
     private void GenerateSector() {
@@ -72,11 +76,11 @@ public class AlienStats : ScriptableObject {
     }
 
     private void GenerateAgility() {
-        agility = Random.Range(1,25)*rank*agilityModifier - (age/25);
+        agility = Random.Range(1,25)*rank*agilityMultiplier - (age/25);
     }
 
     private void GenerateKnowledge() {
-        knowledge = Random.Range(1,25)*rank*knowledgeModifier + (age/25);
+        knowledge = Random.Range(1,25)*rank*knowledgeMultiplier + (age/25);
     }
 
     private void GenerateSalary() { //Precisa criar lógica para levar em conta a distância do planeta em que mora

@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 7748012889105296339}
   - component: {fileID: 7748012889105296338}
   m_Layer: 5
-  m_Name: UI_Contract_Wisdom
+  m_Name: UI_Contract_Knowledge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1905,7 +1905,7 @@ GameObject:
   - component: {fileID: 7748012890079893146}
   - component: {fileID: 7748012890079893147}
   m_Layer: 5
-  m_Name: UI_Contract_Wisdom_Label
+  m_Name: UI_Contract_Knowledge_Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2173,7 +2173,7 @@ GameObject:
   - component: {fileID: 7748012890249206241}
   - component: {fileID: 7748012890249206246}
   m_Layer: 5
-  m_Name: UI_Contract_Wisdom_Display
+  m_Name: UI_Contract_Knowledge_Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2899,7 +2899,6 @@ MonoBehaviour:
   agility: {fileID: 7748012889343620132}
   knowledge: {fileID: 7748012890464993950}
   salary: {fileID: 7748012890196545311}
-  alien: {fileID: 0}
 --- !u!1 &7748012890450715609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2976,7 +2975,7 @@ GameObject:
   - component: {fileID: 7748012890464993945}
   - component: {fileID: 7748012890464993950}
   m_Layer: 5
-  m_Name: UI_Contract_Wisdom_Display_Text
+  m_Name: UI_Contract_Knowledge_Display_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

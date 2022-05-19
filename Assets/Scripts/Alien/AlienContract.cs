@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class AlienContract : MonoBehaviour {
+    private Company company;
+
     private Alien[] aliens;
     private Alien activeAlien;
     [SerializeField]private AlienDisplay display;
@@ -21,6 +23,8 @@ public class AlienContract : MonoBehaviour {
     }
 
     private void Start() {
+        company = Company.instance;
+
         acceptButton.interactable = false;
         rejectButton.interactable = false;
 
@@ -38,13 +42,13 @@ public class AlienContract : MonoBehaviour {
 
         activeAlien = aliens[Random.Range(0,aliens.Length)];
         activeAlien.gameObject.SetActive(true);
-        activeAlien.stats.Randomize();
+        activeAlien.GenerateStats();
 
         display.RefreshDisplay(activeAlien.stats);
     }
 
     private void Accept() {
-        Company.instance.AddEmployee(activeAlien);
+        company.AddEmployee(activeAlien);
         GenerateRandomAlien();
     }
 
