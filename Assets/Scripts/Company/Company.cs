@@ -30,10 +30,19 @@ public class Company : MonoBehaviour {
             return revenue;
         }
 
+        public List<Alien> GetEmployees() {
+            return employees;
+        }
+
     #endregion
 
     #region Set Functions
-    
+
+        public void AddRevenue(int value) {
+            revenue += value;
+            Debug.Log(revenue);
+        }
+
         public void AddEmployee(Alien alien) {
             employees.Add(alien);
             Debug.Log(employees[employees.Count-1].GetType() + " Accepted");
