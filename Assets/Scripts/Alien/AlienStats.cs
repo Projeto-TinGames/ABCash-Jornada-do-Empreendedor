@@ -10,6 +10,7 @@ public class AlienStats {
 
     //Alien stats
     public Sprite sprite;
+    public Color color;
     public string name;
     public string race;
     public string planet;
@@ -32,6 +33,7 @@ public class AlienStats {
     }
 
     private void Randomize() {
+        GenerateColor();
         GenerateName();
         GeneratePlanet();
         GenerateSector();
@@ -40,6 +42,10 @@ public class AlienStats {
         GenerateAgility();
         GenerateKnowledge();
         GenerateSalary();
+    }
+
+    private void GenerateColor() {
+        color = new Color(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1F));
     }
 
     private void GenerateName() {

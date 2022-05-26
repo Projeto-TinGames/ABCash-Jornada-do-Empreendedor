@@ -26,10 +26,18 @@ public class Sector : MonoBehaviour {
         }
     }
 
-    public void AddEmployee() {
+    public List<Alien> GetEmployees() {
+        return employees;
+    }
+
+    public void AddEmployee(Alien employee) {
         if (company.GetEmployees().Count > 0) {
-            employees.Add(company.GetEmployees()[0]);
+            employees.Add(employee);
         }
+    }
+
+    public void RemoveEmployee(Alien employee) {
+        employees.Remove(employee);
     }
 
 }

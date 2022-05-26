@@ -48,5 +48,9 @@ public class Company : MonoBehaviour {
             Debug.Log(employees[employees.Count-1].GetType() + " Accepted");
         }
 
+        public void RemoveEmployee(Alien alien) {
+            employees.Remove(alien);
+        }
+
     #endregion
 }

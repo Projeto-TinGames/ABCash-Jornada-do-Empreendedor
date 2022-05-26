@@ -18,7 +18,7 @@ public class AlienDisplay : MonoBehaviour {
 
     public void RefreshDisplay(AlienStats stats) {
         image.sprite = stats.sprite;
-        image.color = new Color(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1F));
+        image.color = stats.color;
 
         name.text = stats.name;
         race.text = stats.race;
