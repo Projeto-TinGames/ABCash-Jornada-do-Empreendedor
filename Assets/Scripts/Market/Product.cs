@@ -6,5 +6,5 @@ using UnityEngine;
 public class Product : ScriptableObject {
     public new string name;
     public int workRequired;
-    public int price;
+    public float price;
 }

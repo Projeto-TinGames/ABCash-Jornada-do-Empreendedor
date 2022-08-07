@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour {
     public static SceneController instance;
 
-    [SerializeField]private Animator crossfade;
-    private float transitionTime = .2f;
+    //[SerializeField]private Animator crossfade;
+    //private float transitionTime = .2f;
 
     private void Awake() {
         if (instance == null) {

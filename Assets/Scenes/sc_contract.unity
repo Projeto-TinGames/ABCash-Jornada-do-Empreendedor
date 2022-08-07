@@ -2301,7 +2301,7 @@ GameObject:
   - component: {fileID: 1209245450}
   - component: {fileID: 1209245449}
   m_Layer: 5
-  m_Name: UI_Contract_Race_Display_Text
+  m_Name: UI_Contract_Species_Display_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2346,7 +2346,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ra\xE7a"
+  m_text: "Esp\xE9cie"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2979,7 +2979,7 @@ GameObject:
   - component: {fileID: 1548798997}
   - component: {fileID: 1548798998}
   m_Layer: 5
-  m_Name: UI_Contract_Race
+  m_Name: UI_Contract_Species
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3044,7 +3044,7 @@ GameObject:
   - component: {fileID: 1673559130}
   - component: {fileID: 1673559129}
   m_Layer: 5
-  m_Name: UI_Contract_Race_Label
+  m_Name: UI_Contract_Species_Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3089,7 +3089,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ra\xE7a:"
+  m_text: "Esp\xE9cie:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4204,7 +4204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1849602638}
   name: {fileID: 1922271803}
-  race: {fileID: 1209245449}
+  species: {fileID: 1209245449}
   planet: {fileID: 167970107}
   sector: {fileID: 1351780866}
   age: {fileID: 1770534132}
@@ -4288,7 +4288,7 @@ GameObject:
   - component: {fileID: 2116892835}
   - component: {fileID: 2116892834}
   m_Layer: 5
-  m_Name: UI_Contract_Race_Display
+  m_Name: UI_Contract_Species_Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

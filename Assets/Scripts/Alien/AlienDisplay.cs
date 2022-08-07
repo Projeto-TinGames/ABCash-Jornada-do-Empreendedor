@@ -7,7 +7,7 @@ using TMPro;
 public class AlienDisplay : MonoBehaviour {
     [SerializeField]private Image image;
     [SerializeField]private new TextMeshProUGUI name;
-    [SerializeField]private TextMeshProUGUI race;
+    [SerializeField]private TextMeshProUGUI species;
     [SerializeField]private TextMeshProUGUI planet;
     [SerializeField]private TextMeshProUGUI sector;
     [SerializeField]private TextMeshProUGUI age;
@@ -21,7 +21,7 @@ public class AlienDisplay : MonoBehaviour {
         image.color = stats.color;
 
         name.text = stats.name;
-        race.text = stats.race;
+        species.text = stats.species;
         planet.text = stats.planet;
         sector.text = stats.sector.ToString();
         age.text = stats.age.ToString();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AlienStats {
-    //Race variables
+    //species variables
     private string[] namesArray;
     private int agilityMultiplier = 1;
     private int knowledgeMultiplier = 1;
@@ -12,7 +12,7 @@ public class AlienStats {
     public Sprite sprite;
     public Color color;
     public string name;
-    public string race;
+    public string species;
     public string planet;
     public string sector;
     public int age;
@@ -22,10 +22,10 @@ public class AlienStats {
     public int knowledge;
     public int salary;
 
-    public AlienStats(Sprite sprite, string[] namesArray, string race, int agilityMultiplier, int knowledgeMultiplier) {
+    public AlienStats(Sprite sprite, string[] namesArray, string species, int agilityMultiplier, int knowledgeMultiplier) {
         this.sprite = sprite;
         this.namesArray = namesArray;
-        this.race = race;
+        this.species = species;
         this.agilityMultiplier = agilityMultiplier;
         this.knowledgeMultiplier = knowledgeMultiplier;
 
@@ -33,8 +33,8 @@ public class AlienStats {
     }
 
     private void Randomize() {
-        GenerateColor();
         GenerateName();
+        GenerateColor();
         GeneratePlanet();
         GenerateSector();
         GenerateAge();
@@ -44,12 +44,12 @@ public class AlienStats {
         GenerateSalary();
     }
 
-    private void GenerateColor() {
-        color = new Color(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1F));
-    }
-
     private void GenerateName() {
         name = namesArray[Random.Range(0,namesArray.Length)];
+    }
+
+    private void GenerateColor() {
+        color = new Color(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1F));
     }
 
     private void GeneratePlanet() {

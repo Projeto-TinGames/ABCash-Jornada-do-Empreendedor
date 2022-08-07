@@ -1431,7 +1431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35ba742cffa34fb4896502d93a8b6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  product: {fileID: 11400000, guid: 6f6866d0562d35742b305cc6af489799, type: 2}
+  product: {fileID: 11400000, guid: 1d2671d9ef2fb054abef70521ca9e1c4, type: 2}
 --- !u!1001 &1616552552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1591,7 +1591,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7748012889069579715, guid: c7da8c4365f2e9d4a8dfd4dd66163cb5, type: 3}
       propertyPath: m_Name
-      value: UI_Employees_Race_Label
+      value: UI_Employees_Species_Label
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748012889069579773, guid: c7da8c4365f2e9d4a8dfd4dd66163cb5, type: 3}
+      propertyPath: m_text
+      value: "Esp\xE9cie"
       objectReference: {fileID: 0}
     - target: {fileID: 7748012889098435148, guid: c7da8c4365f2e9d4a8dfd4dd66163cb5, type: 3}
       propertyPath: m_Name
@@ -1887,7 +1891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7748012890402775464, guid: c7da8c4365f2e9d4a8dfd4dd66163cb5, type: 3}
       propertyPath: m_Name
-      value: UI_Employees_Race_Display
+      value: UI_Employees_Species_Display
       objectReference: {fileID: 0}
     - target: {fileID: 7748012890402775467, guid: c7da8c4365f2e9d4a8dfd4dd66163cb5, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2039,7 +2043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7748012890527693398, guid: c7da8c4365f2e9d4a8dfd4dd66163cb5, type: 3}
       propertyPath: m_Name
-      value: UI_Employees_Race
+      value: UI_Employees_Species
       objectReference: {fileID: 0}
     - target: {fileID: 7748012890700267076, guid: c7da8c4365f2e9d4a8dfd4dd66163cb5, type: 3}
       propertyPath: m_Name
@@ -2095,7 +2099,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7748012890831443681, guid: c7da8c4365f2e9d4a8dfd4dd66163cb5, type: 3}
       propertyPath: m_Name
-      value: UI_Employees_Race_Display_Text
+      value: UI_Employees_Species_Display_Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748012890831443683, guid: c7da8c4365f2e9d4a8dfd4dd66163cb5, type: 3}
+      propertyPath: m_text
+      value: "Esp\xE9cie"
       objectReference: {fileID: 0}
     - target: {fileID: 7748012890949072750, guid: c7da8c4365f2e9d4a8dfd4dd66163cb5, type: 3}
       propertyPath: m_AnchorMax.y

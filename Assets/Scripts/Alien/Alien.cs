@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Alien : MonoBehaviour {
-
     public AlienStats stats;
 
     [SerializeField]private Sprite sprite;

@@ -266,7 +266,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: sc_company
+          m_StringArgument: sc_branch
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &2945108765105111251
@@ -813,7 +813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e16034f51b4edd449cfd6f2c6143320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crossfade: {fileID: 6321659372602615280}
 --- !u!1 &5374638222823238267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5990392707752527703}
   m_Layer: 0
-  m_Name: prefab_GeneralScene
+  m_Name: prefab_scene_general
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
