@@ -1,37 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GalaxyDisplay : MonoBehaviour {
     private Company company;
     private Galaxy galaxy;
-    private Direction direction;
-    private bool branchFounded;
+    private bool hasBranch;
+
+    [SerializeField]private TextMeshProUGUI galaxyName;
 
     private void Start() {
         company = Company.instance;
+        galaxyName.text = $"Galáxia \n{galaxy.GetPositionX()},{galaxy.GetPositionY()}";
     }
 
     public void Select() {
-        if (!branchFounded) {
-            branchFounded = true;
+        if (hasBranch) {
+            company.SetBranch(galaxy.GetId());
+            SceneController.instance.Load("sc_branch");
+        }
+        else {
+            hasBranch = true;
 
-            Branch branch = new Branch(galaxy.GetId(), galaxy.GetStats().GetMarket());
+            Branch branch = new Branch(galaxy.GetId(), galaxy.GetMarket());
             branch.Test();
             company.AddBranch(branch);
 
-            GalaxyMapDisplay.instance.GenerateMap(this);
-        }
-        else {
-            company.SetBranch(galaxy.GetId());
-            SceneController.instance.Load("sc_branch");
+            GalaxyMap.instance.GenerateMap(this.GetGalaxy());
         }
     }
 
     #region Get Functions
 
-        public Direction GetDirection() {
-            return direction;
+        public Galaxy GetGalaxy() {
+            return galaxy;
         }
 
     #endregion
@@ -40,10 +43,6 @@ public class GalaxyDisplay : MonoBehaviour {
 
         public void SetGalaxy(Galaxy galaxy) {
             this.galaxy = galaxy;
-        }
-
-        public void SetDirection(Direction direction) {
-            this.direction = direction;
         }
 
     #endregion

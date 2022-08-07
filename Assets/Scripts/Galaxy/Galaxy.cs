@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Galaxy {
-    private int id;
-    private GalaxyStats stats;
+    private string[] possibleNames = {"a", "b", "c", "d", "e"};
 
-    public Galaxy(int id) {
+    private int id;
+    private int x;
+    private int y;
+    private string name;
+    private Market market;
+
+    public Galaxy(int id, int x, int y) {
         this.id = id;
-        stats = new GalaxyStats();
+        this.x = x;
+        this.y = y;
+
+        this.name = possibleNames[Random.Range(0,possibleNames.Length)];
+        this.market = new Market();
     }
 
     #region Get Functions
@@ -17,9 +27,22 @@ public class Galaxy {
             return id;
         }
 
-        public GalaxyStats GetStats() {
-            return stats;
+        public int GetPositionX() {
+            return x;
+        }
+
+        public int GetPositionY() {
+            return y;
+        }
+
+        public string GetName() {
+            return name;
+        }
+
+        public Market GetMarket() {
+            return market;
         }
 
     #endregion
+
 }

@@ -38,6 +38,7 @@ public class Branch {
     #endregion
 
     public void Test() {
+        Debug.Log(id);
         for (int i = 0; i < 3; i++) {
             Debug.Log(market.GetProduct(i) + ": " + market.GetValue(i).ToString());
         }
