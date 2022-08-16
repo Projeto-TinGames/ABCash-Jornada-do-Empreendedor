@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/sc_galaxies.unity
+    guid: 037d9ebe209d87d478207a025836667f
+  - enabled: 1
     path: Assets/Scenes/sc_branch.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1

@@ -40,7 +40,7 @@ public class GalaxyMap : MonoBehaviour {
             galaxies.Add(newGalaxy);
             galaxyMatrix[x].Add(y,newGalaxy);
 
-            GalaxyMapDisplay.instance.UpdateDisplay(newGalaxy);
+            GalaxyMapDisplay.instance.AddGalaxy(newGalaxy);
         }
     }
 
