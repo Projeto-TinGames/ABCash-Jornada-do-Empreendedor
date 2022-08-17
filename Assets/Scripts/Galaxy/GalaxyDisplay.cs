@@ -21,7 +21,6 @@ public class GalaxyDisplay : MonoBehaviour {
         button.interactable = false;
         button.interactable = true;
         
-        company = Company.instance;
         galaxyName.text = $"Galáxia \n{galaxy.GetPositionX()},{galaxy.GetPositionY()}";
     }
 
@@ -38,19 +37,17 @@ public class GalaxyDisplay : MonoBehaviour {
 
     public void Select() {
         if (hasBranch) {
-            company.SetBranch(galaxy.GetId());
+            Company.instance.SetBranch(galaxy.GetId());
             SceneController.instance.Load("sc_branch");
         }
         else {
-            hasBranch = true;
-
-            Branch branch = new Branch(galaxy.GetId(), galaxy.GetMarket());
-            branch.Test();
-            company.AddBranch(branch);
-
-            GalaxyMap.instance.GenerateMap(this.GetGalaxy());
-            ChangeColors();
+            CreateBranchUI.instance.OpenPanel(this);
         }
+    }
+
+    public void CreateBranch() {
+        hasBranch = true;
+        ChangeColors();
     }
 
     #region Get Functions

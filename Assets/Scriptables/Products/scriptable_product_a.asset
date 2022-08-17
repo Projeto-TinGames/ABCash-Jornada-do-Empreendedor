@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312656ff795d2e24fb964d799e17e3e5, type: 3}
   m_Name: scriptable_product_a
   m_EditorClassIdentifier: 
-  name: a
+  name: Produto A
   workRequired: 100
   price: 1

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GalaxyMapDisplay : MonoBehaviour {
     public static GalaxyMapDisplay instance;
-    public GameObject galaxy;
+    [SerializeField]private GameObject galaxy;
 
     private void Awake() {
         if (instance == null) {

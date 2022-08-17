@@ -9,16 +9,20 @@ public class Market {
     de produto, tendo um ID próprio para ser referenciado 
     --------------------------------------------------------------*/
 
-    private string[] products = {"a", "b", "c"};
+    private List<string> products = new List<string>{"Produto A", "Produto B", "Produto C"};
     private float[] values = new float[3]; //Percentagem de valorização/desvalorização
 
     public Market() {
-        for (int i = 0; i < products.Length; i++) {
+        for (int i = 0; i < products.Count; i++) {
             values[i] = (float)Random.Range(-100, 101)/100;
         }
     }
 
     #region Get Functions
+
+        public List<string> GetProducts() {
+            return products;
+        }
 
         public string GetProduct(int id) {
             return products[id];
