@@ -27,6 +27,10 @@ public class Branch {
             return sectors;
         }
 
+        public Sector GetSector(int id) {
+            return sectors[id];
+        }
+
     #endregion
 
     #region Add Functions
@@ -36,10 +40,4 @@ public class Branch {
         }
 
     #endregion
-
-    public void Test() {
-        for (int i = 0; i < 3; i++) {
-            Debug.Log(market.GetProduct(i) + ": " + market.GetValue(i).ToString());
-        }
-    }
 }

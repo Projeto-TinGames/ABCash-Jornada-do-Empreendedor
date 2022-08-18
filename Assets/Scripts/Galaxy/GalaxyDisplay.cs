@@ -41,7 +41,7 @@ public class GalaxyDisplay : MonoBehaviour {
             SceneController.instance.Load("sc_branch");
         }
         else {
-            CreateBranchUI.instance.OpenPanel(this);
+            CreateBranchManager.instance.LoadDisplay(this);
         }
     }
 

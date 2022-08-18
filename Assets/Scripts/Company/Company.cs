@@ -47,6 +47,7 @@ public class Company : MonoBehaviour {
 
         public void SetBranch(int id) {
             branch = branches[id];
+            Debug.Log(branch.GetSector(0).GetProduct().name);
         }
 
     #endregion
@@ -65,7 +66,6 @@ public class Company : MonoBehaviour {
 
         public void AddEmployee(Alien alien) {
             employees.Add(alien);
-            Debug.Log(employees[employees.Count-1].GetType() + " Accepted");
         }
 
     #endregion

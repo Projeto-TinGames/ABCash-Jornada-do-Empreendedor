@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 312656ff795d2e24fb964d799e17e3e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 26790096909b75042b08ca60e2f88442, type: 3}
   m_Name: scriptable_product_c
   m_EditorClassIdentifier: 
-  name: Produto C
-  workRequired: 300
-  price: 3
+  product:
+    name: Produto C
+    workRequired: 300
+    price: 3
