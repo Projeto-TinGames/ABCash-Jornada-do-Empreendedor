@@ -5,30 +5,29 @@ using UnityEngine.UI;
 using TMPro;
 
 public class AlienDisplay : MonoBehaviour {
-    public Image image;
-    public TextMeshProUGUI name;
-    public TextMeshProUGUI race;
-    public TextMeshProUGUI age;
-    public TextMeshProUGUI rank;
-    public TextMeshProUGUI exigence;
-    public TextMeshProUGUI agility;
-    public TextMeshProUGUI knowledge;
-    public Alien alien;
+    [SerializeField]private Image image;
+    [SerializeField]private new TextMeshProUGUI name;
+    [SerializeField]private TextMeshProUGUI species;
+    [SerializeField]private TextMeshProUGUI planet;
+    [SerializeField]private TextMeshProUGUI sector;
+    [SerializeField]private TextMeshProUGUI age;
+    [SerializeField]private TextMeshProUGUI rank;
+    [SerializeField]private TextMeshProUGUI agility;
+    [SerializeField]private TextMeshProUGUI knowledge;
+    [SerializeField]private TextMeshProUGUI salary;
 
-    void Start() {
-        RefreshDisplay();
-    }
+    public void RefreshDisplay(AlienStats stats) {
+        image.sprite = stats.sprite;
+        image.color = stats.color;
 
-    public void RefreshDisplay() {
-        image.sprite = alien.stats.sprite;
-        image.color = new Color(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1F));
-
-        name.text = "Nome: " + alien.stats.name;
-        race.text = "Raça: " + alien.stats.race;
-        age.text = "Idade: " + alien.stats.age.ToString();
-        rank.text = "Rank: " + alien.stats.rank.ToString();
-        exigence.text = "Exigência: " + alien.stats.exigence.ToString();
-        agility.text = "Agilidade: " + alien.stats.agility.ToString();
-        knowledge.text = "Conhecimento: " + alien.stats.knowledge.ToString();
+        name.text = stats.name;
+        species.text = stats.species;
+        planet.text = stats.planet;
+        sector.text = stats.sector.ToString();
+        age.text = stats.age.ToString();
+        rank.text = stats.rank.ToString();
+        agility.text = stats.agility.ToString();
+        knowledge.text = stats.knowledge.ToString();
+        salary.text = stats.salary.ToString()+"/mês";
     }
 }

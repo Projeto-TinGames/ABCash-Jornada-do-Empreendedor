@@ -2,57 +2,63 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AlienStats")]
-public class AlienStats : ScriptableObject {
+public class AlienStats {
+    //species variables
+    private string[] namesArray;
+    private int agilityMultiplier = 1;
+    private int knowledgeMultiplier = 1;
 
-    //Race variables
-    public string[] possibleNames;
-    public string race;
-    public int agilityModifier = 1;
-    public int knowledgeModifier = 1;
+    //Alien stats
     public Sprite sprite;
+    public Color color;
+    public string name;
+    public string species;
+    public string planet;
+    public string sector;
+    public int age;
+    public int rank;
+    public int status = 100;
+    public int agility;
+    public int knowledge;
+    public int salary;
 
-    //Stats strings
-    [System.NonSerialized]public string name;
-    [System.NonSerialized]public string planet;
-    [System.NonSerialized]public string status;
-    [System.NonSerialized]public string[] likes;
-    [System.NonSerialized]public string[] dislikes;
-    
-    //Stats ints
-    [System.NonSerialized]public int age;
-    [System.NonSerialized]public int rank;
-    [System.NonSerialized]public int exigence;
-    [System.NonSerialized]public int agility;
-    [System.NonSerialized]public int knowledge;
+    public AlienStats(Sprite sprite, string[] namesArray, string species, int agilityMultiplier, int knowledgeMultiplier) {
+        this.sprite = sprite;
+        this.namesArray = namesArray;
+        this.species = species;
+        this.agilityMultiplier = agilityMultiplier;
+        this.knowledgeMultiplier = knowledgeMultiplier;
 
-    public void Randomize() {
+        Randomize();
+    }
+
+    private void Randomize() {
         GenerateName();
+        GenerateColor();
         GeneratePlanet();
-        GenerateLikes();
-        GenerateDislikes();
+        GenerateSector();
         GenerateAge();
         GenerateRank();
-        GenerateExigence();
         GenerateAgility();
         GenerateKnowledge();
+        GenerateSalary();
     }
 
     private void GenerateName() {
-        name = possibleNames[Random.Range(0,possibleNames.Length)];
+        name = namesArray[Random.Range(0,namesArray.Length)];
+    }
+
+    private void GenerateColor() {
+        color = new Color(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1F));
     }
 
     private void GeneratePlanet() {
-        string[] possiblePlanets = new string[]{"Sinertag","Lemeb Vono", "Amenaip"};
-        planet = possiblePlanets[Random.Range(0,possibleNames.Length)];
+        string[] planets = new string[]{"Sinertag","Lemeb Vono", "Amenaip"};
+        planet = planets[Random.Range(0,planets.Length)];
     }
 
-    private void GenerateLikes() {
-        likes = new string[]{"TestLikes"};
-    }
-
-    private void GenerateDislikes() {
-        dislikes = new string[]{"TestDislikes"};
+    private void GenerateSector() {
+        sector = "Test";
     }
 
     private void GenerateAge() {
@@ -60,19 +66,31 @@ public class AlienStats : ScriptableObject {
     }
 
     private void GenerateRank() {
-        rank = Random.Range(1,4);
-    }
-
-    private void GenerateExigence() {
-        exigence = Random.Range(1,25*rank);
+        int randomInt = Random.Range(1,100);
+        if (randomInt <= 50) {
+            rank = 1;
+        }
+        else if (randomInt <= 80) {
+            rank = 2;
+        }
+        else if (randomInt <= 95) {
+            rank = 3;
+        }
+        else {
+            rank = 4;
+        }
     }
 
     private void GenerateAgility() {
-        agility = Random.Range(1,25*rank)*agilityModifier - (age/25);
+        agility = Random.Range(1,25)*rank*agilityMultiplier - (age/25);
     }
 
     private void GenerateKnowledge() {
-        knowledge = Random.Range(1,25*rank)*knowledgeModifier + (age/25);
+        knowledge = Random.Range(1,25)*rank*knowledgeMultiplier + (age/25);
+    }
+
+    private void GenerateSalary() { //Precisa criar lógica para levar em conta a distância do planeta em que mora
+        salary = (agility+knowledge)*100;
     }
 
 }
