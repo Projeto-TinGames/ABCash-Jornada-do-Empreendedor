@@ -8,7 +8,7 @@ public class ProductDisplay : MonoBehaviour {
 
     public GameObject panel;
     public TMP_Dropdown products;
-    public TextMeshProUGUI productModifier;
+    public TextMeshProUGUI productPrice;
 
     public virtual void OpenPanel() {
         if (products.options.Count == 0) {
@@ -18,7 +18,7 @@ public class ProductDisplay : MonoBehaviour {
             }
             products.AddOptions(productNames);
 
-            ChangeProductValue();
+            ChangeProductPrice();
         }
         panel.SetActive(true);
     }
@@ -27,19 +27,8 @@ public class ProductDisplay : MonoBehaviour {
         panel.SetActive(false);
     }
 
-    public void ChangeProductValue() {
-        float percentage = market.GetModifier(products.value) * 100;
-
-        if (percentage > 0) {
-            productModifier.color = Color.green;
-        }
-        else if (percentage < 0) {
-            productModifier.color = Color.red;
-        }
-        else {
-            productModifier.color = Color.yellow;
-        }
-
-        productModifier.text = percentage.ToString() + "%";
+    public void ChangeProductPrice() {
+        float price = market.GetProduct(products.value).price;
+        productPrice.text = "$" + price.ToString();
     }
 }

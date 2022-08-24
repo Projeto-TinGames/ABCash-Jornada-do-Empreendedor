@@ -20,7 +20,7 @@ public class Sector {
             workProgress += 10;
         }
         if (workProgress >= product.workRequired) {
-            float revenue = product.price + product.price*market.GetModifierForProduct(product);
+            float revenue = product.price;
             Company.instance.AddRevenue(revenue);
             
             workProgress = 0;

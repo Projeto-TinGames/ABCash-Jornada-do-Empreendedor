@@ -205,8 +205,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1857928581}
-        m_TargetAssemblyTypeName: SectorManager, Assembly-CSharp
+      - m_Target: {fileID: 553297878}
+        m_TargetAssemblyTypeName: EmployeesManager, Assembly-CSharp
         m_MethodName: ShowPreviousAlien
         m_Mode: 1
         m_Arguments:
@@ -689,7 +689,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 373071252}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &553297878
 MonoBehaviour:
@@ -1105,8 +1105,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1857928581}
-        m_TargetAssemblyTypeName: SectorManager, Assembly-CSharp
+      - m_Target: {fileID: 553297878}
+        m_TargetAssemblyTypeName: EmployeesManager, Assembly-CSharp
         m_MethodName: ShowNextAlien
         m_Mode: 1
         m_Arguments:
@@ -1229,7 +1229,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1857928581}
         m_TargetAssemblyTypeName: ProductDisplay, Assembly-CSharp
-        m_MethodName: ChangeProductValue
+        m_MethodName: ChangeProductPrice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1667,7 +1667,7 @@ GameObject:
   - component: {fileID: 1342071542}
   - component: {fileID: 1342071541}
   m_Layer: 5
-  m_Name: UI_Contract_Reject
+  m_Name: UI_Contract_Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1736,8 +1736,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1857928581}
-        m_TargetAssemblyTypeName: SectorManager, Assembly-CSharp
+      - m_Target: {fileID: 553297878}
+        m_TargetAssemblyTypeName: EmployeesManager, Assembly-CSharp
         m_MethodName: CloseSector
         m_Mode: 1
         m_Arguments:
@@ -1910,8 +1910,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1857928581}
-        m_TargetAssemblyTypeName: SectorManager, Assembly-CSharp
+      - m_Target: {fileID: 553297878}
+        m_TargetAssemblyTypeName: EmployeesManager, Assembly-CSharp
         m_MethodName: RemoveAlien
         m_Mode: 1
         m_Arguments:
@@ -1972,6 +1972,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1758837193571067812, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194533572023203991, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3246499555347622270, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2004,6 +2012,10 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4278190335
       objectReference: {fileID: 0}
+    - target: {fileID: 5038236562674871841, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5754723107757527054, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2023,6 +2035,10 @@ PrefabInstance:
     - target: {fileID: 5988253697479849819, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
       propertyPath: m_Name
       value: UI_Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 5990392706802341238, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5990392707752527702, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
       propertyPath: m_Name
@@ -3010,8 +3026,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1857928581}
-        m_TargetAssemblyTypeName: SectorManager, Assembly-CSharp
+      - m_Target: {fileID: 553297878}
+        m_TargetAssemblyTypeName: EmployeesManager, Assembly-CSharp
         m_MethodName: AddAlien
         m_Mode: 1
         m_Arguments:
@@ -3164,7 +3180,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 373071252}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1857928581
 MonoBehaviour:
@@ -3180,7 +3196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel: {fileID: 1902301928}
   products: {fileID: 1026506643}
-  productModifier: {fileID: 2041510516}
+  productPrice: {fileID: 2041510516}
   sectorDisplay: {fileID: 9168418371316098362, guid: b51944805a83bab44ab219ce29bd856e, type: 3}
   sectorsUI: {fileID: 1718969102}
 --- !u!1 &1869236336
@@ -3601,7 +3617,7 @@ GameObject:
   - component: {fileID: 2041510517}
   - component: {fileID: 2041510516}
   m_Layer: 5
-  m_Name: UI_CreateSector_Modifier
+  m_Name: UI_CreateSector_Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

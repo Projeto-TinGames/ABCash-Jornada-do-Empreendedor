@@ -17,10 +17,6 @@ public class GalaxyMap : MonoBehaviour {
         }
     }
 
-    private void Start() {
-        GenerateMap(null);
-    }
-
     public void GenerateMap(Galaxy selectedGalaxy) {
         if (selectedGalaxy == null) {
             GenerateGalaxy(0,0);
