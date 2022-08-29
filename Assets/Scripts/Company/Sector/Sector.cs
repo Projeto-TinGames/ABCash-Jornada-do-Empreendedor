@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Sector {
-    private Market market;
-    private Product product;
+    public int work;
 
-    private List<Alien> employees = new List<Alien>();
-    private int workProgress;
+    public Market market;
+    public Product product;
+    public List<Alien> employees = new List<Alien>();
 
     public Sector (Market market, Product product) {
         this.market = market;
@@ -17,44 +17,13 @@ public class Sector {
 
     private void Produce() {
         foreach (Alien employee in employees) {
-            workProgress += 10;
+            work += 10;
         }
-        if (workProgress >= product.workRequired) {
-            float revenue = product.price;
-            Company.instance.AddRevenue(revenue);
+        if (work >= product.work) {
+            float revenue = product.price * market.percentages[product.id];
+            Company.instance.revenue += revenue;
             
-            workProgress = 0;
+            work = 0;
         }
     }
-
-    #region Get Functions
-
-        public Product GetProduct() {
-            return product;
-        }
-
-        public List<Alien> GetEmployees() {
-            return employees;
-        }
-
-    #endregion
-
-    #region Add Functions
-
-        public void AddEmployee(Alien employee) {
-            if (Company.instance.GetEmployees().Count > 0) {
-                employees.Add(employee);
-            }
-        }
-
-    #endregion
-
-    #region Remove Functions
-
-        public void RemoveEmployee(Alien employee) {
-            employees.Remove(employee);
-        }
-
-    #endregion
-
 }

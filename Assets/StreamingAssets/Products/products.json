@@ -1,19 +1,22 @@
 {
     "products": [
         {
+            "id": 0,
             "name": "Produto A",
-            "workRequired": 100,
-            "price": 1.0
+            "price": 1.0,
+            "work": 100
         },
         {
+            "id": 1,
             "name": "Produto B",
-            "workRequired": 200,
-            "price": 2.0
+            "price": 2.0,
+            "work": 200
         },
         {
+            "id": 2,
             "name": "Produto C",
-            "workRequired": 300,
-            "price": 3.0
+            "price": 3.0,
+            "work": 300
         }
     ]
 }

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
     public static SceneController instance;
+    [System.NonSerialized]public string currentScene = "sc_galaxyMap";
 
     //[SerializeField]private Animator crossfade;
     //private float transitionTime = .2f;
@@ -20,6 +21,7 @@ public class SceneController : MonoBehaviour {
     }
 
     public void Load(string scene) {
+        currentScene = scene;
         SceneManager.LoadScene(scene);
         //StartCoroutine(LoadScene(scene));
     }

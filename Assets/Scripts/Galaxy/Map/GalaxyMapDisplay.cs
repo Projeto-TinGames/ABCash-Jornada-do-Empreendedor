@@ -22,14 +22,7 @@ public class GalaxyMapDisplay : MonoBehaviour {
     }
 
     public void AddGalaxy(Galaxy newGalaxy) {
-        float randomOffsetX = Random.Range(250, 500);
-        float randomOffsetY = Random.Range(250, 500);
-        float newGalaxyPositionX = transform.position.x + 750*newGalaxy.GetPositionX() + randomOffsetX*newGalaxy.GetPositionY();
-        float newGalaxyPositionY = transform.position.y + 750*newGalaxy.GetPositionY() + randomOffsetY*newGalaxy.GetPositionX();
-
-        Vector3 newGalaxyPosition = new Vector3(newGalaxyPositionX, newGalaxyPositionY, 0f);
-        GameObject newDisplay = Instantiate(galaxy, newGalaxyPosition, Quaternion.identity, gameObject.transform);
-
+        GameObject newDisplay = Instantiate(galaxy, newGalaxy.position, Quaternion.identity, gameObject.transform);
         GalaxyDisplay galaxyDisplay = newDisplay.GetComponent<GalaxyDisplay>();
         galaxyDisplay.SetGalaxy(newGalaxy);
     }

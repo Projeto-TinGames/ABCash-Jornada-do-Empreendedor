@@ -6,29 +6,13 @@ using UnityEngine.UI;
 public class AlienContract : MonoBehaviour {
     private Company company;
 
-    private Alien[] aliens;
-    private Alien activeAlien;
+    private Alien alien;
     [SerializeField]private AlienDisplay display;
 
     [SerializeField]private Button acceptButton;
     [SerializeField]private Button rejectButton;
 
     private static int cooldown;
-
-    private void Awake() {
-        aliens = GetComponentsInChildren<Alien>();
-        foreach (Alien alien in aliens) {
-            alien.gameObject.SetActive(false);
-        }
-
-        if (cooldown == 0) {
-            GenerateRandomAlien();
-        }
-        else {
-            display.gameObject.SetActive(false);
-        }
-
-    }
 
     private void Start() {
         company = Company.instance;
@@ -37,6 +21,7 @@ public class AlienContract : MonoBehaviour {
         rejectButton.onClick.AddListener(Reject);
 
         ResetButtonsColors();
+        GenerateRandomAlien();
     }
 
     private void FixedUpdate() {
@@ -73,24 +58,20 @@ public class AlienContract : MonoBehaviour {
     }
 
     private void GenerateRandomAlien() {
-        if (activeAlien != null) {
-            activeAlien.gameObject.SetActive(false);
-        }
+        AlienGenerator generator = new AlienGenerator();
+        alien = generator.GetRandomAlien();
+        alien.GenerateStats();
+        alien.Work();
 
-        activeAlien = aliens[Random.Range(0,aliens.Length)];
-        activeAlien.gameObject.SetActive(true);
-        activeAlien.GenerateStats();
-
-        display.RefreshDisplay(activeAlien.stats);
+        display.RefreshDisplay(alien);
     }
 
     private void Accept() {
-        company.AddEmployee(activeAlien);
+        company.employees.Add(alien);
         StartCooldown();
     }
 
     private void Reject() {
-        Debug.Log(activeAlien.GetType() + " Rejected");
         StartCooldown();
     }
 }

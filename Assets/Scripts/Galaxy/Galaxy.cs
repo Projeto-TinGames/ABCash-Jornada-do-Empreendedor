@@ -6,11 +6,12 @@ using UnityEngine;
 public class Galaxy {
     private string[] possibleNames = {"a", "b", "c", "d", "e"};
 
-    private int id;
-    private int x;
-    private int y;
-    private string name;
-    private Market market;
+    public string name;
+    public int id;
+    public int x;
+    public int y;
+    public Vector3 position;
+    public Market market;
 
     public Galaxy(int id, int x, int y) {
         this.id = id;
@@ -20,29 +21,4 @@ public class Galaxy {
         this.name = possibleNames[Random.Range(0,possibleNames.Length)];
         this.market = new Market();
     }
-
-    #region Get Functions
-
-        public int GetId() {
-            return id;
-        }
-
-        public int GetPositionX() {
-            return x;
-        }
-
-        public int GetPositionY() {
-            return y;
-        }
-
-        public string GetName() {
-            return name;
-        }
-
-        public Market GetMarket() {
-            return market;
-        }
-
-    #endregion
-
 }

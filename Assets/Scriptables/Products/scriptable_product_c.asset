@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: scriptable_product_c
   m_EditorClassIdentifier: 
   product:
+    id: 2
     name: Produto C
-    workRequired: 300
     price: 3
+    work: 300

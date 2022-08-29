@@ -17,7 +17,7 @@ public class DataManager : MonoBehaviour {
         }
     }
 
-    public void LoadJSON(string filePath, UnityEvent<string> FinishLoadEvent) {
+    public void Load(string filePath, UnityEvent<string> FinishLoadEvent) {
         #if UNITY_EDITOR
             string dataAsJson = File.ReadAllText(filePath);
             FinishLoadEvent.Invoke(dataAsJson);
@@ -28,7 +28,30 @@ public class DataManager : MonoBehaviour {
         #endif
     }
 
+    public void Save(string filePath, string dataAsJson) {
+        #if UNITY_EDITOR
+            File.WriteAllText(filePath, dataAsJson);
+        #endif
+
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            //StartCoroutine(WebPostRequest(filePath));
+        #endif
+    }
+
     private IEnumerator WebGetRequest(string filePath, UnityEvent<string> FinishLoadEvent) {
+        UnityWebRequest webRequest = UnityWebRequest.Get(filePath);
+        yield return webRequest.SendWebRequest();
+
+        if (webRequest.result == UnityWebRequest.Result.ProtocolError) {
+            Debug.LogError(webRequest.error);
+        }
+        else {
+            string dataAsJson = webRequest.downloadHandler.text;
+            FinishLoadEvent.Invoke(dataAsJson);
+        }
+    }
+
+    private IEnumerator WebPostRequest(string filePath, UnityEvent<string> FinishLoadEvent) {
         UnityWebRequest webRequest = UnityWebRequest.Get(filePath);
         yield return webRequest.SendWebRequest();
 

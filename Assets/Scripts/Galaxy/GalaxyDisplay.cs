@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GalaxyDisplay : MonoBehaviour {
-    private Company company;
-
     private Button button;
     private Galaxy galaxy;
     private bool hasBranch;
@@ -21,7 +19,7 @@ public class GalaxyDisplay : MonoBehaviour {
         button.interactable = false;
         button.interactable = true;
         
-        galaxyName.text = $"Galáxia \n{galaxy.GetPositionX()},{galaxy.GetPositionY()}";
+        galaxyName.text = $"Galáxia \n{galaxy.x},{galaxy.y}";
     }
 
     private void ChangeColors() {
@@ -37,7 +35,7 @@ public class GalaxyDisplay : MonoBehaviour {
 
     public void Select() {
         if (hasBranch) {
-            Company.instance.SetBranch(galaxy.GetId());
+            Company.instance.currentBranch = Company.instance.branches[galaxy.id];
             SceneController.instance.Load("sc_branch");
         }
         else {

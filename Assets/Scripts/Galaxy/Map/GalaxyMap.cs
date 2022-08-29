@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GalaxyMap : MonoBehaviour {
     public static GalaxyMap instance;
-    private List<Galaxy> galaxies = new List<Galaxy>();
+    public List<Galaxy> galaxies = new List<Galaxy>();
     private Dictionary<int,Dictionary<int,Galaxy>> galaxyMatrix = new Dictionary<int,Dictionary<int,Galaxy>>();
 
     private void Awake() {
@@ -33,6 +33,13 @@ public class GalaxyMap : MonoBehaviour {
 
         if (!galaxyMatrix[x].ContainsKey(y)) {
             Galaxy newGalaxy = new Galaxy(galaxies.Count, x, y);
+
+            float randomOffsetX = Random.Range(250, 500);
+            float randomOffsetY = Random.Range(250, 500);
+            float newGalaxyPositionX = transform.position.x + 750*newGalaxy.x + randomOffsetX*newGalaxy.y;
+            float newGalaxyPositionY = transform.position.y + 750*newGalaxy.y + randomOffsetY*newGalaxy.x;
+            newGalaxy.position = new Vector3(newGalaxyPositionX, newGalaxyPositionY, 0f);
+
             galaxies.Add(newGalaxy);
             galaxyMatrix[x].Add(y,newGalaxy);
 
@@ -41,25 +48,13 @@ public class GalaxyMap : MonoBehaviour {
     }
 
     private void GenerateAdjacentGalaxies(Galaxy selectedGalaxy) {
-        int x = selectedGalaxy.GetPositionX();
-        int y = selectedGalaxy.GetPositionY();
+        int x = selectedGalaxy.x;
+        int y = selectedGalaxy.y;
 
         GenerateGalaxy(x+1,y); //Galáxia para direita
         GenerateGalaxy(x-1,y); //Galáxia para esquerda
         GenerateGalaxy(x,y+1); //Galáxia para cima
         GenerateGalaxy(x,y-1); //Galáxia para baixo
     }
-
-    #region Get Functions
-
-        public List<Galaxy> GetGalaxies() {
-            return galaxies;
-        }
-
-        public Galaxy GetGalaxy(int id) {
-            return galaxies[id];
-        }
-
-    #endregion
 
 }
