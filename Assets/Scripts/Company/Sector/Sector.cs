@@ -10,9 +10,21 @@ public class Sector {
     public Product product;
     public List<Alien> employees = new List<Alien>();
 
-    public Sector (Market market, Product product) {
+    public Sector(Market market, Product product) {
         this.market = market;
         this.product = product;
+    }
+
+    public Sector(SectorData sectorData) {
+        this.work = sectorData.work;
+        this.market = new Market(sectorData.market);
+        this.product = ProductManager.instance.GetProduct(sectorData.productId);
+
+        AlienGenerator alienGenerator = new AlienGenerator();
+        foreach (AlienData alienData in sectorData.employees) {
+            Alien employee = alienGenerator.LoadAlien(alienData);
+            employees.Add(employee);
+        }
     }
 
     private void Produce() {

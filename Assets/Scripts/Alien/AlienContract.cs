@@ -58,8 +58,8 @@ public class AlienContract : MonoBehaviour {
     }
 
     private void GenerateRandomAlien() {
-        AlienGenerator generator = new AlienGenerator();
-        alien = generator.GetRandomAlien();
+        AlienGenerator alienGenerator = new AlienGenerator();
+        alien = alienGenerator.GetRandomAlien();
         alien.GenerateStats();
         alien.Work();
 

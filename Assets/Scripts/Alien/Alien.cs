@@ -9,7 +9,7 @@ public abstract class Alien {
     public int knowledgeMultiplier = 1;
 
     //Alien Stats
-    public int id;
+    public int speciesId = 0;
     public string name;
     public string species;
     public Sprite sprite;
@@ -25,19 +25,18 @@ public abstract class Alien {
 
     public abstract void Work();
 
-    public void SetStats(Alien alien) {
-        name = alien.name;
-        species = alien.species;
+    public void SetStats(AlienData alienData) {
+        name = alienData.name;
         sprite = Resources.Load<Sprite>($"Sprites/Aliens/{species}");
-        color = alien.color;
-        planet = alien.planet;
-        sector = alien.sector;
-        age = alien.age;
-        rank = alien.rank;
-        status = alien.status;
-        agility = alien.agility;
-        knowledge = alien.knowledge;
-        salary = alien.salary;
+        color = new Color(alienData.color[0], alienData.color[1], alienData.color[2]);
+        planet = alienData.planet;
+        sector = alienData.sector;
+        age = alienData.age;
+        rank = alienData.rank;
+        status = alienData.status;
+        agility = alienData.agility;
+        knowledge = alienData.knowledge;
+        salary = alienData.salary;
     }
 
     public void GenerateStats() {

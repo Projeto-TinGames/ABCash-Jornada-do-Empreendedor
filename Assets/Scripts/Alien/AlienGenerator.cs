@@ -13,4 +13,10 @@ public class AlienGenerator {
         int randomIndex = Random.Range(0, species.Length);
         return species[randomIndex];
     }
+
+    public Alien LoadAlien(AlienData alienData) {
+        Alien alien = species[alienData.speciesId];
+        alien.SetStats(alienData);
+        return alien;
+    }
 }

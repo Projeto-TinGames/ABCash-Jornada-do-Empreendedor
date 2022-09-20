@@ -14,4 +14,12 @@ public class Market {
             percentages.Add(percentage);
         }
     }
+
+    public Market(MarketData marketData) {
+        foreach (Product product in ProductManager.instance.GetProducts()) {
+            products.Add(product);
+        }
+        
+        this.percentages = marketData.percentages;
+    }
 }

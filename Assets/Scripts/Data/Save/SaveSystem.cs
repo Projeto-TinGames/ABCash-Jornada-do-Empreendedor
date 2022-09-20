@@ -18,13 +18,17 @@ public class SaveSystem : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.S)) {
             SaveData saveData = new SaveData();
-            Debug.Log(saveData.company.branches.Count);
             string dataAsJson = JsonUtility.ToJson(saveData,true);
             DataManager.instance.Save(filePath, dataAsJson);
         }
     }
 
     private void Load(string dataAsJson) {
-        Debug.Log(dataAsJson);
+        SaveData saveData = JsonUtility.FromJson<SaveData>(dataAsJson);
+
+        GalaxyMap.instance.Load(saveData.galaxyMap);
+        Company.instance.Load(saveData.company);
+        //SceneController.instance.Load(saveData.scene);
+        SceneController.instance.Load("sc_galaxyMap");
     }
 }

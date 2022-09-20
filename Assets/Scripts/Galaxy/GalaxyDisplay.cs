@@ -7,7 +7,6 @@ using TMPro;
 public class GalaxyDisplay : MonoBehaviour {
     private Button button;
     private Galaxy galaxy;
-    private bool hasBranch;
 
     [SerializeField]private TextMeshProUGUI galaxyName;
 
@@ -34,7 +33,7 @@ public class GalaxyDisplay : MonoBehaviour {
     }
 
     public void Select() {
-        if (hasBranch) {
+        if (galaxy.hasBranch) {
             Company.instance.currentBranch = Company.instance.branches[galaxy.id];
             SceneController.instance.Load("sc_branch");
         }
@@ -44,7 +43,7 @@ public class GalaxyDisplay : MonoBehaviour {
     }
 
     public void CreateBranch() {
-        hasBranch = true;
+        galaxy.hasBranch = true;
         ChangeColors();
     }
 
@@ -60,6 +59,10 @@ public class GalaxyDisplay : MonoBehaviour {
 
         public void SetGalaxy(Galaxy galaxy) {
             this.galaxy = galaxy;
+            
+            if (galaxy.hasBranch) {
+                ChangeColors();
+            }
         }
 
     #endregion

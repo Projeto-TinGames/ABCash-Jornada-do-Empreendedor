@@ -4,9 +4,8 @@ using UnityEngine;
 
 [System.Serializable]
 public class AlienData {
-    public int id;
+    public int speciesId;
     public string name;
-    public string species;
     public float[] color;
     public string planet;
     public string sector;
@@ -18,9 +17,8 @@ public class AlienData {
     public float salary;
     
     public AlienData(Alien alien) {
-        this.id = alien.id;
+        this.speciesId = alien.speciesId;
         this.name = alien.name;
-        this.species = alien.species;
         this.color = new float[]{alien.color.r, alien.color.g, alien.color.b};
         this.planet = alien.planet;
         this.sector = alien.sector;

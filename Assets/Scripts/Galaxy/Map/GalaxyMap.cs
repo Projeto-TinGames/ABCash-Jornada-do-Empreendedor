@@ -17,6 +17,24 @@ public class GalaxyMap : MonoBehaviour {
         }
     }
 
+    public void Load(GalaxyMapData mapData) {
+        galaxies.Clear();
+        galaxyMatrix.Clear();
+
+        foreach (GalaxyData galaxyData in mapData.galaxies) {
+            Galaxy galaxy = new Galaxy(galaxyData);
+            galaxies.Add(galaxy);
+
+            if (!galaxyMatrix.ContainsKey(galaxy.x)) {
+                galaxyMatrix.Add(galaxy.x,new Dictionary<int, Galaxy>());
+            }
+
+            if (!galaxyMatrix[galaxy.x].ContainsKey(galaxy.y)) {
+                galaxyMatrix[galaxy.x].Add(galaxy.y,galaxy);
+            }
+        }
+    }
+
     public void GenerateMap(Galaxy selectedGalaxy) {
         if (selectedGalaxy == null) {
             GenerateGalaxy(0,0);
@@ -34,10 +52,16 @@ public class GalaxyMap : MonoBehaviour {
         if (!galaxyMatrix[x].ContainsKey(y)) {
             Galaxy newGalaxy = new Galaxy(galaxies.Count, x, y);
 
-            float randomOffsetX = Random.Range(250, 500);
-            float randomOffsetY = Random.Range(250, 500);
-            float newGalaxyPositionX = transform.position.x + 750*newGalaxy.x + randomOffsetX*newGalaxy.y;
-            float newGalaxyPositionY = transform.position.y + 750*newGalaxy.y + randomOffsetY*newGalaxy.x;
+            float randomOffsetX = Random.Range(-500, 500);
+            float randomOffsetY = Random.Range(-500, 500);
+
+            if (galaxies.Count == 0) {
+                randomOffsetX = randomOffsetY = 0;
+            }
+
+            float newGalaxyPositionX = newGalaxy.x*1500 + randomOffsetX;
+            float newGalaxyPositionY = newGalaxy.y*1500 + randomOffsetY;
+
             newGalaxy.position = new Vector3(newGalaxyPositionX, newGalaxyPositionY, 0f);
 
             galaxies.Add(newGalaxy);

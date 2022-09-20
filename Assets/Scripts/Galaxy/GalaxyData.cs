@@ -8,6 +8,7 @@ public class GalaxyData {
     public int id;
     public int x;
     public int y;
+    public bool hasBranch;
     public float[] position;
     public MarketData market;
 
@@ -16,6 +17,7 @@ public class GalaxyData {
         this.id = galaxy.id;
         this.x = galaxy.x;
         this.y = galaxy.y;
+        this.hasBranch = galaxy.hasBranch;
         this.position = new float[]{galaxy.position.x, galaxy.position.y, galaxy.position.z};
         this.market = new MarketData(galaxy.market);
     }

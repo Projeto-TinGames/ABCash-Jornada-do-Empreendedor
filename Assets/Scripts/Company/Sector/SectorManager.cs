@@ -46,6 +46,8 @@ public class SectorManager : ProductDisplay {
 
     public void CreateSector() {
         Sector newSector = new Sector(market, market.products[dropdown.value]);
+        Company.instance.currentBranch.sectors.Add(newSector);
+        
         currentDisplay.SetSector(newSector);
         currentDisplay.UpdateStatus();
         currentDisplay = null;

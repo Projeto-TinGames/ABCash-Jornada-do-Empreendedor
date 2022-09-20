@@ -39,6 +39,10 @@ public class ProductManager : MonoBehaviour {
         GalaxyMap.instance.GenerateMap(null);
     }
 
+    public Product GetProduct(int id) {
+        return loadedProducts[id];
+    }
+
     public List<Product> GetProducts() {
         return loadedProducts;
     }

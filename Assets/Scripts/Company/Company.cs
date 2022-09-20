@@ -19,7 +19,29 @@ public class Company : MonoBehaviour {
             DontDestroyOnLoad(this);
         }
         else {
-            Destroy(this);
+            Destroy(gameObject);
+        }
+    }
+
+    public void Load(CompanyData companyData) {
+        this.branches.Clear();
+        this.employees.Clear();
+
+        this.name = companyData.name;
+        this.revenue = companyData.revenue;
+
+        this.currentBranch = new Branch(companyData.currentBranch);
+
+        foreach (BranchData branchData in companyData.branches) {
+            Branch branch = new Branch(branchData);
+            branches.Add(branch.id, branch);
+        }
+
+        AlienGenerator alienGenerator = new AlienGenerator();
+        foreach (AlienData alienData in companyData.employees) {
+            Alien employee = alienGenerator.LoadAlien(alienData);
+            employee.Work();
+            this.employees.Add(employee);
         }
     }
 }

@@ -11,4 +11,14 @@ public class Branch {
         this.id = id;
         this.market = market;
     }
+
+    public Branch(BranchData branchData) {
+        this.id = branchData.id;
+        this.market = new Market(branchData.market);
+        
+        foreach (SectorData sectorData in branchData.sectors) {
+            Sector sector = new Sector(sectorData);
+            this.sectors.Add(sector);
+        }
+    }
 }
