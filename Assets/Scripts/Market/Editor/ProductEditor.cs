@@ -13,24 +13,30 @@ public class ProductEditor : Editor {
     public override void OnInspectorGUI() {
         ProductObject productObject = (ProductObject)target;
 
-        if (string.IsNullOrEmpty(productObject.GetName())) {
+        if (string.IsNullOrEmpty(productObject.product.name)) {
             name = EditorGUILayout.TextField("Name:",name);
             if (GUILayout.Button("Save Name")) {
-                productObject.SetName(name);
+                productObject.product.name = name;
+                productObject.product.id = -1;
             }
         }
         else {
-            EditorGUILayout.LabelField("Name: " + productObject.GetName());
+            GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("Name: " + productObject.product.name);
+                if (productObject.product.id != -1) {
+                    EditorGUILayout.LabelField("Id: " + productObject.product.id);
+                } 
+            GUILayout.EndHorizontal();
             EditorGUILayout.LabelField("",GUI.skin.horizontalSlider);
 
             GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Work Required:");
-                productObject.SetWork(EditorGUILayout.IntField(productObject.GetWork()));
+                EditorGUILayout.LabelField("Price:");
+                productObject.product.price = EditorGUILayout.FloatField(productObject.product.price);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Price:");
-                productObject.SetPrice(EditorGUILayout.FloatField(productObject.GetPrice()));
+                EditorGUILayout.LabelField("Work:");
+                productObject.product.work = EditorGUILayout.IntField(productObject.product.work);
             GUILayout.EndHorizontal();
 
             if (GUILayout.Button("Save Data")) {
@@ -60,12 +66,14 @@ public class ProductEditor : Editor {
 
         if (fileProduct != null) {
             fileProduct.name = product.name;
-            fileProduct.workRequired = product.workRequired;
+            fileProduct.work = product.work;
             fileProduct.price = product.price;
         }
         else {
+            product.id = productData.products.Count;
             productData.products.Add(product);
         }
+
 
         string dataAsJson = JsonUtility.ToJson(productData,true);
         File.WriteAllText(filePath,dataAsJson);

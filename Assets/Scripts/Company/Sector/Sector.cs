@@ -4,57 +4,38 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Sector {
-    private Market market;
-    private Product product;
+    public int work;
 
-    private List<Alien> employees = new List<Alien>();
-    private int workProgress;
+    public Market market;
+    public Product product;
+    public List<Alien> employees = new List<Alien>();
 
-    public Sector (Market market, Product product) {
+    public Sector(Market market, Product product) {
         this.market = market;
         this.product = product;
     }
 
-    private void Produce() {
-        foreach (Alien employee in employees) {
-            workProgress += 10;
-        }
-        if (workProgress >= product.workRequired) {
-            float revenue = product.price;
-            Company.instance.AddRevenue(revenue);
-            
-            workProgress = 0;
+    public Sector(SectorData sectorData) {
+        this.work = sectorData.work;
+        this.market = new Market(sectorData.market);
+        this.product = ProductManager.instance.GetProduct(sectorData.productId);
+
+        AlienGenerator alienGenerator = new AlienGenerator();
+        foreach (AlienData alienData in sectorData.employees) {
+            Alien employee = alienGenerator.LoadAlien(alienData);
+            employees.Add(employee);
         }
     }
 
-    #region Get Functions
-
-        public Product GetProduct() {
-            return product;
+    private void Produce() {
+        foreach (Alien employee in employees) {
+            work += 10;
         }
-
-        public List<Alien> GetEmployees() {
-            return employees;
+        if (work >= product.work) {
+            float revenue = product.price * market.percentages[product.id];
+            Company.instance.revenue += revenue;
+            
+            work = 0;
         }
-
-    #endregion
-
-    #region Add Functions
-
-        public void AddEmployee(Alien employee) {
-            if (Company.instance.GetEmployees().Count > 0) {
-                employees.Add(employee);
-            }
-        }
-
-    #endregion
-
-    #region Remove Functions
-
-        public void RemoveEmployee(Alien employee) {
-            employees.Remove(employee);
-        }
-
-    #endregion
-
+    }
 }

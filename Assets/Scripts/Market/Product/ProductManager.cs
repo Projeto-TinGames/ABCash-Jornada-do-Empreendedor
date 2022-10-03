@@ -29,7 +29,7 @@ public class ProductManager : MonoBehaviour {
 
     private void StartLoad() {
         string filePath = Application.streamingAssetsPath + "/Products/products.json";
-        DataManager.instance.LoadJSON(filePath, FinishLoadEvent);
+        DataManager.instance.Load(filePath, FinishLoadEvent);
     }
 
     private void DefineProducts(string dataAsJson) {
@@ -37,6 +37,10 @@ public class ProductManager : MonoBehaviour {
         loadedProducts = data.products;
 
         GalaxyMap.instance.GenerateMap(null);
+    }
+
+    public Product GetProduct(int id) {
+        return loadedProducts[id];
     }
 
     public List<Product> GetProducts() {

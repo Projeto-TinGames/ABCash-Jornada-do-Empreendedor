@@ -3,22 +3,14 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class Product {
+    public int id;
     public string name;
-    public int workRequired;
     public float price;
+    public int work;
 
-    public Product(string name, int workRequired, float price) {
+    public Product(string name, float price, int work) {
         this.name = name;
-        this.workRequired = workRequired;
         this.price = price;
-    }
-}
-
-[System.Serializable]
-public class ProductData {
-    public List<Product> products;
-
-    public ProductData(List<Product> products) {
-        this.products = products;
+        this.work = work;
     }
 }

@@ -21,18 +21,18 @@ public class SectorManager : ProductDisplay {
     }
 
     private void Start() {
-        Branch branch = Company.instance.GetBranch();
-        market = branch.GetMarket();
+        Branch branch = Company.instance.currentBranch;
+        market = branch.market;
 
-        for (int i = 0; i < branch.GetSectors().Count + 1; i++) {
+        for (int i = 0; i < branch.sectors.Count + 1; i++) {
             GameObject newInstance = Instantiate(sectorDisplay);
             newInstance.transform.SetParent(sectorsUI.transform);
             newInstance.transform.localScale = Vector3.one;
 
             SectorDisplay display = newInstance.GetComponent<SectorDisplay>();
 
-            if (i < branch.GetSectors().Count) {
-                display.SetSector(branch.GetSector(i));
+            if (i < branch.sectors.Count) {
+                display.SetSector(branch.sectors[i]);
             }
             display.UpdateStatus();
         }
@@ -45,7 +45,9 @@ public class SectorManager : ProductDisplay {
     }
 
     public void CreateSector() {
-        Sector newSector = new Sector(market, market.GetProduct(products.value));
+        Sector newSector = new Sector(market, market.products[dropdown.value]);
+        Company.instance.currentBranch.sectors.Add(newSector);
+        
         currentDisplay.SetSector(newSector);
         currentDisplay.UpdateStatus();
         currentDisplay = null;

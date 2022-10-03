@@ -3195,7 +3195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1902301928}
-  products: {fileID: 1026506643}
+  dropdown: {fileID: 1026506643}
   productPrice: {fileID: 2041510516}
   sectorDisplay: {fileID: 9168418371316098362, guid: b51944805a83bab44ab219ce29bd856e, type: 3}
   sectorsUI: {fileID: 1718969102}

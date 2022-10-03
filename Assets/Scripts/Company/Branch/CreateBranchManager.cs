@@ -24,24 +24,22 @@ public class CreateBranchManager : ProductDisplay {
     public void LoadDisplay(GalaxyDisplay display) {
         currentDisplay = display;
         currentGalaxy = display.GetGalaxy();
-        market = currentGalaxy.GetMarket();
+        market = currentGalaxy.market;
 
         OpenPanel();
     }
 
     public override void OpenPanel() {
-        galaxyName.text = $"Galáxia \n{currentGalaxy.GetPositionX()},{currentGalaxy.GetPositionY()}";
+        galaxyName.text = $"Galáxia \n{currentGalaxy.x},{currentGalaxy.y}";
 
         base.OpenPanel();
     }
 
     public void CreateBranch() {
-        Market market = currentGalaxy.GetMarket();
-
-        Branch branch = new Branch(currentGalaxy.GetId(), currentGalaxy.GetMarket());
-        Sector firstSector = new Sector(market, market.GetProduct(products.value));
-        branch.AddSector(firstSector);
-        Company.instance.AddBranch(branch);
+        Branch branch = new Branch(currentGalaxy.id, currentGalaxy.market);
+        Sector firstSector = new Sector(currentGalaxy.market, market.products[dropdown.value]);
+        branch.sectors.Add(firstSector);
+        Company.instance.branches.Add(branch.id,branch);
 
         currentDisplay.CreateBranch();
         GalaxyMap.instance.GenerateMap(currentGalaxy);

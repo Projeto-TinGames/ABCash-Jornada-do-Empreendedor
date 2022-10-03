@@ -3,29 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Market {
-    private List<Product> products = new List<Product>();
+    public List<Product> products = new List<Product>();
+    public List<float> percentages = new List<float>(); //Porcentagem de valorização
 
     public Market() {
         foreach (Product product in ProductManager.instance.GetProducts()) {
-            Product modifiedProduct = new Product(product.name, product.workRequired, product.price);
-
+            products.Add(product);
+            
             float percentage = (float)Random.Range(-100, 101)/100;
-            modifiedProduct.price = modifiedProduct.price + percentage * modifiedProduct.price;
-            modifiedProduct.price = (Mathf.Round(modifiedProduct.price * 100)) / 100;
-
-            products.Add(modifiedProduct);
+            percentages.Add(percentage);
         }
     }
 
-    #region Get Functions
-
-        public List<Product> GetProducts() {
-            return products;
+    public Market(MarketData marketData) {
+        foreach (Product product in ProductManager.instance.GetProducts()) {
+            products.Add(product);
         }
-
-        public Product GetProduct(int id) {
-            return products[id];
-        }
-
-    #endregion
+        
+        this.percentages = marketData.percentages;
+    }
 }

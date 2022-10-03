@@ -6,11 +6,13 @@ using UnityEngine;
 public class Galaxy {
     private string[] possibleNames = {"a", "b", "c", "d", "e"};
 
-    private int id;
-    private int x;
-    private int y;
-    private string name;
-    private Market market;
+    public string name;
+    public int id;
+    public int x;
+    public int y;
+    public bool hasBranch;
+    public Vector3 position;
+    public Market market;
 
     public Galaxy(int id, int x, int y) {
         this.id = id;
@@ -21,28 +23,13 @@ public class Galaxy {
         this.market = new Market();
     }
 
-    #region Get Functions
-
-        public int GetId() {
-            return id;
-        }
-
-        public int GetPositionX() {
-            return x;
-        }
-
-        public int GetPositionY() {
-            return y;
-        }
-
-        public string GetName() {
-            return name;
-        }
-
-        public Market GetMarket() {
-            return market;
-        }
-
-    #endregion
-
+    public Galaxy(GalaxyData data) {
+        this.name = data.name;
+        this.id = data.id;
+        this.x = data.x;
+        this.y = data.y;
+        this.hasBranch = data.hasBranch;
+        this.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+        market = new Market(data.market);
+    }
 }

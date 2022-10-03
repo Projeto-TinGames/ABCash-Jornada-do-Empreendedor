@@ -25,48 +25,48 @@ public class EmployeesManager : MonoBehaviour {
     public void OpenAdd(Sector sector) {
         currentAlienIndex = 0;
         currentSector = sector;
-        currentEmployees = Company.instance.GetEmployees();
+        currentEmployees = Company.instance.employees;
 
         if (currentEmployees.Count > 0) {
             addButton.SetActive(true);
             removeButton.SetActive(false);
             employeesDisplay.gameObject.SetActive(true);
-            employeesDisplay.RefreshDisplay(currentEmployees[0].stats);
+            employeesDisplay.RefreshDisplay(currentEmployees[0]);
         }
     }
 
     public void OpenRemove(Sector sector) {
         currentAlienIndex = 0;
         currentSector = sector;
-        currentEmployees = sector.GetEmployees();
+        currentEmployees = sector.employees;
 
         if (currentEmployees.Count > 0) {
             addButton.SetActive(false);
             removeButton.SetActive(true);
             employeesDisplay.gameObject.SetActive(true);
-            employeesDisplay.RefreshDisplay(currentEmployees[0].stats);
+            employeesDisplay.RefreshDisplay(currentEmployees[0]);
         }
     }
 
     public void ShowNextAlien() {
         if (currentAlienIndex < currentEmployees.Count - 1) {
             currentAlienIndex++;
-            employeesDisplay.RefreshDisplay(currentEmployees[currentAlienIndex].stats);
+            employeesDisplay.RefreshDisplay(currentEmployees[currentAlienIndex]);
         }
     }
 
     public void ShowPreviousAlien() {
         if (currentAlienIndex > 0) {
             currentAlienIndex--;
-            employeesDisplay.RefreshDisplay(currentEmployees[currentAlienIndex].stats);
+            employeesDisplay.RefreshDisplay(currentEmployees[currentAlienIndex]);
         }
     }
 
     public void AddAlien() {
-        currentSector.AddEmployee(currentEmployees[currentAlienIndex]);
-        Company.instance.RemoveEmployee(currentEmployees[currentAlienIndex]);
+        currentSector.employees.Add(currentEmployees[currentAlienIndex]);
+        Company.instance.employees.Remove(currentEmployees[currentAlienIndex]);
 
-        currentEmployees = Company.instance.GetEmployees();
+        currentEmployees = Company.instance.employees;
 
         if (currentAlienIndex > 0) {
             currentAlienIndex--;
@@ -76,15 +76,15 @@ public class EmployeesManager : MonoBehaviour {
             employeesDisplay.gameObject.SetActive(false);
         }
         else {
-            employeesDisplay.RefreshDisplay(currentEmployees[currentAlienIndex].stats);
+            employeesDisplay.RefreshDisplay(currentEmployees[currentAlienIndex]);
         }
     }
 
     public void RemoveAlien() {
-        Company.instance.AddEmployee(currentEmployees[currentAlienIndex]);
-        currentSector.RemoveEmployee(currentEmployees[currentAlienIndex]);
+        Company.instance.employees.Add(currentEmployees[currentAlienIndex]);
+        currentSector.employees.Remove(currentEmployees[currentAlienIndex]);
 
-        currentEmployees = currentSector.GetEmployees();
+        currentEmployees = currentSector.employees;
 
         if (currentAlienIndex > 0) {
             currentAlienIndex--;
@@ -94,7 +94,7 @@ public class EmployeesManager : MonoBehaviour {
             employeesDisplay.gameObject.SetActive(false);
         }
         else {
-            employeesDisplay.RefreshDisplay(currentEmployees[currentAlienIndex].stats);
+            employeesDisplay.RefreshDisplay(currentEmployees[currentAlienIndex]);
         }
     }
 
