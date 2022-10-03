@@ -4,9 +4,15 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.Events;
 using UnityEngine.Networking;
+using System.Runtime.InteropServices;
 
 public class DataManager : MonoBehaviour {
     public static DataManager instance;
+
+    #if UNITY_WEBGL && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern void SyncDB();
+    #endif
 
     private void Awake() {
         if (instance == null) {
@@ -16,25 +22,31 @@ public class DataManager : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-
+    
     public void Load(string filePath, UnityEvent<string> FinishLoadEvent) {
+        string dataAsJson;
+
         #if UNITY_EDITOR
-            string dataAsJson = File.ReadAllText(filePath);
+            dataAsJson = File.ReadAllText(filePath);
             FinishLoadEvent.Invoke(dataAsJson);
         #endif
 
         #if UNITY_WEBGL && !UNITY_EDITOR
-            StartCoroutine(WebGetRequest(filePath, FinishLoadEvent));
+            if (File.Exists(filePath)) {
+                dataAsJson = File.ReadAllText(filePath);
+                FinishLoadEvent.Invoke(dataAsJson);
+            }
+            else {
+                StartCoroutine(WebGetRequest(filePath, FinishLoadEvent));
+            }
         #endif
     }
 
     public void Save(string filePath, string dataAsJson) {
-        #if UNITY_EDITOR
-            File.WriteAllText(filePath, dataAsJson);
-        #endif
+        File.WriteAllText(filePath, dataAsJson);
 
         #if UNITY_WEBGL && !UNITY_EDITOR
-            //StartCoroutine(WebPostRequest(filePath));
+            SyncDB();
         #endif
     }
 
@@ -51,7 +63,7 @@ public class DataManager : MonoBehaviour {
         }
     }
 
-    private IEnumerator WebPostRequest(string filePath, UnityEvent<string> FinishLoadEvent) {
+    /*private IEnumerator WebPostRequest(string filePath, UnityEvent<string> FinishLoadEvent) {
         UnityWebRequest webRequest = UnityWebRequest.Get(filePath);
         yield return webRequest.SendWebRequest();
 
@@ -62,5 +74,5 @@ public class DataManager : MonoBehaviour {
             string dataAsJson = webRequest.downloadHandler.text;
             FinishLoadEvent.Invoke(dataAsJson);
         }
-    }
+    }*/
 }

@@ -12,7 +12,6 @@ public class BranchData {
         this.id = branch.id;
         this.market = new MarketData(branch.market);
 
-        Debug.Log(branch.sectors.Count);
         foreach (Sector sector in branch.sectors) {
             this.sectors.Add(new SectorData(sector));
         }

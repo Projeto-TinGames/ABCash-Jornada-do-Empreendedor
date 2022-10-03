@@ -74,6 +74,7 @@ public class ProductEditor : Editor {
             productData.products.Add(product);
         }
 
+
         string dataAsJson = JsonUtility.ToJson(productData,true);
         File.WriteAllText(filePath,dataAsJson);
 
