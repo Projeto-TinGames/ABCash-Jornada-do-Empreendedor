@@ -16,6 +16,9 @@ public class GalaxyMapDisplay : MonoBehaviour {
     }
 
     private void Start() {
+        if (GalaxyMap.galaxies.Count == 0) {
+            GalaxyMap.GenerateMap(null);
+        }
         LoadMap();
     }
 
@@ -26,7 +29,7 @@ public class GalaxyMapDisplay : MonoBehaviour {
     }
 
     private void LoadMap() {
-        foreach (Galaxy galaxy in GalaxyMap.instance.galaxies) {
+        foreach (Galaxy galaxy in GalaxyMap.galaxies) {
             AddGalaxy(galaxy);
         }
     }

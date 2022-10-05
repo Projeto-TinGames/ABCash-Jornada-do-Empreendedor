@@ -3,47 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ProductManager : MonoBehaviour {
-    public static ProductManager instance;
+public static class ProductManager {
+    private static List<Product> loadedProducts;
+    private static UnityEvent<string> FinishLoadEvent = new UnityEvent<string>();
 
-    private List<Product> loadedProducts;
-    private UnityEvent<string> FinishLoadEvent;
-
-    private void Awake() {
-        if (instance == null) {
-            instance = this;
-            transform.parent = null;
-            DontDestroyOnLoad(gameObject);
-        }
-        else {
-            Destroy(gameObject);
-        }
-    }
-
-    private void Start() {
-        FinishLoadEvent = new UnityEvent<string>();
-        FinishLoadEvent.AddListener(DefineProducts);
-
-        StartLoad();
-    }
-
-    private void StartLoad() {
+    public static void Load() {
         string filePath = Application.streamingAssetsPath + "/Products/products.json";
+        FinishLoadEvent.AddListener(DefineProducts);
         DataManager.instance.Load(filePath, FinishLoadEvent);
     }
 
-    private void DefineProducts(string dataAsJson) {
+    private static void DefineProducts(string dataAsJson) {
         ProductData data = JsonUtility.FromJson<ProductData>(dataAsJson);
         loadedProducts = data.products;
 
-        GalaxyMap.instance.GenerateMap(null);
+        GalaxyMap.GenerateMap(null);
     }
 
-    public Product GetProduct(int id) {
+    public static Product GetProduct(int id) {
         return loadedProducts[id];
     }
 
-    public List<Product> GetProducts() {
+    public static List<Product> GetProducts() {
         return loadedProducts;
     }
 }

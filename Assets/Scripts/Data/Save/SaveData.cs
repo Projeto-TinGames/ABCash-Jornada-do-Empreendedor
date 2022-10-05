@@ -7,10 +7,11 @@ public class SaveData {
     public CompanyData company;
     public GalaxyMapData galaxyMap;
     public string scene;
+    //public int timePlayed;
 
     public SaveData() {
-        this.company = new CompanyData(Company.instance);
-        this.galaxyMap = new GalaxyMapData(GalaxyMap.instance);
+        this.company = new CompanyData();
+        this.galaxyMap = new GalaxyMapData();
         this.scene = SceneController.instance.currentScene;
     }
 }

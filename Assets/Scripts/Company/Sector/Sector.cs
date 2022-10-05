@@ -18,7 +18,7 @@ public class Sector {
     public Sector(SectorData sectorData) {
         this.work = sectorData.work;
         this.market = new Market(sectorData.market);
-        this.product = ProductManager.instance.GetProduct(sectorData.productId);
+        this.product = ProductManager.GetProduct(sectorData.productId);
 
         AlienGenerator alienGenerator = new AlienGenerator();
         foreach (AlienData alienData in sectorData.employees) {
@@ -27,13 +27,13 @@ public class Sector {
         }
     }
 
-    private void Produce() {
+    public void Produce() {
         foreach (Alien employee in employees) {
             work += 10;
         }
         if (work >= product.work) {
             float revenue = product.price * market.percentages[product.id];
-            Company.instance.revenue += revenue;
+            Company.revenue = (float)Math.Round(Company.revenue + revenue, 2);
             
             work = 0;
         }

@@ -6,8 +6,8 @@ using UnityEngine;
 public class GalaxyMapData {
     public List<GalaxyData> galaxies = new List<GalaxyData>();
 
-    public GalaxyMapData(GalaxyMap map) {
-        foreach (Galaxy galaxy in map.galaxies) {
+    public GalaxyMapData() {
+        foreach (Galaxy galaxy in GalaxyMap.galaxies) {
             galaxies.Add(new GalaxyData(galaxy));
         }
     }

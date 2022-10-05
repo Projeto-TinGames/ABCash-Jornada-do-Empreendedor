@@ -21,7 +21,7 @@ public class SectorManager : ProductDisplay {
     }
 
     private void Start() {
-        Branch branch = Company.instance.currentBranch;
+        Branch branch = Company.currentBranch;
         market = branch.market;
 
         for (int i = 0; i < branch.sectors.Count + 1; i++) {
@@ -46,7 +46,7 @@ public class SectorManager : ProductDisplay {
 
     public void CreateSector() {
         Sector newSector = new Sector(market, market.products[dropdown.value]);
-        Company.instance.currentBranch.sectors.Add(newSector);
+        Company.currentBranch.sectors.Add(newSector);
         
         currentDisplay.SetSector(newSector);
         currentDisplay.UpdateStatus();

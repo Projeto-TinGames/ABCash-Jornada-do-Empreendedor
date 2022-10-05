@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class AlienContract : MonoBehaviour {
-    private Company company;
-
     private Alien alien;
     [SerializeField]private AlienDisplay display;
 
@@ -15,8 +13,6 @@ public class AlienContract : MonoBehaviour {
     private static int cooldown;
 
     private void Start() {
-        company = Company.instance;
-
         acceptButton.onClick.AddListener(Accept);
         rejectButton.onClick.AddListener(Reject);
 
@@ -67,7 +63,7 @@ public class AlienContract : MonoBehaviour {
     }
 
     private void Accept() {
-        company.employees.Add(alien);
+        Company.employees.Add(alien);
         StartCooldown();
     }
 

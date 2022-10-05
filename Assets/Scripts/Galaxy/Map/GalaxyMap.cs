@@ -2,22 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GalaxyMap : MonoBehaviour {
-    public static GalaxyMap instance;
-    public List<Galaxy> galaxies = new List<Galaxy>();
-    private Dictionary<int,Dictionary<int,Galaxy>> galaxyMatrix = new Dictionary<int,Dictionary<int,Galaxy>>();
+public static class GalaxyMap {
+    public static List<Galaxy> galaxies = new List<Galaxy>();
+    private static Dictionary<int,Dictionary<int,Galaxy>> galaxyMatrix = new Dictionary<int,Dictionary<int,Galaxy>>();
 
-    private void Awake() {
-        if (instance == null) {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else {
-            Destroy(gameObject);
-        }
-    }
-
-    public void Load(GalaxyMapData mapData) {
+    public static void Load(GalaxyMapData mapData) {
         galaxies.Clear();
         galaxyMatrix.Clear();
 
@@ -35,7 +24,7 @@ public class GalaxyMap : MonoBehaviour {
         }
     }
 
-    public void GenerateMap(Galaxy selectedGalaxy) {
+    public static void GenerateMap(Galaxy selectedGalaxy) {
         if (selectedGalaxy == null) {
             GenerateGalaxy(0,0);
         }
@@ -44,7 +33,7 @@ public class GalaxyMap : MonoBehaviour {
         }
     }
 
-    private void GenerateGalaxy(int x, int y) {
+    private static void GenerateGalaxy(int x, int y) {
         if (!galaxyMatrix.ContainsKey(x)) {
             galaxyMatrix.Add(x,new Dictionary<int, Galaxy>());
         }
@@ -67,11 +56,13 @@ public class GalaxyMap : MonoBehaviour {
             galaxies.Add(newGalaxy);
             galaxyMatrix[x].Add(y,newGalaxy);
 
-            GalaxyMapDisplay.instance.AddGalaxy(newGalaxy);
+            if (GalaxyMapDisplay.instance != null) {
+                GalaxyMapDisplay.instance.AddGalaxy(newGalaxy);
+            }
         }
     }
 
-    private void GenerateAdjacentGalaxies(Galaxy selectedGalaxy) {
+    private static void GenerateAdjacentGalaxies(Galaxy selectedGalaxy) {
         int x = selectedGalaxy.x;
         int y = selectedGalaxy.y;
 
