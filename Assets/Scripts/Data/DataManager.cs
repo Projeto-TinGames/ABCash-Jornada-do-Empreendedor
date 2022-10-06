@@ -27,8 +27,13 @@ public class DataManager : MonoBehaviour {
         string dataAsJson;
 
         #if UNITY_EDITOR
-            dataAsJson = File.ReadAllText(filePath);
-            FinishLoadEvent.Invoke(dataAsJson);
+            if (File.Exists(filePath)) {
+                dataAsJson = File.ReadAllText(filePath);
+                FinishLoadEvent.Invoke(dataAsJson);
+            }
+            else {
+                FinishLoadEvent.Invoke(string.Empty);
+            }
         #endif
 
         #if UNITY_WEBGL && !UNITY_EDITOR
@@ -56,6 +61,7 @@ public class DataManager : MonoBehaviour {
 
         if (webRequest.result == UnityWebRequest.Result.ProtocolError) {
             Debug.LogError(webRequest.error);
+            FinishLoadEvent.Invoke(string.Empty);
         }
         else {
             string dataAsJson = webRequest.downloadHandler.text;

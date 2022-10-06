@@ -39,10 +39,10 @@ public class CreateBranchManager : ProductDisplay {
         Branch branch = new Branch(currentGalaxy.id, currentGalaxy.market);
         Sector firstSector = new Sector(currentGalaxy.market, market.products[dropdown.value]);
         branch.sectors.Add(firstSector);
-        Company.instance.branches.Add(branch.id,branch);
+        Company.branches.Add(branch.id,branch);
 
         currentDisplay.CreateBranch();
-        GalaxyMap.instance.GenerateMap(currentGalaxy);
+        GalaxyMap.GenerateMap(currentGalaxy);
 
         currentDisplay = null;
         currentGalaxy = null;

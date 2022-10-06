@@ -1980,7 +1980,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1511934132}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &916439319
 MonoBehaviour:
@@ -2088,6 +2088,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3241299412925520960, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241299412925520960, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241299412925520960, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3246499555347622270, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2103,6 +2115,10 @@ PrefabInstance:
     - target: {fileID: 3246499555347622270, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005721097410881686, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5038236562674871841, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
       propertyPath: m_RootOrder
@@ -2207,6 +2223,10 @@ PrefabInstance:
     - target: {fileID: 7296292114373205955, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864323809318045532, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}

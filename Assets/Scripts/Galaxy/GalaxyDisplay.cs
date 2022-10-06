@@ -34,7 +34,7 @@ public class GalaxyDisplay : MonoBehaviour {
 
     public void Select() {
         if (galaxy.hasBranch) {
-            Company.instance.currentBranch = Company.instance.branches[galaxy.id];
+            Company.currentBranch = Company.branches[galaxy.id];
             SceneController.instance.Load("sc_branch");
         }
         else {

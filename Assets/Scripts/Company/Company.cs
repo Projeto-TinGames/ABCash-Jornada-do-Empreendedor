@@ -2,35 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Company : MonoBehaviour {
-    public static Company instance;
+public static class Company {
+    [HideInInspector]public static int id;
+    [HideInInspector]public static string name;
+    [HideInInspector]public static float revenue;
 
-    [HideInInspector]public new string name;
-    [HideInInspector]public float revenue;
+    [HideInInspector]public static Branch currentBranch;
+    [HideInInspector]public static Dictionary<int, Branch> branches = new Dictionary<int, Branch>();
+    [HideInInspector]public static List<Alien> employees = new List<Alien>();
 
-    [HideInInspector]public Branch currentBranch;
-    [HideInInspector]public Dictionary<int, Branch> branches = new Dictionary<int, Branch>();
-    [HideInInspector]public List<Alien> employees = new List<Alien>();
+    public static void Load(CompanyData companyData) {
+        branches.Clear();
+        employees.Clear();
 
-    private void Awake() {
-        if (instance == null) {
-            transform.parent = null;
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else {
-            Destroy(gameObject);
-        }
-    }
+        name = companyData.name;
+        revenue = companyData.revenue;
 
-    public void Load(CompanyData companyData) {
-        this.branches.Clear();
-        this.employees.Clear();
-
-        this.name = companyData.name;
-        this.revenue = companyData.revenue;
-
-        this.currentBranch = new Branch(companyData.currentBranch);
+        currentBranch = new Branch(companyData.currentBranch);
 
         foreach (BranchData branchData in companyData.branches) {
             Branch branch = new Branch(branchData);
@@ -41,7 +29,7 @@ public class Company : MonoBehaviour {
         foreach (AlienData alienData in companyData.employees) {
             Alien employee = alienGenerator.LoadAlien(alienData);
             employee.Work();
-            this.employees.Add(employee);
+            employees.Add(employee);
         }
     }
 }
