@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/sc_contract.unity
     guid: dd14e545203277f46b50a674d632c5bb
+  - enabled: 1
+    path: Assets/Scenes/sc_companyCreation.unity
+    guid: 55a1d819868000146af97ffe51fe956d
   m_configObjects: {}

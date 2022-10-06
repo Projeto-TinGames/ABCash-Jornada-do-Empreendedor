@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class SaveSlot : MonoBehaviour {
@@ -13,6 +14,7 @@ public class SaveSlot : MonoBehaviour {
 
     [SerializeField]private GameObject newGameText;
     [SerializeField]private GameObject dataUI;
+    [SerializeField]private Button deleteButton;
     [SerializeField]private TextMeshProUGUI companyName;
     [SerializeField]private TextMeshProUGUI revenueText;
     [SerializeField]private TextMeshProUGUI timeText;
@@ -29,8 +31,13 @@ public class SaveSlot : MonoBehaviour {
             SceneController.instance.Load(saveData.scene);
         }
         else {
-            SceneController.instance.Load("sc_galaxyMap");
+            SceneController.instance.Load("sc_companyCreation");
         }
+    }
+
+    public void DeleteFile() {
+        DataManager.instance.Save(filePath, string.Empty);
+        FinishLoad(string.Empty);
     }
 
     private void Awake() {
@@ -50,9 +57,15 @@ public class SaveSlot : MonoBehaviour {
 
             newGameText.SetActive(false);
             dataUI.SetActive(true);
+            deleteButton.gameObject.SetActive(true);
             companyName.text = saveData.company.name;
-            revenueText.text = saveData.company.revenue.ToString();
+            revenueText.text = saveData.company.revenue.ToString("C2");
             timeText.text = "";
+        }
+        else {
+            newGameText.SetActive(true);
+            deleteButton.gameObject.SetActive(false);
+            dataUI.SetActive(false);
         }
     }
     
