@@ -20,15 +20,14 @@ public class SaveSlot : MonoBehaviour {
     [SerializeField]private TextMeshProUGUI timeText;
 
     public void StartGame() {
-        ProductManager.Load();
-        Company.id = saveID;
+        Company.SetId(saveID);
 
         if (dataAsJson != string.Empty) {
             SaveData saveData = JsonUtility.FromJson<SaveData>(dataAsJson);
 
-            GalaxyMap.Load(saveData.galaxyMap);
-            Company.Load(saveData.company);
-            SceneController.instance.Load(saveData.scene);
+            GalaxyMap.Load(saveData.GetGalaxyMap());
+            Company.Load(saveData.GetCompany());
+            SceneController.instance.Load(saveData.GetScene());
         }
         else {
             SceneController.instance.Load("sc_companyCreation");
@@ -58,8 +57,8 @@ public class SaveSlot : MonoBehaviour {
             newGameText.SetActive(false);
             dataUI.SetActive(true);
             deleteButton.gameObject.SetActive(true);
-            companyName.text = saveData.company.name;
-            revenueText.text = saveData.company.revenue.ToString("C2");
+            companyName.text = saveData.GetCompany().GetName();
+            revenueText.text = saveData.GetCompany().GetRevenue().ToString("C2");
             timeText.text = "";
         }
         else {

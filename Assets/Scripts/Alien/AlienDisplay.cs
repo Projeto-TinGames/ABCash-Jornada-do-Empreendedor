@@ -13,21 +13,21 @@ public class AlienDisplay : MonoBehaviour {
     [SerializeField]private TextMeshProUGUI age;
     [SerializeField]private TextMeshProUGUI rank;
     [SerializeField]private TextMeshProUGUI agility;
-    [SerializeField]private TextMeshProUGUI knowledge;
+    [SerializeField]private TextMeshProUGUI wisdom;
     [SerializeField]private TextMeshProUGUI salary;
 
     public void RefreshDisplay(Alien alien) {
-        image.sprite = alien.sprite;
-        image.color = alien.color;
+        image.sprite = alien.GetSprite();
+        image.color = alien.GetColor();
 
-        name.text = alien.name;
-        species.text = alien.species;
-        planet.text = alien.planet;
-        sector.text = alien.sector.ToString();
-        age.text = alien.age.ToString();
-        rank.text = alien.rank.ToString();
-        agility.text = alien.agility.ToString();
-        knowledge.text = alien.knowledge.ToString();
-        salary.text = alien.salary.ToString()+"/mês";
+        name.text = alien.GetName();
+        species.text = alien.GetSpecies();
+        planet.text = alien.GetPlanet();
+        sector.text = alien.GetSector();
+        age.text = alien.GetAge().ToString();
+        rank.text = alien.GetRank().ToString();
+        agility.text = alien.GetAgility().ToString();
+        wisdom.text = alien.GetWisdom().ToString();
+        salary.text = alien.GetSalary().ToString()+"/mês";
     }
 }

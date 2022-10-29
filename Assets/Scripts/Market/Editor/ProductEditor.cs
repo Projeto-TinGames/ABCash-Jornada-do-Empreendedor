@@ -13,34 +13,34 @@ public class ProductEditor : Editor {
     public override void OnInspectorGUI() {
         ProductObject productObject = (ProductObject)target;
 
-        if (string.IsNullOrEmpty(productObject.product.name)) {
+        if (string.IsNullOrEmpty(productObject.GetProduct().GetName())) {
             name = EditorGUILayout.TextField("Name:",name);
             if (GUILayout.Button("Save Name")) {
-                productObject.product.name = name;
-                productObject.product.id = -1;
+                productObject.GetProduct().SetName(name);
+                productObject.GetProduct().SetId(-1);
             }
         }
         else {
             GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Name: " + productObject.product.name);
-                if (productObject.product.id != -1) {
-                    EditorGUILayout.LabelField("Id: " + productObject.product.id);
+                EditorGUILayout.LabelField("Name: " + productObject.GetProduct().GetName());
+                if (productObject.GetProduct().GetId() != -1) {
+                    EditorGUILayout.LabelField("Id: " + productObject.GetProduct().GetId());
                 } 
             GUILayout.EndHorizontal();
             EditorGUILayout.LabelField("",GUI.skin.horizontalSlider);
 
             GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Price:");
-                productObject.product.price = EditorGUILayout.FloatField(productObject.product.price);
+                productObject.GetProduct().SetPrice(EditorGUILayout.FloatField(productObject.GetProduct().GetPrice()));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Work:");
-                productObject.product.work = EditorGUILayout.IntField(productObject.product.work);
+                productObject.GetProduct().SetWork(EditorGUILayout.IntField(productObject.GetProduct().GetWork()));
             GUILayout.EndHorizontal();
 
             if (GUILayout.Button("Save Data")) {
-                SaveData(productObject.product);
+                SaveData(productObject.GetProduct());
             }
         }
 
@@ -62,16 +62,16 @@ public class ProductEditor : Editor {
         
         string filePath = Application.streamingAssetsPath + "/Products/products.json";
 
-        Product fileProduct = productData.products.Find(data => data.name == product.name);
+        Product fileProduct = productData.GetProducts().Find(data => data.GetName() == product.GetName());
 
         if (fileProduct != null) {
-            fileProduct.name = product.name;
-            fileProduct.work = product.work;
-            fileProduct.price = product.price;
+            fileProduct.SetName(product.GetName());
+            fileProduct.SetWork(product.GetWork());
+            fileProduct.SetPrice(product.GetPrice());
         }
         else {
-            product.id = productData.products.Count;
-            productData.products.Add(product);
+            product.SetId(productData.GetProducts().Count);
+            productData.AddProduct(product);
         }
 
 

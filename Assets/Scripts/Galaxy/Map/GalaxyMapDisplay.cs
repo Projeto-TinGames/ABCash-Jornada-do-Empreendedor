@@ -16,7 +16,7 @@ public class GalaxyMapDisplay : MonoBehaviour {
     }
 
     private void Start() {
-        if (GalaxyMap.galaxies.Count == 0) {
+        if (GalaxyMap.GetGalaxies().Count == 0) {
             GalaxyMap.GenerateMap(null);
         }
         LoadMap();
@@ -29,7 +29,7 @@ public class GalaxyMapDisplay : MonoBehaviour {
     }
 
     private void LoadMap() {
-        foreach (Galaxy galaxy in GalaxyMap.galaxies) {
+        foreach (Galaxy galaxy in GalaxyMap.GetGalaxies()) {
             AddGalaxy(galaxy);
         }
     }
@@ -37,7 +37,7 @@ public class GalaxyMapDisplay : MonoBehaviour {
     public void AddGalaxy(Galaxy newGalaxy) {
         GameObject newDisplay = Instantiate(galaxy);
         newDisplay.transform.SetParent(transform);
-        newDisplay.transform.localPosition = newGalaxy.position;
+        newDisplay.transform.localPosition = newGalaxy.GetPosition();
         newDisplay.transform.localScale = Vector3.one;
         
         GalaxyDisplay galaxyDisplay = newDisplay.GetComponent<GalaxyDisplay>();

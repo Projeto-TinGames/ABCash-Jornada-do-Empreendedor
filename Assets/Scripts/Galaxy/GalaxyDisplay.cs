@@ -18,7 +18,7 @@ public class GalaxyDisplay : MonoBehaviour {
         button.interactable = false;
         button.interactable = true;
         
-        galaxyName.text = $"Galáxia \n{galaxy.x},{galaxy.y}";
+        galaxyName.text = $"Galáxia \n{galaxy.GetX()},{galaxy.GetY()}";
     }
 
     private void ChangeColors() {
@@ -33,8 +33,8 @@ public class GalaxyDisplay : MonoBehaviour {
     }
 
     public void Select() {
-        if (galaxy.hasBranch) {
-            Company.currentBranch = Company.branches[galaxy.id];
+        if (galaxy.GetHasBranch()) {
+            Company.SetCurrentBranch(Company.GetBranches(galaxy.GetId()));
             SceneController.instance.Load("sc_branch");
         }
         else {
@@ -43,11 +43,11 @@ public class GalaxyDisplay : MonoBehaviour {
     }
 
     public void CreateBranch() {
-        galaxy.hasBranch = true;
+        galaxy.SetHasBranch(true);
         ChangeColors();
     }
 
-    #region Get Functions
+    #region Getters
 
         public Galaxy GetGalaxy() {
             return galaxy;
@@ -55,12 +55,12 @@ public class GalaxyDisplay : MonoBehaviour {
 
     #endregion
 
-    #region Set Functions
+    #region Setters
 
         public void SetGalaxy(Galaxy galaxy) {
             this.galaxy = galaxy;
             
-            if (galaxy.hasBranch) {
+            if (galaxy.GetHasBranch()) {
                 ChangeColors();
             }
         }

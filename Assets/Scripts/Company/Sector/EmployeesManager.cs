@@ -25,7 +25,7 @@ public class EmployeesManager : MonoBehaviour {
     public void OpenAdd(Sector sector) {
         currentAlienIndex = 0;
         currentSector = sector;
-        currentEmployees = Company.employees;
+        currentEmployees = Company.GetAliens();
 
         if (currentEmployees.Count > 0) {
             addButton.SetActive(true);
@@ -38,7 +38,7 @@ public class EmployeesManager : MonoBehaviour {
     public void OpenRemove(Sector sector) {
         currentAlienIndex = 0;
         currentSector = sector;
-        currentEmployees = sector.employees;
+        currentEmployees = sector.GetAliens();
 
         if (currentEmployees.Count > 0) {
             addButton.SetActive(false);
@@ -63,10 +63,10 @@ public class EmployeesManager : MonoBehaviour {
     }
 
     public void AddAlien() {
-        currentSector.employees.Add(currentEmployees[currentAlienIndex]);
-        Company.employees.Remove(currentEmployees[currentAlienIndex]);
+        currentSector.AddAlien(currentEmployees[currentAlienIndex]);
+        Company.RemoveAlien(currentEmployees[currentAlienIndex]);
 
-        currentEmployees = Company.employees;
+        currentEmployees = Company.GetAliens();
 
         if (currentAlienIndex > 0) {
             currentAlienIndex--;
@@ -81,10 +81,10 @@ public class EmployeesManager : MonoBehaviour {
     }
 
     public void RemoveAlien() {
-        Company.employees.Add(currentEmployees[currentAlienIndex]);
-        currentSector.employees.Remove(currentEmployees[currentAlienIndex]);
+        Company.AddAlien(currentEmployees[currentAlienIndex]);
+        currentSector.RemoveAlien(currentEmployees[currentAlienIndex]);
 
-        currentEmployees = currentSector.employees;
+        currentEmployees = currentSector.GetAliens();
 
         if (currentAlienIndex > 0) {
             currentAlienIndex--;

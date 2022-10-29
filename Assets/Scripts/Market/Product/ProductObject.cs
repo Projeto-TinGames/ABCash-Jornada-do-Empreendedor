@@ -4,5 +4,13 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Product", fileName = "scriptable_product_")]
 public class ProductObject : ScriptableObject {
-    public Product product;
+    [SerializeField]private Product product;
+
+    #region Getters
+
+        public Product GetProduct() {
+            return product;
+        }
+
+    #endregion
 }

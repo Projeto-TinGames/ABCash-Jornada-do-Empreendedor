@@ -4,17 +4,17 @@ using UnityEngine;
 using TMPro;
 
 public class ProductDisplay : MonoBehaviour {
-    [System.NonSerialized]public Market market;
+    private Market market;
 
-    public GameObject panel;
-    public TMP_Dropdown dropdown;
-    public TextMeshProUGUI productPrice;
+    [SerializeField]private GameObject panel;
+    [SerializeField]private TMP_Dropdown dropdown;
+    [SerializeField]private TextMeshProUGUI productPrice;
 
     public virtual void OpenPanel() {
         if (dropdown.options.Count == 0) {
             List<string> productNames = new List<string>();
-            foreach (Product product in market.products) {
-                productNames.Add(product.name);
+            foreach (Product product in market.GetProducts()) {
+                productNames.Add(product.GetName());
             }
             dropdown.AddOptions(productNames);
 
@@ -28,7 +28,31 @@ public class ProductDisplay : MonoBehaviour {
     }
 
     public void ChangeProductPrice() {
-        float price = market.products[dropdown.value].price * market.percentages[dropdown.value];
+        float price = market.GetProducts(dropdown.value).GetPrice() * market.GetPercentages(dropdown.value);
         productPrice.text = "$" + price.ToString();
     }
+
+    #region Getters
+
+        protected Market GetMarket() {
+            return market;
+        }
+
+        protected TMP_Dropdown GetDropdown() {
+            return dropdown;
+        }
+
+    #endregion
+
+    #region Setters
+
+        protected void SetMarket(Market value) {
+            market = value;
+        }
+
+        protected void SetDropdown(TMP_Dropdown value) {
+            dropdown = value;
+        }
+
+    #endregion
 }

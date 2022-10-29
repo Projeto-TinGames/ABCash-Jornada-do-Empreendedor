@@ -13,7 +13,7 @@ public class Menu : MonoBehaviour {
 
     public void Save() {
         menu.SetActive(false);
-        string filePath = Application.persistentDataPath + "/save" + Company.id + ".json";
+        string filePath = Application.persistentDataPath + "/save" + Company.GetId() + ".json";
 
         SaveData saveData = new SaveData();
         string dataAsJson = JsonUtility.ToJson(saveData,true);

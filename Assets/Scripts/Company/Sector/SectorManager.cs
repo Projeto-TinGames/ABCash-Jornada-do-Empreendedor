@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SectorManager : ProductDisplay {
     public static SectorManager instance;
 
+    private Branch branch;
     private SectorDisplay currentDisplay;
 
     [SerializeField]private GameObject sectorDisplay;
@@ -21,18 +22,18 @@ public class SectorManager : ProductDisplay {
     }
 
     private void Start() {
-        Branch branch = Company.currentBranch;
-        market = branch.market;
+        branch = Company.GetCurrentBranch();
+        SetMarket(branch.GetMarket());
 
-        for (int i = 0; i < branch.sectors.Count + 1; i++) {
+        for (int i = 0; i < branch.GetSectors().Count + 1; i++) {
             GameObject newInstance = Instantiate(sectorDisplay);
             newInstance.transform.SetParent(sectorsUI.transform);
             newInstance.transform.localScale = Vector3.one;
 
             SectorDisplay display = newInstance.GetComponent<SectorDisplay>();
 
-            if (i < branch.sectors.Count) {
-                display.SetSector(branch.sectors[i]);
+            if (i < branch.GetSectors().Count) {
+                display.SetSector(branch.GetSectors(i));
             }
             display.UpdateStatus();
         }
@@ -45,8 +46,8 @@ public class SectorManager : ProductDisplay {
     }
 
     public void CreateSector() {
-        Sector newSector = new Sector(market, market.products[dropdown.value]);
-        Company.currentBranch.sectors.Add(newSector);
+        Sector newSector = new Sector(GetMarket(), GetMarket().GetProducts(GetDropdown().value));
+        branch.AddSector(newSector);
         
         currentDisplay.SetSector(newSector);
         currentDisplay.UpdateStatus();

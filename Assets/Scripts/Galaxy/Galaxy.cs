@@ -6,13 +6,13 @@ using UnityEngine;
 public class Galaxy {
     private string[] possibleNames = {"a", "b", "c", "d", "e"};
 
-    public string name;
-    public int id;
-    public int x;
-    public int y;
-    public bool hasBranch;
-    public Vector3 position;
-    public Market market;
+    private int id;
+    private string name;
+    private int x;
+    private int y;
+    private bool hasBranch;
+    private Vector3 position;
+    private Market market;
 
     public Galaxy(int id, int x, int y) {
         this.id = id;
@@ -24,12 +24,76 @@ public class Galaxy {
     }
 
     public Galaxy(GalaxyData data) {
-        this.name = data.name;
-        this.id = data.id;
-        this.x = data.x;
-        this.y = data.y;
-        this.hasBranch = data.hasBranch;
-        this.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-        market = new Market(data.market);
+        this.id = data.GetId();
+        this.name = data.GetName();
+        this.x = data.GetX();
+        this.y = data.GetY();
+        this.hasBranch = data.GetHasBranch();
+        this.position = new Vector3(data.GetPosition(0), data.GetPosition(1), data.GetPosition(2));
+        market = new Market(data.GetMarket());
     }
+
+    #region Getters
+
+        public int GetId() {
+            return id;
+        }
+        
+        public string GetName() {
+            return name;
+        }
+
+        public int GetX() {
+            return x;
+        }
+
+        public int GetY() {
+            return y;
+        }
+
+        public bool GetHasBranch() {
+            return hasBranch;
+        }
+
+        public Vector3 GetPosition() {
+            return position;
+        }
+
+        public Market GetMarket() {
+            return market;
+        }
+
+    #endregion
+
+    #region Setters
+
+        public void SetId(int value) {
+            id = value;
+        }
+        
+        public void SetName(string value) {
+            name = value;
+        }
+
+        public void SetX(int value) {
+            x = value;
+        }
+
+        public void SetY(int value) {
+            y = value;
+        }
+
+        public void SetHasBranch(bool value) {
+            hasBranch = value;
+        }
+
+        public void SetPosition(Vector3 value) {
+            position = value;
+        }
+
+        public void SetMarket(Market value) {
+            market = value;
+        }
+
+    #endregion
 }

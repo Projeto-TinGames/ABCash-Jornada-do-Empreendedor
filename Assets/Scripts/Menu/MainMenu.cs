@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour {
 
+    private void Start() {
+        ProductManager.Load();
+    }
+
     public void Quit() {
         Application.Quit();
     }

@@ -15,7 +15,7 @@ public static class ProductManager {
 
     private static void DefineProducts(string dataAsJson) {
         ProductData data = JsonUtility.FromJson<ProductData>(dataAsJson);
-        loadedProducts = data.products;
+        loadedProducts = data.GetProducts();
 
         GalaxyMap.GenerateMap(null);
     }

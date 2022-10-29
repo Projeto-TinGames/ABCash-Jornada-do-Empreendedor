@@ -5,9 +5,11 @@ using UnityEngine;
 public class Repinch : Alien {
     
     public Repinch() {
-        speciesId = 1;
-        namesArray = new string[]{"Repincha", "Repincho", "Repinchio"};
-        species = "Repinch";
+        SetSpeciesId(1);
+        SetAvailableNames(new string[]{"Repincha", "Repincho", "Repinchio"});
+        SetSpecies("Repinch");
+        
+        GenerateStats();
     }
 
     public override void Work() {

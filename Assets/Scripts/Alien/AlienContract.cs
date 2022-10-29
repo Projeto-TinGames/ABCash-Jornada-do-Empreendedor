@@ -56,14 +56,13 @@ public class AlienContract : MonoBehaviour {
     private void GenerateRandomAlien() {
         AlienGenerator alienGenerator = new AlienGenerator();
         alien = alienGenerator.GetRandomAlien();
-        alien.GenerateStats();
         alien.Work();
 
         display.RefreshDisplay(alien);
     }
 
     private void Accept() {
-        Company.employees.Add(alien);
+        Company.AddAlien(alien);
         StartCooldown();
     }
 
