@@ -4,15 +4,19 @@ using UnityEngine;
 using TMPro;
 
 public class CompanyManager : MonoBehaviour {
-    [SerializeField]private TextMeshProUGUI revenueText;
+    [SerializeField]private TextMeshProUGUI moneyText;
 
-    private void FixedUpdate() {
+    private void Start() {
+        InvokeRepeating("UpdateCompany", 1f, 1f);
+    }
+
+    private void UpdateCompany() {
         foreach (KeyValuePair<int, Branch> branch in Company.GetBranches()) {
             foreach (Sector sector in branch.Value.GetSectors()) {
                 sector.Produce();
             }
         }
 
-        revenueText.text = Company.GetRevenue().ToString("C2");
+        moneyText.text = Company.GetMoney().ToString("C2");
     }
 }

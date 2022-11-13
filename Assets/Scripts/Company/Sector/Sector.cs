@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Sector {
-    private int work;
+    private int productionTime;
 
     private Market market;
     private Product product;
@@ -15,7 +15,7 @@ public class Sector {
     }
 
     public Sector(SectorData sectorData) {
-        this.work = sectorData.work;
+        this.productionTime = sectorData.productionTime;
         this.market = new Market(sectorData.market);
         this.product = ProductManager.GetProduct(sectorData.productId);
 
@@ -28,20 +28,23 @@ public class Sector {
 
     public void Produce() {
         foreach (Alien alien in aliens) {
-            work += 10;
+            productionTime += 10;
         }
-        if (work >= product.GetWork()) {
-            float revenue = product.GetPrice() * market.GetPercentages(product.GetId());
-            Company.AddRevenue(revenue);
+        if (productionTime >= product.GetProductionTime()) {
+            float money = product.GetPrice() * market.GetPercentages(product.GetId());
+            Company.AddMoney(money);
             
-            work = 0;
+            productionTime = 0;
         }
+
+        TimeData timeData = new TimeData((product.GetProductionTime() - productionTime)/10);
+        Debug.Log($"{timeData.GetDays()}, {timeData.GetHours()}, {timeData.GetMinutes()}, {timeData.GetSeconds()}");
     }
 
     #region Add
 
-        public void AddWork(int value) {
-            work += value;
+        public void AddProductionTime(int value) {
+            productionTime += value;
         }
 
         public void AddAlien(Alien alien) {
@@ -52,8 +55,8 @@ public class Sector {
 
     #region Remove
 
-        public void RemoveWork(int value) {
-            work -= value;
+        public void RemoveProductionTime(int value) {
+            productionTime -= value;
         }
 
         public void RemoveAlien(Alien alien) {
@@ -68,8 +71,8 @@ public class Sector {
 
     #region Getters
 
-        public int GetWork() {
-            return work;
+        public int GetProductionTime() {
+            return productionTime;
         }
 
         public Market GetMarket() {
@@ -92,8 +95,8 @@ public class Sector {
 
     #region Setters
 
-        public void SetWork(int value) {
-            work = value;
+        public void SetProductionTime(int value) {
+            productionTime = value;
         }
 
         public void SetMarket(Market value) {

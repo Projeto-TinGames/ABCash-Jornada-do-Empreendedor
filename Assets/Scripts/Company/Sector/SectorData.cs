@@ -4,13 +4,14 @@ using UnityEngine;
 
 [System.Serializable]
 public class SectorData {
-    [SerializeField]public int work;
     [SerializeField]public int productId;
+    [SerializeField]public int productionTime;
+
     [SerializeField]public MarketData market;
     [SerializeField]public List<AlienData> aliens = new List<AlienData>();
 
     public SectorData(Sector sector) {
-        this.work = sector.GetWork();
+        this.productionTime = sector.GetProductionTime();
         this.productId = sector.GetProduct().GetId();
         this.market = new MarketData(sector.GetMarket());
         
@@ -21,8 +22,8 @@ public class SectorData {
 
     #region Getters
 
-        public int GetWork() {
-            return work;
+        public int GetProductionTime() {
+            return productionTime;
         }
 
         public MarketData GetMarket() {
@@ -45,8 +46,8 @@ public class SectorData {
 
     #region Setters
 
-        public void SetWork(int value) {
-            work = value;
+        public void SetProductionTime(int value) {
+            productionTime = value;
         }
 
         public void SetMarket(MarketData value) {

@@ -16,7 +16,7 @@ public class SaveSlot : MonoBehaviour {
     [SerializeField]private GameObject dataUI;
     [SerializeField]private Button deleteButton;
     [SerializeField]private TextMeshProUGUI companyName;
-    [SerializeField]private TextMeshProUGUI revenueText;
+    [SerializeField]private TextMeshProUGUI moneyText;
     [SerializeField]private TextMeshProUGUI timeText;
 
     public void StartGame() {
@@ -25,7 +25,7 @@ public class SaveSlot : MonoBehaviour {
         if (dataAsJson != string.Empty) {
             SaveData saveData = JsonUtility.FromJson<SaveData>(dataAsJson);
 
-            GalaxyMap.Load(saveData.GetGalaxyMap());
+            Universe.Load(saveData.GetGalaxyMap());
             Company.Load(saveData.GetCompany());
             SceneController.instance.Load(saveData.GetScene());
         }
@@ -58,7 +58,7 @@ public class SaveSlot : MonoBehaviour {
             dataUI.SetActive(true);
             deleteButton.gameObject.SetActive(true);
             companyName.text = saveData.GetCompany().GetName();
-            revenueText.text = saveData.GetCompany().GetRevenue().ToString("C2");
+            moneyText.text = saveData.GetCompany().GetMoney().ToString("C2");
             timeText.text = "";
         }
         else {

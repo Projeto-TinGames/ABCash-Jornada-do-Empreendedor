@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class CompanyData {
     [SerializeField]private string name;
-    [SerializeField]private float revenue;
+    [SerializeField]private float money;
 
     [SerializeField]private BranchData currentBranch;
     [SerializeField]private List<BranchData> branches = new List<BranchData>();
@@ -13,7 +13,7 @@ public class CompanyData {
 
     public CompanyData() {
         this.name = Company.GetName();
-        this.revenue = Company.GetRevenue();
+        this.money = Company.GetMoney();
 
         foreach (KeyValuePair<int, Branch> entry in Company.GetBranches()) {
             BranchData branch = new BranchData(entry.Value);
@@ -35,8 +35,8 @@ public class CompanyData {
             return name;
         }
 
-        public float GetRevenue() {
-            return revenue;
+        public float GetMoney() {
+            return money;
         }
 
         public BranchData GetCurrentBranch() {

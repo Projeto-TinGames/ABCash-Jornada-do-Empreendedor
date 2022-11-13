@@ -7,12 +7,12 @@ public class Product {
     [SerializeField]private int id;
     [SerializeField]private string name;
     [SerializeField]private float price;
-    [SerializeField]private int work;
+    [SerializeField]private int productionTime;
 
-    public Product(string name, float price, int work) {
+    public Product(string name, float price, int productionTime) {
         this.name = name;
         this.price = price;
-        this.work = work;
+        this.productionTime = productionTime;
     }
 
     #region Getters
@@ -29,8 +29,8 @@ public class Product {
             return price;
         }
 
-        public int GetWork() {
-            return work;
+        public int GetProductionTime() {
+            return productionTime;
         }
 
     #endregion
@@ -49,8 +49,8 @@ public class Product {
             price = value;
         }
 
-        public void SetWork(int value) {
-            work = value;
+        public void SetProductionTime(int value) {
+            productionTime = value;
         }
 
     #endregion

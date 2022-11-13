@@ -42,7 +42,7 @@ public class CreateBranchManager : ProductDisplay {
         Company.AddBranch(branch.GetId(), branch);
 
         currentDisplay.CreateBranch();
-        GalaxyMap.GenerateMap(currentGalaxy);
+        Universe.Generate(currentGalaxy);
 
         currentDisplay = null;
         currentGalaxy = null;

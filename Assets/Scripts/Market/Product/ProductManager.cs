@@ -17,7 +17,7 @@ public static class ProductManager {
         ProductData data = JsonUtility.FromJson<ProductData>(dataAsJson);
         loadedProducts = data.GetProducts();
 
-        GalaxyMap.GenerateMap(null);
+        Universe.Generate();
     }
 
     public static Product GetProduct(int id) {

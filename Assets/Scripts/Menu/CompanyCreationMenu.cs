@@ -9,6 +9,6 @@ public class CompanyCreationMenu : MonoBehaviour {
     public void CreateCompany() {
         Company.SetName(nameField.text);
 
-        SceneController.instance.Load("sc_galaxyMap");
+        SceneController.instance.Load("sc_universe");
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class GalaxyMapData {
+public class UniverseData {
     [SerializeField]private List<GalaxyData> galaxies = new List<GalaxyData>();
 
-    public GalaxyMapData() {
-        foreach (Galaxy galaxy in GalaxyMap.GetGalaxies()) {
+    public UniverseData() {
+        foreach (Galaxy galaxy in Universe.GetGalaxies()) {
             galaxies.Add(new GalaxyData(galaxy));
         }
     }

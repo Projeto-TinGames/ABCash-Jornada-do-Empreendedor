@@ -1156,6 +1156,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -82.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504592, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_text
+      value: Company Money
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504594, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_Name
+      value: Company Money
+      objectReference: {fileID: 0}
     - target: {fileID: 8753244550571204263, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2424,6 +2432,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -82.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504592, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_text
+      value: Company Money
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504594, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_Name
+      value: Company Money
+      objectReference: {fileID: 0}
     - target: {fileID: 8753244550571204263, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2809,6 +2825,14 @@ PrefabInstance:
     - target: {fileID: 8753244549954530611, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -82.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504592, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_text
+      value: Company Money
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504594, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_Name
+      value: Company Money
       objectReference: {fileID: 0}
     - target: {fileID: 8753244550571204263, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
       propertyPath: m_AnchorMax.y

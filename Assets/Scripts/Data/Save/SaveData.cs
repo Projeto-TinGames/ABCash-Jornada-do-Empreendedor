@@ -5,13 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData {
     [SerializeField]private CompanyData company;
-    [SerializeField]private GalaxyMapData galaxyMap;
+    [SerializeField]private UniverseData universe;
     [SerializeField]private string scene;
     //[SerializeField]private int timePlayed;
 
     public SaveData() {
         this.company = new CompanyData();
-        this.galaxyMap = new GalaxyMapData();
+        this.universe = new UniverseData();
         this.scene = SceneController.instance.currentScene;
     }
 
@@ -21,8 +21,8 @@ public class SaveData {
             return company;
         }
 
-        public GalaxyMapData GetGalaxyMap() {
-            return galaxyMap;
+        public UniverseData GetGalaxyMap() {
+            return universe;
         }
 
         public string GetScene() {
@@ -37,8 +37,8 @@ public class SaveData {
             company = value;
         }
 
-        public void SetGalaxyMap(GalaxyMapData value) {
-            galaxyMap = value;
+        public void SetGalaxyMap(UniverseData value) {
+            universe = value;
         }
 
         public void SetScene(string value) {

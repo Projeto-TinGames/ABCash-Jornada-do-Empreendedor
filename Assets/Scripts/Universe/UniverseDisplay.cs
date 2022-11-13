@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GalaxyMapDisplay : MonoBehaviour {
-    public static GalaxyMapDisplay instance;
+public class UniverseDisplay : MonoBehaviour {
+    public static UniverseDisplay instance;
     [SerializeField]private GameObject galaxy;
 
     private void Awake() {
@@ -16,8 +16,8 @@ public class GalaxyMapDisplay : MonoBehaviour {
     }
 
     private void Start() {
-        if (GalaxyMap.GetGalaxies().Count == 0) {
-            GalaxyMap.GenerateMap(null);
+        if (Universe.GetGalaxies().Count == 0) {
+            Universe.Generate();
         }
         LoadMap();
     }
@@ -29,7 +29,7 @@ public class GalaxyMapDisplay : MonoBehaviour {
     }
 
     private void LoadMap() {
-        foreach (Galaxy galaxy in GalaxyMap.GetGalaxies()) {
+        foreach (Galaxy galaxy in Universe.GetGalaxies()) {
             AddGalaxy(galaxy);
         }
     }

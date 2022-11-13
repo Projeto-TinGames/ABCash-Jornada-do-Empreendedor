@@ -35,8 +35,8 @@ public class ProductEditor : Editor {
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Work:");
-                productObject.GetProduct().SetWork(EditorGUILayout.IntField(productObject.GetProduct().GetWork()));
+                EditorGUILayout.LabelField("Production Time:");
+                productObject.GetProduct().SetProductionTime(EditorGUILayout.IntField(productObject.GetProduct().GetProductionTime()));
             GUILayout.EndHorizontal();
 
             if (GUILayout.Button("Save Data")) {
@@ -66,7 +66,7 @@ public class ProductEditor : Editor {
 
         if (fileProduct != null) {
             fileProduct.SetName(product.GetName());
-            fileProduct.SetWork(product.GetWork());
+            fileProduct.SetProductionTime(product.GetProductionTime());
             fileProduct.SetPrice(product.GetPrice());
         }
         else {

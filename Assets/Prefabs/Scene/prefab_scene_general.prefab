@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5d5fa5c9651324fa41c0a0cbe9ae39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  revenueText: {fileID: 8185475961250918329}
+  moneyText: {fileID: 8185475961250918329}
 --- !u!1 &2242829523857853397
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 3319994530844085215}
   - component: {fileID: 8185475961250918329}
   m_Layer: 5
-  m_Name: Revenue
+  m_Name: Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Revenue
+  m_text: Money
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

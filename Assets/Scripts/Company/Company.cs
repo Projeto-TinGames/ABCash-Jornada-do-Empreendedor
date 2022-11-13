@@ -6,7 +6,7 @@ using UnityEngine;
 public static class Company {
     private static int id;
     private static string name;
-    private static float revenue;
+    private static float money;
 
     private static Branch currentBranch;
     private static Dictionary<int, Branch> branches = new Dictionary<int, Branch>();
@@ -17,7 +17,7 @@ public static class Company {
         aliens.Clear();
 
         name = companyData.GetName();
-        revenue = companyData.GetRevenue();
+        money = companyData.GetMoney();
 
         currentBranch = new Branch(companyData.GetCurrentBranch());
 
@@ -37,9 +37,8 @@ public static class Company {
 
     #region Add
 
-        public static void AddRevenue(float value) {
-            Debug.Log(revenue);
-            revenue = (float)Math.Round(revenue + value, 2);
+        public static void AddMoney(float value) {
+            money = (float)Math.Round(money + value, 2);
         }
 
         public static void AddAlien(Alien alien) {
@@ -54,8 +53,8 @@ public static class Company {
 
     #region Remove
 
-        public static void RemoveRevenue(float value) {
-            revenue = (float)Math.Round(revenue - value, 2);
+        public static void RemoveMoney(float value) {
+            money = (float)Math.Round(money - value, 2);
         }
 
         public static void RemoveAlien(Alien alien) {
@@ -82,8 +81,8 @@ public static class Company {
             return name;
         }
 
-        public static float GetRevenue() {
-            return revenue;
+        public static float GetMoney() {
+            return money;
         }
 
         public static Branch GetCurrentBranch() {
@@ -118,8 +117,8 @@ public static class Company {
             name = value;
         }
 
-        public static void SetRevenue(float value) {
-            revenue = value;
+        public static void SetMoney(float value) {
+            money = value;
         }
 
         public static void SetCurrentBranch(Branch value) {
