@@ -12,6 +12,14 @@ public static class Company {
     private static Dictionary<int, Branch> branches = new Dictionary<int, Branch>();
     private static List<Alien> aliens = new List<Alien>();
 
+    public static void Update() {
+        foreach (KeyValuePair<int, Branch> branch in Company.GetBranches()) {
+            foreach (Sector sector in branch.Value.GetSectors()) {
+                sector.Produce();
+            }
+        }
+    }
+
     public static void Load(CompanyData companyData) {
         branches.Clear();
         aliens.Clear();

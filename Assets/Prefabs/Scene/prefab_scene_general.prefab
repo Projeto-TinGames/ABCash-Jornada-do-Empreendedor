@@ -163,7 +163,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1358649489797406862}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5477786012920331686
 MonoBehaviour:
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7989ec8dd8ee947a5441f7a5a04963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2165898883747235418
+--- !u!1 &1447813270206767813
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,42 +185,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1364142920460463193}
-  - component: {fileID: 7872323094678636338}
+  - component: {fileID: 9012567360898467594}
+  - component: {fileID: 3877320772173204869}
   m_Layer: 0
-  m_Name: Manager_Company
+  m_Name: Manager_Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1364142920460463193
+--- !u!4 &9012567360898467594
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2165898883747235418}
+  m_GameObject: {fileID: 1447813270206767813}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1358649489797406862}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7872323094678636338
+--- !u!114 &3877320772173204869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2165898883747235418}
+  m_GameObject: {fileID: 1447813270206767813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b5d5fa5c9651324fa41c0a0cbe9ae39, type: 3}
+  m_Script: {fileID: 11500000, guid: c6c5a6b1f3950474a88f3947a96e0c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyText: {fileID: 8185475961250918329}
 --- !u!1 &2242829523857853397
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +500,7 @@ GameObject:
   - component: {fileID: 5005721097410881686}
   - component: {fileID: 3319994530844085215}
   - component: {fileID: 8185475961250918329}
+  - component: {fileID: 8863329257879757981}
   m_Layer: 5
   m_Name: Money
   m_TagString: Untagged
@@ -624,6 +624,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8863329257879757981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828477443642019605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c179bd8c53a02d8418b40931c3153051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2873810493874406278
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,7 +899,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: sc_galaxyMap
+          m_StringArgument: sc_universe
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &2945108765105111251
@@ -1672,7 +1684,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1358649489797406862}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8709634036927745543
 MonoBehaviour:
@@ -1847,11 +1859,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1364142920460463193}
   - {fileID: 523184980042735267}
   - {fileID: 5990392706802341238}
   - {fileID: 8361899956961441929}
   - {fileID: 2194533572023203991}
+  - {fileID: 9012567360898467594}
   m_Father: {fileID: 5990392707752527703}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1961,7 +1973,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1358649489797406862}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5990392706802341241
 MonoBehaviour:
@@ -2351,7 +2363,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1358649489797406862}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2612032353259383739
 MonoBehaviour:
