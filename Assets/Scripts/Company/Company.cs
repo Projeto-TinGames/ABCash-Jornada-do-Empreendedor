@@ -8,15 +8,13 @@ public static class Company {
     private static string name;
     private static float money;
 
-    private static Branch currentBranch;
+    private static int currentBranchId = -1;
     private static Dictionary<int, Branch> branches = new Dictionary<int, Branch>();
     private static List<Alien> aliens = new List<Alien>();
 
     public static void Update() {
         foreach (KeyValuePair<int, Branch> branch in Company.GetBranches()) {
-            foreach (Sector sector in branch.Value.GetSectors()) {
-                sector.Produce();
-            }
+            branch.Value.Update();
         }
     }
 
@@ -27,7 +25,7 @@ public static class Company {
         name = companyData.GetName();
         money = companyData.GetMoney();
 
-        currentBranch = new Branch(companyData.GetCurrentBranch());
+        currentBranchId = companyData.GetCurrentBranchId();
 
         foreach (BranchData branchData in companyData.GetBranches()) {
             Branch branch = new Branch(branchData);
@@ -41,6 +39,15 @@ public static class Company {
             employee.Work();
             aliens.Add(employee);
         }
+    }
+
+    public static bool Pay(float value) {
+        if (money >= value) {
+            RemoveMoney(value);
+            return true;
+        }
+        
+        return false;
     }
 
     #region Add
@@ -93,8 +100,8 @@ public static class Company {
             return money;
         }
 
-        public static Branch GetCurrentBranch() {
-            return currentBranch;
+        public static int GetCurrentBranchId() {
+            return currentBranchId;
         }
 
         public static Dictionary<int, Branch> GetBranches() {
@@ -129,8 +136,8 @@ public static class Company {
             money = value;
         }
 
-        public static void SetCurrentBranch(Branch value) {
-            currentBranch = value;
+        public static void SetCurrentBranchId(int value) {
+            currentBranchId = value;
         }
 
     #endregion

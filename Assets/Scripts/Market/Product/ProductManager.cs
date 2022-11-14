@@ -20,11 +20,11 @@ public static class ProductManager {
         Universe.Generate();
     }
 
-    public static Product GetProduct(int id) {
-        return loadedProducts[id];
-    }
-
     public static List<Product> GetProducts() {
         return loadedProducts;
+    }
+
+    public static Product GetProducts(int id) {
+        return loadedProducts[id];
     }
 }

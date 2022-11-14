@@ -3,42 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Sector {
-    private int productionTime;
-
-    private Market market;
+    private Galaxy galaxy; // Galaxy that the sector sell its products to
     private Product product;
     private List<Alien> aliens = new List<Alien>();
 
-    public Sector(Market market, Product product) {
-        this.market = market;
+    private int productionTime;
+
+    public Sector(Product product, Galaxy galaxy) {
         this.product = product;
+        this.galaxy = galaxy;
     }
 
     public Sector(SectorData sectorData) {
-        this.productionTime = sectorData.productionTime;
-        this.market = new Market(sectorData.market);
-        this.product = ProductManager.GetProduct(sectorData.productId);
+        this.galaxy = Universe.GetGalaxies(sectorData.GetGalaxyId());
+        this.product = ProductManager.GetProducts(sectorData.GetProductId());
+        this.productionTime = sectorData.GetProductionTime();
 
-        AlienGenerator alienGenerator = new AlienGenerator();
-        foreach (AlienData alienData in sectorData.aliens) {
+        foreach (AlienData alienData in sectorData.GetAliens()) {
+            AlienGenerator alienGenerator = new AlienGenerator();
             Alien alien = alienGenerator.LoadAlien(alienData);
             aliens.Add(alien);
         }
     }
 
-    public void Produce() {
+    public void Update() {
+        Produce();
+    }
+
+    private void Produce() {
+        Market market = galaxy.GetMarket();
+
         foreach (Alien alien in aliens) {
             productionTime += 10;
         }
         if (productionTime >= product.GetProductionTime()) {
-            float money = product.GetPrice() * market.GetPercentages(product.GetId());
+            float money = market.GetTendencies(product).GetProductNormalizedPrice();
             Company.AddMoney(money);
             
             productionTime = 0;
         }
 
-        TimeData timeData = new TimeData((product.GetProductionTime() - productionTime)/10);
-        Debug.Log($"{timeData.GetDays()}, {timeData.GetHours()}, {timeData.GetMinutes()}, {timeData.GetSeconds()}");
+        TimeConverter time = new TimeConverter(product.GetProductionTime() - productionTime, 10);
+        //Debug.Log($"{time.GetDays()}, {time.GetHours()}, {time.GetMinutes()}, {time.GetSeconds()}");
     }
 
     #region Add
@@ -75,8 +81,8 @@ public class Sector {
             return productionTime;
         }
 
-        public Market GetMarket() {
-            return market;
+        public Galaxy GetGalaxy() {
+            return galaxy;
         }
 
         public Product GetProduct() {
@@ -99,8 +105,8 @@ public class Sector {
             productionTime = value;
         }
 
-        public void SetMarket(Market value) {
-            market = value;
+        public void SetGalaxy(Galaxy value) {
+            galaxy = value;
         }
 
         public void SetProduct(Product value) {

@@ -36,8 +36,8 @@ public class CreateBranchManager : ProductDisplay {
     }
 
     public void CreateBranch() {
-        Branch branch = new Branch(currentGalaxy.GetId(), currentGalaxy.GetMarket());
-        Sector firstSector = new Sector(currentGalaxy.GetMarket(), GetMarket().GetProducts(GetDropdown().value));
+        Branch branch = new Branch(currentGalaxy.GetId());
+        Sector firstSector = new Sector(ProductManager.GetProducts(GetDropdown().value), currentGalaxy);
         branch.AddSector(firstSector);
         Company.AddBranch(branch.GetId(), branch);
 

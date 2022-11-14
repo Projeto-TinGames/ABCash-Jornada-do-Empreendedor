@@ -2058,7 +2058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5990392707752527702, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
       propertyPath: m_Name
-      value: prefab_scene_general
+      value: prefab_scene_branch
       objectReference: {fileID: 0}
     - target: {fileID: 5990392707752527703, guid: b41a5ed23b3657140b806f0f73bb90e5, type: 3}
       propertyPath: m_RootOrder

@@ -13,7 +13,7 @@ public class ProductDisplay : MonoBehaviour {
     public virtual void OpenPanel() {
         if (dropdown.options.Count == 0) {
             List<string> productNames = new List<string>();
-            foreach (Product product in market.GetProducts()) {
+            foreach (Product product in ProductManager.GetProducts()) {
                 productNames.Add(product.GetName());
             }
             dropdown.AddOptions(productNames);
@@ -28,7 +28,8 @@ public class ProductDisplay : MonoBehaviour {
     }
 
     public void ChangeProductPrice() {
-        float price = market.GetProducts(dropdown.value).GetPrice() * market.GetPercentages(dropdown.value);
+        Tendency tendency = market.GetTendencies(ProductManager.GetProducts(dropdown.value));
+        float price = tendency.GetProductNormalizedPrice();
         productPrice.text = "$" + price.ToString();
     }
 

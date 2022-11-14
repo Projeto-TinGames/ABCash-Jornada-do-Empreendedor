@@ -5,12 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class BranchData {
     [SerializeField]private int id;
-    [SerializeField]private MarketData market;
     [SerializeField]private List<SectorData> sectors = new List<SectorData>();
 
     public BranchData(Branch branch) {
         this.id = branch.GetId();
-        this.market = new MarketData(branch.GetMarket());
 
         foreach (Sector sector in branch.GetSectors()) {
             this.sectors.Add(new SectorData(sector));
@@ -43,10 +41,6 @@ public class BranchData {
             return id;
         }
 
-        public MarketData GetMarket() {
-            return market;
-        }
-
         public List<SectorData> GetSectors() {
             return sectors;
         }
@@ -61,10 +55,6 @@ public class BranchData {
 
         public void SetId(int value) {
             id = value;
-        }
-
-        public void SetMarket(MarketData value) {
-            market = value;
         }
 
         public void SetSectors(List<SectorData> value) {

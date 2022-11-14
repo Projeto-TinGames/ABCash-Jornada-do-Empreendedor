@@ -34,8 +34,8 @@ public class GalaxyDisplay : MonoBehaviour {
 
     public void Select() {
         if (galaxy.GetHasBranch()) {
-            Company.SetCurrentBranch(Company.GetBranches(galaxy.GetId()));
-            SceneController.instance.Load("sc_branch");
+            Company.SetCurrentBranchId(galaxy.GetId());
+            SceneController.instance.Load("sc_branch_sectors");
         }
         else {
             CreateBranchManager.instance.LoadDisplay(this);

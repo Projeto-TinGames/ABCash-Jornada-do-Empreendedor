@@ -26,6 +26,7 @@ public class TimeManager : MonoBehaviour {
     }
 
     public void UpdateGame() {
+        Universe.Update();
         Company.Update();
 
         UpdateUI.Invoke();

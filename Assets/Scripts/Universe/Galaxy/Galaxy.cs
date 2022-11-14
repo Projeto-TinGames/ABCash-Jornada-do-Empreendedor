@@ -30,7 +30,11 @@ public class Galaxy {
         this.y = data.GetY();
         this.hasBranch = data.GetHasBranch();
         this.position = new Vector3(data.GetPosition(0), data.GetPosition(1), data.GetPosition(2));
-        market = new Market(data.GetMarket());
+        this.market = new Market(data.GetMarket());
+    }
+
+    public void Update() {
+        market.Update();
     }
 
     #region Getters

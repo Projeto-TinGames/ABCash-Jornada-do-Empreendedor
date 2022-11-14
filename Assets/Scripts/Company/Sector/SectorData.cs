@@ -4,16 +4,16 @@ using UnityEngine;
 
 [System.Serializable]
 public class SectorData {
-    [SerializeField]public int productId;
-    [SerializeField]public int productionTime;
+    [SerializeField]private int productId;
+    [SerializeField]private int galaxyId;
+    [SerializeField]private int productionTime;
 
-    [SerializeField]public MarketData market;
-    [SerializeField]public List<AlienData> aliens = new List<AlienData>();
+    [SerializeField]private List<AlienData> aliens = new List<AlienData>();
 
     public SectorData(Sector sector) {
         this.productionTime = sector.GetProductionTime();
         this.productId = sector.GetProduct().GetId();
-        this.market = new MarketData(sector.GetMarket());
+        this.galaxyId = sector.GetGalaxy().GetId();
         
         foreach (Alien alien in sector.GetAliens()) {
             this.aliens.Add(new AlienData(alien));
@@ -26,11 +26,11 @@ public class SectorData {
             return productionTime;
         }
 
-        public MarketData GetMarket() {
-            return market;
+        public int GetGalaxyId() {
+            return galaxyId;
         }
 
-        public int GetProduct() {
+        public int GetProductId() {
             return productId;
         }
 
@@ -50,11 +50,11 @@ public class SectorData {
             productionTime = value;
         }
 
-        public void SetMarket(MarketData value) {
-            market = value;
+        public void SetGalaxyId(int value) {
+            galaxyId = value;
         }
 
-        public void SetProduct(int value) {
+        public void SetProductId(int value) {
             productId = value;
         }
 

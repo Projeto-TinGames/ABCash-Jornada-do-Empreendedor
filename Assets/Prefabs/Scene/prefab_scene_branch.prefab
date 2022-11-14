@@ -589,7 +589,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -649,7 +649,7 @@ GameObject:
   - component: {fileID: 7242768023312923824}
   - component: {fileID: 5958176855613051753}
   m_Layer: 5
-  m_Name: Empresa
+  m_Name: Setores
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -757,10 +757,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8709634036927745543}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 5
+      - m_Target: {fileID: 5808279065870166110}
+        m_TargetAssemblyTypeName: BranchNavMenu, Assembly-CSharp
+        m_MethodName: GoToSectors
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -890,10 +890,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8709634036927745543}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 5
+      - m_Target: {fileID: 5808279065870166110}
+        m_TargetAssemblyTypeName: BranchNavMenu, Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1451,9 +1451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Empresa
-
-'
+  m_text: Setores
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2205,7 +2203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5990392707752527703}
   m_Layer: 0
-  m_Name: prefab_scene_general
+  m_Name: prefab_scene_branch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2240,6 +2238,7 @@ GameObject:
   - component: {fileID: 5990392708033268567}
   - component: {fileID: 5990392708033268566}
   - component: {fileID: 5990392708033268569}
+  - component: {fileID: 5808279065870166110}
   m_Layer: 5
   m_Name: UI_Nav
   m_TagString: Untagged
@@ -2334,6 +2333,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!114 &5808279065870166110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5990392708033268571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 919368775b6f09945951ce7a8f4ee605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7846961680014855013
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,10 +2765,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8709634036927745543}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 5
+      - m_Target: {fileID: 5808279065870166110}
+        m_TargetAssemblyTypeName: BranchNavMenu, Assembly-CSharp
+        m_MethodName: GoToContract
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

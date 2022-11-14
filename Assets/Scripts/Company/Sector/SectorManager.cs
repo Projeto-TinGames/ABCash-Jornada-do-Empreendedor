@@ -22,8 +22,8 @@ public class SectorManager : ProductDisplay {
     }
 
     private void Start() {
-        branch = Company.GetCurrentBranch();
-        SetMarket(branch.GetMarket());
+        branch = Company.GetBranches(Company.GetCurrentBranchId());
+        SetMarket(Universe.GetGalaxies(0).GetMarket()); //Testing with only the first galaxy for now
 
         for (int i = 0; i < branch.GetSectors().Count + 1; i++) {
             GameObject newInstance = Instantiate(sectorDisplay);
@@ -46,7 +46,10 @@ public class SectorManager : ProductDisplay {
     }
 
     public void CreateSector() {
-        Sector newSector = new Sector(GetMarket(), GetMarket().GetProducts(GetDropdown().value));
+        Product product = ProductManager.GetProducts(GetDropdown().value);
+        Galaxy galaxy = Universe.GetGalaxies(0); //Testing with only the first galaxy for now
+
+        Sector newSector = new Sector(product, galaxy);
         branch.AddSector(newSector);
         
         currentDisplay.SetSector(newSector);

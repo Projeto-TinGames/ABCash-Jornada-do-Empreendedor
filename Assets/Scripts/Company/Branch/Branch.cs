@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class Branch {
     private int id;
-    private Market market;
     private List<Sector> sectors = new List<Sector>();
 
-    public Branch(int id, Market market) {
+    public Branch(int id) {
         this.id = id;
-        this.market = market;
     }
 
     public Branch(BranchData branchData) {
         this.id = branchData.GetId();
-        this.market = new Market(branchData.GetMarket());
         
         foreach (SectorData sectorData in branchData.GetSectors()) {
             Sector sector = new Sector(sectorData);
             this.sectors.Add(sector);
+        }
+    }
+
+    public void Update() {
+        foreach (Sector sector in sectors) {
+            sector.Update();
         }
     }
 
@@ -48,10 +51,6 @@ public class Branch {
             return id;
         }
 
-        public Market GetMarket() {
-            return market;
-        }
-
         public List<Sector> GetSectors() {
             return sectors;
         }
@@ -66,10 +65,6 @@ public class Branch {
 
         public void SetId(int value) {
             id = value;
-        }
-
-        public void SetMarket(Market value) {
-            market = value;
         }
 
         public void SetSectors(List<Sector> value) {

@@ -6,6 +6,19 @@ public static class Universe {
     private static List<Galaxy> galaxies = new List<Galaxy>();
     private static Dictionary<int,Dictionary<int,Galaxy>> galaxyMatrix = new Dictionary<int,Dictionary<int,Galaxy>>();
 
+    private static int marketUpdateCounter;
+
+    public static void Update() {
+        if (marketUpdateCounter <= 0) {
+            marketUpdateCounter = new TimeConverter(0, 0, 1, 0).GetCounter();
+        }
+        marketUpdateCounter--;
+
+        foreach (Galaxy galaxy in galaxies) {
+            galaxy.Update();
+        }
+    }
+
     public static void Load(UniverseData universeData) {
         galaxies.Clear();
         galaxyMatrix.Clear();
@@ -76,6 +89,10 @@ public static class Universe {
     #endregion
 
     #region Getters
+
+        public static int GetMarketUpdateCounter() {
+            return marketUpdateCounter;
+        }
 
         public static List<Galaxy> GetGalaxies() {
             return galaxies;

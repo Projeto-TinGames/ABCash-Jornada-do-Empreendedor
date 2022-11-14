@@ -4,32 +4,22 @@ using UnityEngine;
 
 [System.Serializable]
 public class MarketData {
-    [SerializeField]private List<float> percentages = new List<float>();
+    [SerializeField]private List<TendencyData> tendencies = new List<TendencyData>();
 
     public MarketData(Market market) {
-        percentages = market.GetPercentages();
+        foreach (Tendency tendency in market.GetTendencies()) {
+            tendencies.Add(new TendencyData(tendency));
+        }
     }
 
     #region Getters
 
-        public List<float> GetPercentages() {
-            return percentages;
+        public List<TendencyData> GetTendencies() {
+            return tendencies;
         }
 
-        public float GetPercentages(int index) {
-            return percentages[index];
-        }
-
-    #endregion
-
-    #region Setters
-
-        public void SetPercentages(List<float> value) {
-            percentages = value;
-        }
-
-        public void GetPercentages(int index, float value) {
-            percentages[index] = value;
+        public TendencyData GetTendencies(int index) {
+            return tendencies[index];
         }
 
     #endregion

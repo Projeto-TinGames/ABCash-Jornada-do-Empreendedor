@@ -30,7 +30,7 @@ public class SaveSlot : MonoBehaviour {
             SceneController.instance.Load(saveData.GetScene());
         }
         else {
-            SceneController.instance.Load("sc_companyCreation");
+            SceneController.instance.Load("sc_company_creation");
         }
     }
 
