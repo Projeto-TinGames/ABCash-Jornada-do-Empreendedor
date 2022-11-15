@@ -5,46 +5,58 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GalaxyDisplay : MonoBehaviour {
-    private Button button;
     private Galaxy galaxy;
+
+    [SerializeField]private GameObject infoElements;
 
     [SerializeField]private TextMeshProUGUI galaxyName;
 
-    private void Awake() {
-        button = GetComponent<Button>();
-    }
+    [SerializeField]private Button galaxyButton;
+    [SerializeField]private Button createButton;
+    [SerializeField]private Button enterButton;
 
     private void Start() {
-        button.interactable = false;
-        button.interactable = true;
+        galaxyButton.interactable = false;
+        galaxyButton.interactable = true;
         
-        galaxyName.text = $"Galáxia \n{galaxy.GetX()},{galaxy.GetY()}";
+        galaxyName.text = $"Galáxia {galaxy.GetX()},{galaxy.GetY()}";
+
+        if (galaxy.GetHasBranch()) {
+            ChangeColors();
+            enterButton.gameObject.SetActive(true);
+        }
+        else {
+            createButton.gameObject.SetActive(true);
+        }
     }
 
     private void ChangeColors() {
-        ColorBlock colors = button.colors;
+        ColorBlock colors = galaxyButton.colors;
         colors.normalColor = new Color(0,1,0,1);
         colors.highlightedColor = new Color(0,0.78f,0,1);
         colors.pressedColor = new Color(0,0.45f,0,1);
         colors.selectedColor = new Color(0,0.78f,0,1);
         colors.disabledColor = new Color(0,0.2f,0,0.5f);
 
-        button.colors = colors;
+        galaxyButton.colors = colors;
     }
 
     public void Select() {
-        if (galaxy.GetHasBranch()) {
-            Company.SetCurrentBranchId(galaxy.GetId());
-            SceneController.instance.Load("sc_branch_sectors");
-        }
-        else {
-            CreateBranchManager.instance.LoadDisplay(this);
-        }
+        BranchCreationMenu.LoadDisplay(this);
+        infoElements.SetActive(true);
     }
 
-    public void CreateBranch() {
-        galaxy.SetHasBranch(true);
-        ChangeColors();
+    public void Deselect() {
+        infoElements.SetActive(false);
+    }
+
+    public void Create() {
+        SceneController.instance.Load("sc_branch_create");
+    }
+
+    public void Enter() {
+        Company.SetCurrentBranchId(galaxy.GetId());
+        SceneController.instance.Load("sc_branch_sectors");
     }
 
     #region Getters
