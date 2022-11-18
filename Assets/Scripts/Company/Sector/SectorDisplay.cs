@@ -22,7 +22,7 @@ public class SectorDisplay : MonoBehaviour {
     }
 
     public void AddSector() {
-        SectorManager.instance.OpenAdd(this);
+        //SectorManager.instance.OpenAdd(this);
     }
 
     public void AddEmployee() {

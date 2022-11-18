@@ -23,6 +23,7 @@ public class UniverseDisplay : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        // Implementar limite de movimento com base em uma largura e altura da classe Universe
         float x = -Input.GetAxis("Horizontal")*10;
         float y = -Input.GetAxis("Vertical")*10;
         transform.position = new Vector3(transform.position.x + x, transform.position.y + y, 0);

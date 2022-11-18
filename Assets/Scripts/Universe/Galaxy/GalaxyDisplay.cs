@@ -42,7 +42,7 @@ public class GalaxyDisplay : MonoBehaviour {
     }
 
     public void Select() {
-        BranchCreationMenu.LoadDisplay(this);
+        BranchCreation.SetGalaxyDisplay(this);
         infoElements.SetActive(true);
     }
 
@@ -56,7 +56,7 @@ public class GalaxyDisplay : MonoBehaviour {
 
     public void Enter() {
         Company.SetCurrentBranchId(galaxy.GetId());
-        SceneController.instance.Load("sc_branch_sectors");
+        SceneController.instance.Load("sc_branch");
     }
 
     #region Getters

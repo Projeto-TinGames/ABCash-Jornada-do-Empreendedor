@@ -60,8 +60,8 @@ public static class Company {
             aliens.Add(alien);
         }
 
-        public static void AddBranch(int key, Branch branch) {
-            branches.Add(key, branch);
+        public static void AddBranch(Branch branch) {
+            branches.Add(branch.GetId(), branch);
         }
 
     #endregion
@@ -76,8 +76,12 @@ public static class Company {
             aliens.Remove(alien);
         }
 
-        public static void RemoveAlien(int alien) {
-            aliens.RemoveAt(alien);
+        public static void RemoveAlien(int index) {
+            aliens.RemoveAt(index);
+        }
+
+        public static void RemoveBranch(Branch branch) {
+            branches.Remove(branch.GetId());
         }
 
         public static void RemoveBranch(int index) {
