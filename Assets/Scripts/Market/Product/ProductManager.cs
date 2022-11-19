@@ -15,6 +15,10 @@ public static class ProductManager {
 
     private static void DefineProducts(string dataAsJson) {
         ProductData data = JsonUtility.FromJson<ProductData>(dataAsJson);
+
+        foreach (Product product in data.GetProducts()) {
+            product.SetProductionTimeMetrics();
+        }
         loadedProducts = data.GetProducts();
 
         Universe.Generate();

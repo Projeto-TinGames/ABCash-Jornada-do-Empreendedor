@@ -1,10 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BranchCreation : MonoBehaviour {
-    public static GalaxyDisplay galaxyDisplay;
-    public static Product product;
+    private static GalaxyDisplay galaxyDisplay;
+    private static Product product;
+
+    [SerializeField]private TextMeshProUGUI sector;
+
+    private void Start() {
+        if (product != null) {
+            sector.text = product.GetName();
+        }
+    }
 
     public void Sector() {
         SceneController.instance.Load("sc_product");
@@ -31,6 +40,14 @@ public class BranchCreation : MonoBehaviour {
     public void Exit() {
         SceneController.instance.Load("sc_universe");
     }
+
+    #region Getters
+
+        public static Product GetProduct() {
+            return product;
+        }
+
+    #endregion
 
     #region Setters
 

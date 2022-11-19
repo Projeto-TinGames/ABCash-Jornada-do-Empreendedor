@@ -51,7 +51,7 @@ public class GalaxyDisplay : MonoBehaviour {
     }
 
     public void Create() {
-        SceneController.instance.Load("sc_branch_create");
+        SceneController.instance.Load("sc_branch_creation");
     }
 
     public void Enter() {

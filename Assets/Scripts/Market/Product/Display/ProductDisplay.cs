@@ -1,19 +1,16 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class ProductDisplay : MonoBehaviour {
     private Product product;
 
-    #region Getters
-
-        public void GetProduct() {
-            Debug.Log(product.GetName());
-            //return product;
-        }
-
-    #endregion
+    public void SelectProduct() {
+        ProductInfoDisplay.SetProduct(product);
+        GetComponent<Button>().Select();
+    }
 
     #region Setters
 

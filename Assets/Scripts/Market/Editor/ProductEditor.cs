@@ -34,12 +34,16 @@ public class ProductEditor : Editor {
                 productObject.GetProduct().SetPrice(EditorGUILayout.FloatField(productObject.GetProduct().GetPrice()));
             GUILayout.EndHorizontal();
 
+            EditorGUILayout.LabelField("Production Time:");
             GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Production Time:");
-                productObject.GetProduct().SetProductionTime(EditorGUILayout.IntField(productObject.GetProduct().GetProductionTime()));
+                productObject.GetProduct().SetProductionTimeDays(EditorGUILayout.IntField(productObject.GetProduct().GetProductionTimeDays()));
+                productObject.GetProduct().SetProductionTimeHours(EditorGUILayout.IntField(productObject.GetProduct().GetProductionTimeHours()));
+                productObject.GetProduct().SetProductionTimeMinutes(EditorGUILayout.IntField(productObject.GetProduct().GetProductionTimeMinutes()));
+                productObject.GetProduct().SetProductionTimeSeconds(EditorGUILayout.IntField(productObject.GetProduct().GetProductionTimeSeconds()));
             GUILayout.EndHorizontal();
 
             if (GUILayout.Button("Save Data")) {
+                productObject.GetProduct().SetProductionTimeCounter();
                 SaveData(productObject.GetProduct());
             }
         }
@@ -66,7 +70,7 @@ public class ProductEditor : Editor {
 
         if (fileProduct != null) {
             fileProduct.SetName(product.GetName());
-            fileProduct.SetProductionTime(product.GetProductionTime());
+            fileProduct.SetProductionTimeCounter(product.GetProductionTimeCounter());
             fileProduct.SetPrice(product.GetPrice());
         }
         else {

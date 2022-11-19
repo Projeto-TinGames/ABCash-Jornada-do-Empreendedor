@@ -6,17 +6,25 @@ public class ProductListDisplay : MonoBehaviour {
     [SerializeField]private ProductDisplay productDisplay;
 
     private void Start() {
-        ProductManager.Load();
+        for (int i = 0; i < ProductManager.GetProducts().Count; i++) {
+            Product product = ProductManager.GetProducts(i);
 
-        foreach (Product product in ProductManager.GetProducts()) {
             ProductDisplay display = Instantiate(productDisplay);
 
             display.SetProduct(product);
 
             display.transform.SetParent(transform);
             display.transform.localScale = Vector3.one;
+
+            if (i == 0) {
+                display.SelectProduct();
+            }
+
+            if (BranchCreation.GetProduct() != null) {
+                if (product.GetId() == BranchCreation.GetProduct().GetId()) {
+                    display.SelectProduct();
+                }
+            }
         }
     }
-
-
 }

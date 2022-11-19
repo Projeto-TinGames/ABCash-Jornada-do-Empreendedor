@@ -7,7 +7,7 @@ public class Sector {
     private Product product;
     private List<Alien> aliens = new List<Alien>();
 
-    private int productionTime;
+    private int productionTimeCounter;
 
     public Sector(Product product, Galaxy galaxy) {
         this.product = product;
@@ -17,7 +17,7 @@ public class Sector {
     public Sector(SectorData sectorData) {
         this.galaxy = Universe.GetGalaxies(sectorData.GetGalaxyId());
         this.product = ProductManager.GetProducts(sectorData.GetProductId());
-        this.productionTime = sectorData.GetProductionTime();
+        this.productionTimeCounter = sectorData.GetProductionTime();
 
         foreach (AlienData alienData in sectorData.GetAliens()) {
             AlienGenerator alienGenerator = new AlienGenerator();
@@ -34,23 +34,23 @@ public class Sector {
         Market market = galaxy.GetMarket();
 
         foreach (Alien alien in aliens) {
-            productionTime += 10;
+            productionTimeCounter++;
         }
-        if (productionTime >= product.GetProductionTime()) {
+        if (productionTimeCounter >= product.GetProductionTimeCounter()) {
             float money = market.GetTendencies(product).GetProductNormalizedPrice();
             Company.AddMoney(money);
             
-            productionTime = 0;
+            productionTimeCounter = 0;
         }
 
-        TimeConverter time = new TimeConverter(product.GetProductionTime() - productionTime, 10);
+        TimeConverter time = new TimeConverter(product.GetProductionTimeCounter() - productionTimeCounter, aliens.Count);
         //Debug.Log($"{time.GetDays()}, {time.GetHours()}, {time.GetMinutes()}, {time.GetSeconds()}");
     }
 
     #region Add
 
-        public void AddProductionTime(int value) {
-            productionTime += value;
+        public void AddProductionTimeCounter(int value) {
+            productionTimeCounter += value;
         }
 
         public void AddAlien(Alien alien) {
@@ -61,8 +61,8 @@ public class Sector {
 
     #region Remove
 
-        public void RemoveProductionTime(int value) {
-            productionTime -= value;
+        public void RemoveProductionTimeCounter(int value) {
+            productionTimeCounter -= value;
         }
 
         public void RemoveAlien(Alien alien) {
@@ -77,8 +77,8 @@ public class Sector {
 
     #region Getters
 
-        public int GetProductionTime() {
-            return productionTime;
+        public int GetProductionTimeCounter() {
+            return productionTimeCounter;
         }
 
         public Galaxy GetGalaxy() {
@@ -101,8 +101,8 @@ public class Sector {
 
     #region Setters
 
-        public void SetProductionTime(int value) {
-            productionTime = value;
+        public void SetProductionTimeCounter(int value) {
+            productionTimeCounter = value;
         }
 
         public void SetGalaxy(Galaxy value) {
@@ -122,6 +122,5 @@ public class Sector {
         }
 
     #endregion
-
 
 }

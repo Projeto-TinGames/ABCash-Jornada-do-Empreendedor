@@ -5,6 +5,10 @@ using UnityEngine;
 public class Menu : MonoBehaviour {
     [SerializeField]private GameObject menu;
 
+    private void Start() {
+        menu.transform.SetAsLastSibling();
+    }
+
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             menu.SetActive(!menu.activeSelf);

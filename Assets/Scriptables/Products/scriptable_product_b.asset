@@ -16,4 +16,4 @@ MonoBehaviour:
     id: 1
     name: Produto B
     price: 2
-    productionTime: 200
+    productionTimeCounter: 20

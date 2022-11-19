@@ -11,7 +11,7 @@ public class SectorData {
     [SerializeField]private List<AlienData> aliens = new List<AlienData>();
 
     public SectorData(Sector sector) {
-        this.productionTime = sector.GetProductionTime();
+        this.productionTime = sector.GetProductionTimeCounter();
         this.productId = sector.GetProduct().GetId();
         this.galaxyId = sector.GetGalaxy().GetId();
         

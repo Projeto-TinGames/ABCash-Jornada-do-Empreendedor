@@ -4,19 +4,19 @@
             "id": 0,
             "name": "Produto A",
             "price": 1.0,
-            "productionTime": 100
+            "productionTimeCounter": 10
         },
         {
             "id": 1,
             "name": "Produto B",
             "price": 2.0,
-            "productionTime": 200
+            "productionTimeCounter": 20
         },
         {
             "id": 2,
             "name": "Produto C",
             "price": 3.0,
-            "productionTime": 300
+            "productionTimeCounter": 30
         }
     ]
 }
