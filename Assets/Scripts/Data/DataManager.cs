@@ -21,6 +21,8 @@ public class DataManager : MonoBehaviour {
         else {
             Destroy(gameObject);
         }
+
+        ProductManager.Start();
     }
     
     public void Load(string filePath, UnityEvent<string> FinishLoadEvent) {

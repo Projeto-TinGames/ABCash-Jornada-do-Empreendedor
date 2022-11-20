@@ -14,19 +14,25 @@ public class GalaxyDisplay : MonoBehaviour {
     [SerializeField]private Button galaxyButton;
     [SerializeField]private Button createButton;
     [SerializeField]private Button enterButton;
+    [SerializeField]private Button selectButton;
 
     private void Start() {
         galaxyButton.interactable = false;
         galaxyButton.interactable = true;
         
-        galaxyName.text = $"Galáxia {galaxy.GetX()},{galaxy.GetY()}";
+        galaxyName.text = galaxy.GetName();
 
-        if (galaxy.GetHasBranch()) {
-            ChangeColors();
-            enterButton.gameObject.SetActive(true);
+        if (!ProductUI.GetIsSelectingGalaxy()) {
+            if (galaxy.GetHasBranch()) {
+                ChangeColors();
+                enterButton.gameObject.SetActive(true);
+            }
+            else {
+                createButton.gameObject.SetActive(true);
+            }
         }
         else {
-            createButton.gameObject.SetActive(true);
+            selectButton.gameObject.SetActive(true);
         }
     }
 
@@ -48,6 +54,11 @@ public class GalaxyDisplay : MonoBehaviour {
 
     public void Deselect() {
         infoElements.SetActive(false);
+    }
+
+    public void SelectProductInterfaceGalaxy() {
+        ProductUI.SetGalaxy(galaxy);
+        SceneController.instance.Load("sc_products");
     }
 
     public void Create() {

@@ -6,17 +6,19 @@ using TMPro;
 public class BranchCreation : MonoBehaviour {
     private static GalaxyDisplay galaxyDisplay;
     private static Product product;
+    private static bool isCreating;
 
     [SerializeField]private TextMeshProUGUI sector;
 
     private void Start() {
+        isCreating = true;
         if (product != null) {
             sector.text = product.GetName();
         }
     }
 
     public void Sector() {
-        SceneController.instance.Load("sc_product");
+        SceneController.instance.Load("sc_products");
     }
 
     public void Create() {
@@ -33,11 +35,15 @@ public class BranchCreation : MonoBehaviour {
             galaxyDisplay = null;
             product = null;
 
+            isCreating = false;
+            product = null;
             SceneController.instance.Load("sc_branch");
         }
     }
 
     public void Exit() {
+        isCreating = false;
+        product = null;
         SceneController.instance.Load("sc_universe");
     }
 
@@ -45,6 +51,10 @@ public class BranchCreation : MonoBehaviour {
 
         public static Product GetProduct() {
             return product;
+        }
+
+        public static bool GetIsCreating() {
+            return isCreating;
         }
 
     #endregion

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UniverseDisplay : MonoBehaviour {
     public static UniverseDisplay instance;
+    [SerializeField]private GameObject navMenu;
     [SerializeField]private GameObject galaxy;
 
     private void Awake() {
@@ -16,6 +17,12 @@ public class UniverseDisplay : MonoBehaviour {
     }
 
     private void Start() {
+        transform.SetAsFirstSibling();
+
+        if (!ProductUI.GetIsSelectingGalaxy()) {
+            navMenu.SetActive(true);
+        }
+        
         if (Universe.GetGalaxies().Count == 0) {
             Universe.Generate();
         }

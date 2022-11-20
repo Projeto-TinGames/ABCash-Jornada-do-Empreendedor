@@ -19,7 +19,8 @@ public class Galaxy {
         this.x = x;
         this.y = y;
 
-        this.name = possibleNames[Random.Range(0,possibleNames.Length)];
+        //this.name = possibleNames[Random.Range(0,possibleNames.Length)];
+        this.name = $"Galáxia {this.x},{this.y}";
         this.market = new Market();
     }
 

@@ -4,11 +4,19 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public static class ProductManager {
+    private static bool started;
+
     private static List<Product> loadedProducts;
     private static UnityEvent<string> FinishLoadEvent = new UnityEvent<string>();
+    private static string filePath = Application.streamingAssetsPath + "/Products/products.json";
+
+    public static void Start() {
+        if (!started) {
+            Load();
+        }
+    }
 
     public static void Load() {
-        string filePath = Application.streamingAssetsPath + "/Products/products.json";
         FinishLoadEvent.AddListener(DefineProducts);
         DataManager.instance.Load(filePath, FinishLoadEvent);
     }

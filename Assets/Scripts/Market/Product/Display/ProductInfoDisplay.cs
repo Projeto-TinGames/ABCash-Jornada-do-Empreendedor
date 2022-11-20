@@ -19,7 +19,6 @@ public class ProductInfoDisplay : MonoBehaviour {
     [SerializeField]private Button choose;
 
     private void Awake() {
-        ProductManager.Load();
         productChangeEvent.AddListener(DisplayProduct);
     }
 
@@ -34,6 +33,14 @@ public class ProductInfoDisplay : MonoBehaviour {
         BranchCreation.SetProduct(product);
         SceneController.instance.Load("sc_branch_creation");
     }
+
+    #region Getters
+
+        public static Product GetProduct() {
+            return product;
+        }
+
+    #endregion
 
     #region Setters
 

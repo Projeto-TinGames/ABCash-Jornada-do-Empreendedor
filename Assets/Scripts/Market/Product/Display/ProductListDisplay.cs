@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ProductListDisplay : MonoBehaviour {
+    private static Market market;
     [SerializeField]private ProductDisplay productDisplay;
+
+    private List<ProductDisplay> listProductDisplay = new List<ProductDisplay>();
 
     private void Start() {
         for (int i = 0; i < ProductManager.GetProducts().Count; i++) {
@@ -16,15 +20,18 @@ public class ProductListDisplay : MonoBehaviour {
             display.transform.SetParent(transform);
             display.transform.localScale = Vector3.one;
 
-            if (i == 0) {
-                display.SelectProduct();
-            }
-
-            if (BranchCreation.GetProduct() != null) {
-                if (product.GetId() == BranchCreation.GetProduct().GetId()) {
-                    display.SelectProduct();
-                }
-            }
+            listProductDisplay.Add(display);
         }
+
+        if (ProductInfoDisplay.GetProduct() != null) {
+            listProductDisplay[ProductInfoDisplay.GetProduct().GetId()].SelectProduct();
+        }
+        else {
+            listProductDisplay[0].SelectProduct();
+        }
+    }
+
+    private void Update() {
+        //if (EventSystem.current.lastSelectedGameObject.)
     }
 }
