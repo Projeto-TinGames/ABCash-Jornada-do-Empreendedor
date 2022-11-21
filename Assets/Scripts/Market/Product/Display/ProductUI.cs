@@ -1,39 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class ProductUI : MonoBehaviour {
-    static private bool isSelectingGalaxy;
-    static private Galaxy galaxy;
+    protected static bool isSelectingGalaxy;
+    protected static UnityEvent<Product> productChangeEvent;
+    protected static Product product;
+    protected static Galaxy galaxy;
 
-    [SerializeField]private GameObject navMenu;
+    [SerializeField]private ProductInfoDisplay productInfoDisplay;
     [SerializeField]private TextMeshProUGUI galaxyName;
-    [SerializeField]private GameObject exitButton;
-    
-    private void Start() {
-        transform.SetAsFirstSibling();
 
-        if (isSelectingGalaxy) {
-            isSelectingGalaxy = false;
-        }
-        else {
+    protected void Awake() {
+        productChangeEvent = new UnityEvent<Product>();
+        productChangeEvent.AddListener(productInfoDisplay.DisplayProduct);
+
+        if (!isSelectingGalaxy) {
+            product = null;
             galaxy = null;
         }
+    }
 
-        if (BranchCreation.GetIsCreating()) {
-            exitButton.SetActive(true);
-            navMenu.SetActive(false);
-        }
-        else {
-            exitButton.SetActive(false);
-            navMenu.SetActive(true);
-        }
+    protected virtual void Start() {
+        transform.SetAsFirstSibling();
 
         if (galaxy != null) {
             galaxyName.text = galaxy.GetName();
-            navMenu.GetComponent<CompanyNavUI>().Toggle(false);
         }
+
+        isSelectingGalaxy = false;
     }
 
     public void SelectGalaxy() {
@@ -51,6 +48,10 @@ public class ProductUI : MonoBehaviour {
             return isSelectingGalaxy;
         }
 
+        public static Product GetProduct() {
+            return product;
+        }
+
         public static Galaxy GetGalaxy() {
             return galaxy;
         }
@@ -58,6 +59,11 @@ public class ProductUI : MonoBehaviour {
     #endregion
 
     #region Setters
+
+        public static void SetProduct(Product value) {
+            product = value;
+            productChangeEvent.Invoke(value);
+        }
 
         public static void SetGalaxy(Galaxy value) {
             galaxy = value;

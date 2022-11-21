@@ -8,9 +8,17 @@ public class ProductDisplay : MonoBehaviour {
     private Product product;
 
     public void SelectProduct() {
-        ProductInfoDisplay.SetProduct(product);
+        ProductUI.SetProduct(product);
         GetComponent<Button>().Select();
     }
+
+    #region Getters
+
+        public Product GetProduct() {
+            return product;
+        }
+
+    #endregion
 
     #region Setters
 
