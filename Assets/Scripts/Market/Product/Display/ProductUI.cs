@@ -6,7 +6,8 @@ using TMPro;
 
 public class ProductUI : MonoBehaviour {
     protected static bool isSelectingGalaxy;
-    protected static UnityEvent<Product> productChangeEvent;
+    protected static int rumorDay;
+    protected static UnityEvent productChangeEvent;
     protected static Product product;
     protected static Galaxy galaxy;
 
@@ -14,7 +15,7 @@ public class ProductUI : MonoBehaviour {
     [SerializeField]private TextMeshProUGUI galaxyName;
 
     protected void Awake() {
-        productChangeEvent = new UnityEvent<Product>();
+        productChangeEvent = new UnityEvent();
         productChangeEvent.AddListener(productInfoDisplay.DisplayProduct);
 
         if (!isSelectingGalaxy) {
@@ -28,6 +29,7 @@ public class ProductUI : MonoBehaviour {
 
         if (galaxy != null) {
             galaxyName.text = galaxy.GetName();
+            productChangeEvent.Invoke();
         }
 
         isSelectingGalaxy = false;
@@ -35,7 +37,14 @@ public class ProductUI : MonoBehaviour {
 
     public void SelectGalaxy() {
         isSelectingGalaxy = true;
+        CompanyNavUI.SetBlockActive(true);
         SceneController.instance.Load("sc_universe");
+    }
+
+    public void Research() {
+        Tendency tendency = galaxy.GetMarket().GetTendencies(product.GetId());
+        tendency.Research(rumorDay);
+        productChangeEvent.Invoke();
     }
 
     public void Exit() {
@@ -62,7 +71,7 @@ public class ProductUI : MonoBehaviour {
 
         public static void SetProduct(Product value) {
             product = value;
-            productChangeEvent.Invoke(value);
+            productChangeEvent.Invoke();
         }
 
         public static void SetGalaxy(Galaxy value) {

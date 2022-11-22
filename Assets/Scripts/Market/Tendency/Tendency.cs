@@ -6,6 +6,7 @@ public class Tendency {
     private Product product;
     private List<float> valorizations = new List<float>();
     private List<float> rumorValorizations = new List<float>();
+    private List<bool> isRumor = new List<bool>();
 
     public Tendency(Product product) {
         this.product = product;
@@ -13,12 +14,15 @@ public class Tendency {
         for (int i = 0; i < 30; i++) { // Generates the valorization and rumor valorization for each day in the month
             this.AddValorization();
         }
+
+        isRumor[0] = false;
     }
 
     public Tendency(TendencyData data) {
         this.product = ProductManager.GetProducts(data.GetProductId());
         this.valorizations = data.GetValorizations();
         this.rumorValorizations = data.GetRumorValorizations();
+        this.isRumor = data.GetIsRumor();
     }
 
     public void Update() {
@@ -26,11 +30,16 @@ public class Tendency {
         AddValorization();
     }
 
+    public void Research(int day) {
+        isRumor[day] = false;
+    }
+
     #region Add
 
         public void AddValorization() {
             float valorization = (float)Random.Range(-100, 101)/100;
             valorizations.Add(valorization);
+            isRumor.Add(true);
 
             int random = Random.Range(0, 2);
 
@@ -50,6 +59,8 @@ public class Tendency {
         public void RemoveValorization(int index = 0) {
             valorizations.RemoveAt(index);
             rumorValorizations.RemoveAt(index);
+            isRumor.RemoveAt(index);
+            isRumor[0] = false;
         }
 
     #endregion
@@ -61,11 +72,19 @@ public class Tendency {
         }
 
         public float GetProductNormalizedPrice() {
-            return product.GetPrice() * rumorValorizations[0];
+            return product.GetPrice() + product.GetPrice() * valorizations[0];
         }
 
         public float GetProductNormalizedPrice(int index) {
-            return product.GetPrice() * rumorValorizations[index];
+            return product.GetPrice() + product.GetPrice() * valorizations[index];
+        }
+
+        public float GetProductRumorNormalizedPrice() {
+            return product.GetPrice() + product.GetPrice() * rumorValorizations[0];
+        }
+
+        public float GetProductRumorNormalizedPrice(int index) {
+            return product.GetPrice() + product.GetPrice() * rumorValorizations[index];
         }
 
         public List<float> GetValorizations() {
@@ -82,6 +101,14 @@ public class Tendency {
 
         public float GetRumorValorizations(int day) {
             return rumorValorizations[day];
+        }
+
+        public List<bool> GetIsRumor() {
+            return isRumor;
+        }
+
+        public bool GetIsRumor(int index) {
+            return isRumor[index];
         }
 
     #endregion

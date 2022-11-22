@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ProductCompanyUI : ProductUI {
-    [SerializeField]private GameObject navMenu;
+    [SerializeField]private GameObject navUI;
 
     protected override void Start() {
-        navMenu.SetActive(true);
-
-        if (ProductUI.isSelectingGalaxy) {
-            navMenu.GetComponent<CompanyNavUI>().Toggle(false);
-        }
+        navUI.SetActive(true);
 
         base.Start();
     }

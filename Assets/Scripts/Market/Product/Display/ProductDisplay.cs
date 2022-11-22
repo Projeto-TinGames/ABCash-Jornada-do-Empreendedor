@@ -6,10 +6,23 @@ using TMPro;
 
 public class ProductDisplay : MonoBehaviour {
     private Product product;
+    private Button button;
+
+    private void Awake() {
+        button = GetComponent<Button>();
+    }
 
     public void SelectProduct() {
-        ProductUI.SetProduct(product);
-        GetComponent<Button>().Select();
+        button.Select();
+
+        if (ProductUI.GetProduct() != null) {
+            if (ProductUI.GetProduct().GetId() != product.GetId()) {
+                ProductUI.SetProduct(product);
+            }
+        }
+        else {
+            ProductUI.SetProduct(product);
+        }
     }
 
     #region Getters

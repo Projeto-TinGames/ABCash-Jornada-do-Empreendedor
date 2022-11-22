@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 
 public class CompanyNavUI : MonoBehaviour {
+    private static bool blockActive;
+
     [SerializeField]private GameObject navMenu;
     [SerializeField]private Button expandButton;
     [SerializeField]private TextMeshProUGUI expandButtonText;
@@ -12,6 +14,11 @@ public class CompanyNavUI : MonoBehaviour {
 
     private void OnEnable() {
         Toggle(true);
+
+        if (blockActive) {
+            Toggle(false);
+            blockActive = false;
+        }
     }
 
     public void Toggle() {
@@ -46,4 +53,12 @@ public class CompanyNavUI : MonoBehaviour {
     public void Products() {
         SceneController.instance.Load("sc_products");
     }
+
+    #region Setters
+
+        public static void SetBlockActive(bool value) {
+            blockActive = value;
+        }
+
+    #endregion
 }
