@@ -21,19 +21,6 @@ public class GalaxyDisplay : MonoBehaviour {
         galaxyButton.interactable = true;
         
         galaxyName.text = galaxy.GetName();
-
-        if (!ProductDisplayUI.GetIsSelectingGalaxy()) {
-            if (galaxy.GetHasBranch()) {
-                ChangeColors();
-                enterButton.gameObject.SetActive(true);
-            }
-            else {
-                createButton.gameObject.SetActive(true);
-            }
-        }
-        else {
-            selectButton.gameObject.SetActive(true);
-        }
     }
 
     private void ChangeColors() {
@@ -45,6 +32,21 @@ public class GalaxyDisplay : MonoBehaviour {
         colors.disabledColor = new Color(0,0.2f,0,0.5f);
 
         galaxyButton.colors = colors;
+    }
+
+    public void LoadButton() {
+        if (!UniverseDisplay.GetIsSelectingGalaxy()) {
+            if (galaxy.GetHasBranch()) {
+                ChangeColors();
+                enterButton.gameObject.SetActive(true);
+            }
+            else {
+                createButton.gameObject.SetActive(true);
+            }
+        }
+        else {
+            selectButton.gameObject.SetActive(true);
+        }
     }
 
     public void Select() {

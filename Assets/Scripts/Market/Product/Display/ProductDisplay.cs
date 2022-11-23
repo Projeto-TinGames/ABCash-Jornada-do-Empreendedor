@@ -21,7 +21,7 @@ public class ProductDisplay : MonoBehaviour {
             }
         }
         else {
-            ProductDisplayUI.SetProduct(product);
+            ProductDisplayUI.SetProduct(ProductManager.GetProducts(product.GetId()));
         }
     }
 

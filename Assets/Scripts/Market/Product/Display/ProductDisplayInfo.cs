@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 
 public class ProductDisplayInfo : MonoBehaviour {
+    private Product product;
+    private Galaxy galaxy;
+
     [SerializeField]new private TextMeshProUGUI name;
     [SerializeField]private Image image;
     [SerializeField]private TextMeshProUGUI price;
@@ -13,17 +16,18 @@ public class ProductDisplayInfo : MonoBehaviour {
     [SerializeField]private Button research;
     [SerializeField]private Button upgrade;
 
-    public void UpdateDisplay() {
-        Product product = ProductDisplayUI.GetProduct();
-        Galaxy galaxy = ProductDisplayUI.GetGalaxy();
+    public void Refresh() {
+        product = ProductDisplayUI.GetProduct();
+        galaxy = ProductDisplayUI.GetGalaxy();
 
         name.text = product.GetName();
         //image = product.GetSprite();
-        DisplayPrice(product,galaxy);
+        DisplayPrice();
+        DisplayUpgrade();
         time.text = $"{product.GetProductionTimeDays()}d {product.GetProductionTimeHours()}h {product.GetProductionTimeMinutes()}m {product.GetProductionTimeSeconds()}s";
     }
 
-    private void DisplayPrice(Product product, Galaxy galaxy) {
+    private void DisplayPrice() {
         price.text = $"{product.GetPrice().ToString("C2")}";
         price.color = Color.white;
 
@@ -36,16 +40,23 @@ public class ProductDisplayInfo : MonoBehaviour {
 
             if (tendency.GetIsRumor(rumorDay)) {
                 research.gameObject.SetActive(true);
-                price.text += $" + ({tendency.GetValorizations(rumorDay)*100}%)";
-                price.text += $" = {tendency.GetProductNormalizedPrice(rumorDay).ToString("C2")}";
+                price.text += $" + ({tendency.GetRumorValorizations(rumorDay)*100}%)";
+                price.text += $" = {tendency.GetProductRumorNormalizedPrice(rumorDay).ToString("C2")}";
                 price.color = Color.red;
             }
             else {
-                research.gameObject.SetActive(false);
-                price.text += $" + ({tendency.GetRumorValorizations(rumorDay)*100}%)";
-                price.text += $" = {tendency.GetProductRumorNormalizedPrice(rumorDay).ToString("C2")}";
+                price.text += $" + ({tendency.GetValorizations(rumorDay)*100}%)";
+                price.text += $" = {tendency.GetProductNormalizedPrice(rumorDay).ToString("C2")}";
                 price.color = Color.green;
             }
+        }
+    }
+
+    private void DisplayUpgrade() {
+        upgrade.gameObject.SetActive(true);
+        
+        if (product.GetLevel() >= 5) {
+            upgrade.gameObject.SetActive(false);
         }
     }
 }

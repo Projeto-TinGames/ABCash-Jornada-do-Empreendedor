@@ -5,7 +5,6 @@ using TMPro;
 
 public class ProductDisplayCalendar : MonoBehaviour {
     [SerializeField]private GameObject calendarUI;
-    [SerializeField]private TextMeshProUGUI calendarButtonText;
 
     [SerializeField]private ProductDisplayCalendarDay prefabDay;
 
@@ -24,8 +23,8 @@ public class ProductDisplayCalendar : MonoBehaviour {
         }
     }
 
-    public void Select(string dayText) {
-        calendarButtonText.text = dayText;
+    public void Select(int day) {
+        ProductDisplayUI.SetRumorDay(day);
         calendarUI.SetActive(false);
     }
 }

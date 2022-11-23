@@ -5,25 +5,25 @@ using UnityEngine.Events;
 using TMPro;
 
 public class ProductDisplayUI : MonoBehaviour {
-    protected static UnityEvent productChangeEvent;
+    protected static UnityEvent refreshDisplayEvent = new UnityEvent();
 
     protected static bool isSelectingGalaxy;
     protected static int rumorDay;
     protected static Product product;
     protected static Galaxy galaxy;
 
-    [SerializeField]private GameObject calendarUI;
     [SerializeField]private ProductDisplayInfo productDisplayInfo;
     [SerializeField]private TextMeshProUGUI galaxyName;
     [SerializeField]private TextMeshProUGUI rumorDayText;
 
     protected void Awake() {
-        productChangeEvent = new UnityEvent();
-        productChangeEvent.AddListener(productDisplayInfo.UpdateDisplay);
+        refreshDisplayEvent.AddListener(productDisplayInfo.Refresh);
+        refreshDisplayEvent.AddListener(SetRumorDayText);
 
         if (!isSelectingGalaxy) {
             product = null;
             galaxy = null;
+            rumorDay = 0;
         }
     }
 
@@ -32,15 +32,22 @@ public class ProductDisplayUI : MonoBehaviour {
 
         if (galaxy != null) {
             galaxyName.text = galaxy.GetName();
-            productChangeEvent.Invoke();
+            refreshDisplayEvent.Invoke();
         }
 
-        rumorDay = 0;
+        SetRumorDayText();
+
         isSelectingGalaxy = false;
+    }
+
+    protected void SetRumorDayText() {
+        rumorDayText.text = $"Dia\n{rumorDay+1}";
     }
 
     public void SelectGalaxy() {
         isSelectingGalaxy = true;
+        UniverseDisplay.SetIsSelectingGalaxy(true);
+        
         CompanyNavUI.SetBlockActive(true);
         SceneController.instance.Load("sc_universe");
     }
@@ -48,7 +55,12 @@ public class ProductDisplayUI : MonoBehaviour {
     public void Research() {
         Tendency tendency = galaxy.GetMarket().GetTendencies(product.GetId());
         tendency.Research(rumorDay);
-        productChangeEvent.Invoke();
+        refreshDisplayEvent.Invoke();
+    }
+
+    public void Upgrade() {
+        product.Upgrade();
+        refreshDisplayEvent.Invoke();
     }
 
     public void Exit() {
@@ -56,10 +68,6 @@ public class ProductDisplayUI : MonoBehaviour {
     }
 
     #region Getters
-
-        public static bool GetIsSelectingGalaxy() {
-            return isSelectingGalaxy;
-        }
 
         public static int GetRumorDay() {
             return rumorDay;
@@ -79,12 +87,12 @@ public class ProductDisplayUI : MonoBehaviour {
 
         public static void SetRumorDay(int value) {
             rumorDay = value;
-            productChangeEvent.Invoke();
+            refreshDisplayEvent.Invoke();
         }
 
         public static void SetProduct(Product value) {
             product = value;
-            productChangeEvent.Invoke();
+            refreshDisplayEvent.Invoke();
         }
 
         public static void SetGalaxy(Galaxy value) {

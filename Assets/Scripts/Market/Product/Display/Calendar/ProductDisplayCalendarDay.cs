@@ -23,7 +23,6 @@ public class ProductDisplayCalendarDay : MonoBehaviour {
     }
 
     public void UpdateRumorDay() {
-        ProductDisplayUI.SetRumorDay(day);
-        calendarDisplay.Select(dayText.text);
+        calendarDisplay.Select(day);
     }
 }

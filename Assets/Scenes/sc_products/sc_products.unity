@@ -804,9 +804,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ProductUI, Assembly-CSharp
-        m_MethodName: Research
+      - m_Target: {fileID: 1380656270}
+        m_TargetAssemblyTypeName: ProductDisplayUI, Assembly-CSharp
+        m_MethodName: Upgrade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -943,7 +943,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calendarUI: {fileID: 2002985321}
-  calendarButtonText: {fileID: 92656209}
   prefabDay: {fileID: 8058511086097859162, guid: e4c0c20085cecee439c63ef70884adc6, type: 3}
 --- !u!1 &335699543
 GameObject:
@@ -2194,10 +2193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e268061e058b2ef4da5adc328e24e73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calendarUI: {fileID: 0}
   productDisplayInfo: {fileID: 953772764}
   galaxyName: {fileID: 260226032}
-  rumorDayText: {fileID: 0}
+  rumorDayText: {fileID: 92656209}
   navUI: {fileID: 1016752905}
 --- !u!1 &1403123737
 GameObject:

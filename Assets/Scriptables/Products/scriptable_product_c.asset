@@ -16,4 +16,5 @@ MonoBehaviour:
     id: 2
     name: Produto C
     price: 3
+    level: 1
     productionTimeCounter: 30

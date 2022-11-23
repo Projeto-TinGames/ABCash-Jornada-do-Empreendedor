@@ -6,7 +6,7 @@ using UnityEngine;
 public static class Company {
     private static int id;
     private static string name;
-    private static float money;
+    private static float money = 10000f;
 
     private static int currentBranchId = -1;
     private static Dictionary<int, Branch> branches = new Dictionary<int, Branch>();

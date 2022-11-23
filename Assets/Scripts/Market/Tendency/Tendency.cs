@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tendency {
+    private const float rumorConfirmationPrice = 200f;
+
     private Product product;
     private List<float> valorizations = new List<float>();
     private List<float> rumorValorizations = new List<float>();
@@ -31,7 +33,9 @@ public class Tendency {
     }
 
     public void Research(int day) {
-        isRumor[day] = false;
+        if (Company.Pay(rumorConfirmationPrice)) {
+            isRumor[day] = false;
+        }
     }
 
     #region Add
@@ -71,19 +75,11 @@ public class Tendency {
             return product;
         }
 
-        public float GetProductNormalizedPrice() {
-            return product.GetPrice() + product.GetPrice() * valorizations[0];
-        }
-
-        public float GetProductNormalizedPrice(int index) {
+        public float GetProductNormalizedPrice(int index = 0) {
             return product.GetPrice() + product.GetPrice() * valorizations[index];
         }
 
-        public float GetProductRumorNormalizedPrice() {
-            return product.GetPrice() + product.GetPrice() * rumorValorizations[0];
-        }
-
-        public float GetProductRumorNormalizedPrice(int index) {
+        public float GetProductRumorNormalizedPrice(int index = 0) {
             return product.GetPrice() + product.GetPrice() * rumorValorizations[index];
         }
 

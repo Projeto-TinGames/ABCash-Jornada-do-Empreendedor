@@ -7,6 +7,7 @@ public class Product {
     [SerializeField]private int id;
     [SerializeField]private string name;
     [SerializeField]private float price;
+    [SerializeField]private int level = 1;
 
     [SerializeField]private int productionTimeCounter;
     private int productionTimeDays;
@@ -17,7 +18,12 @@ public class Product {
     public Product(string name, float price, int productionTimeCounter) {
         this.name = name;
         this.price = price;
+        this.level = 1;
         SetProductionTimeCounter(productionTimeCounter);
+    }
+
+    public void Upgrade() {
+        level++;
     }
 
     #region Getters
@@ -30,8 +36,16 @@ public class Product {
             return name;
         }
 
-        public float GetPrice() {
+        public float GetBasePrice() {
             return price;
+        }
+
+        public float GetPrice() {
+            return price*level;
+        }
+
+        public int GetLevel() {
+            return level;
         }
 
         public int GetProductionTimeCounter() {
@@ -66,8 +80,12 @@ public class Product {
             name = value;
         }
 
-        public void SetPrice(float value) {
+        public void SetBasePrice(float value) {
             price = value;
+        }
+
+        public void SetLevel(int value) {
+            level = value;
         }
 
         public void SetProductionTimeCounter() {

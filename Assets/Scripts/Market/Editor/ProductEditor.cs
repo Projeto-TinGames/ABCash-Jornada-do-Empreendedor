@@ -18,6 +18,7 @@ public class ProductEditor : Editor {
             if (GUILayout.Button("Save Name")) {
                 productObject.GetProduct().SetName(name);
                 productObject.GetProduct().SetId(-1);
+                productObject.GetProduct().SetLevel(1);
             }
         }
         else {
@@ -31,7 +32,7 @@ public class ProductEditor : Editor {
 
             GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Price:");
-                productObject.GetProduct().SetPrice(EditorGUILayout.FloatField(productObject.GetProduct().GetPrice()));
+                productObject.GetProduct().SetBasePrice(EditorGUILayout.FloatField(productObject.GetProduct().GetBasePrice()));
             GUILayout.EndHorizontal();
 
             EditorGUILayout.LabelField("Production Time:");
@@ -71,13 +72,12 @@ public class ProductEditor : Editor {
         if (fileProduct != null) {
             fileProduct.SetName(product.GetName());
             fileProduct.SetProductionTimeCounter(product.GetProductionTimeCounter());
-            fileProduct.SetPrice(product.GetPrice());
+            fileProduct.SetBasePrice(product.GetBasePrice());
         }
         else {
             product.SetId(productData.GetProducts().Count);
             productData.AddProduct(product);
         }
-
 
         string dataAsJson = JsonUtility.ToJson(productData,true);
         File.WriteAllText(filePath,dataAsJson);

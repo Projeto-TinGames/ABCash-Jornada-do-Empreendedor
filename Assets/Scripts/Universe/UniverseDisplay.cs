@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UniverseDisplay : MonoBehaviour {
     public static UniverseDisplay instance;
+    public static bool isSelectingGalaxy;
+
     [SerializeField]private GameObject navMenu;
     [SerializeField]private GameObject galaxy;
 
@@ -18,15 +20,16 @@ public class UniverseDisplay : MonoBehaviour {
 
     private void Start() {
         transform.SetAsFirstSibling();
-
-        if (!ProductDisplayUI.GetIsSelectingGalaxy()) {
-            navMenu.SetActive(true);
-        }
         
         if (Universe.GetGalaxies().Count == 0) {
             Universe.Generate();
         }
         LoadMap();
+
+        if (!isSelectingGalaxy) {
+            navMenu.SetActive(true);
+        }
+        isSelectingGalaxy = false;
     }
 
     private void FixedUpdate() {
@@ -50,6 +53,22 @@ public class UniverseDisplay : MonoBehaviour {
         
         GalaxyDisplay galaxyDisplay = newDisplay.GetComponent<GalaxyDisplay>();
         galaxyDisplay.SetGalaxy(newGalaxy);
+        galaxyDisplay.LoadButton();
     }
 
+    #region Getters
+
+        public static bool GetIsSelectingGalaxy() {
+            return isSelectingGalaxy;
+        }
+
+    #endregion
+
+    #region Setters
+
+        public static void SetIsSelectingGalaxy(bool value) {
+            isSelectingGalaxy = value;
+        }
+
+    #endregion
 }
