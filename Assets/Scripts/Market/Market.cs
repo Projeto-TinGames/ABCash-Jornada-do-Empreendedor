@@ -57,7 +57,7 @@ public class Market {
         }
 
         public Tendency GetTendencies(Product product) {
-            return tendencies.Find(tendency => tendency.GetProduct() == product);
+            return tendencies.Find(tendency => tendency.GetProduct().GetId() == product.GetId());
         }
 
     #endregion

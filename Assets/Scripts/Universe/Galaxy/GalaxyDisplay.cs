@@ -22,7 +22,7 @@ public class GalaxyDisplay : MonoBehaviour {
         
         galaxyName.text = galaxy.GetName();
 
-        if (!ProductUI.GetIsSelectingGalaxy()) {
+        if (!ProductDisplayUI.GetIsSelectingGalaxy()) {
             if (galaxy.GetHasBranch()) {
                 ChangeColors();
                 enterButton.gameObject.SetActive(true);
@@ -57,7 +57,7 @@ public class GalaxyDisplay : MonoBehaviour {
     }
 
     public void SelectProductInterfaceGalaxy() {
-        ProductUI.SetGalaxy(galaxy);
+        ProductDisplayUI.SetGalaxy(galaxy);
         SceneController.instance.Load("sc_products");
     }
 

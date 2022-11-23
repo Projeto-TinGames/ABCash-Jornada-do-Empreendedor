@@ -4,19 +4,22 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 
-public class ProductUI : MonoBehaviour {
+public class ProductDisplayUI : MonoBehaviour {
+    protected static UnityEvent productChangeEvent;
+
     protected static bool isSelectingGalaxy;
     protected static int rumorDay;
-    protected static UnityEvent productChangeEvent;
     protected static Product product;
     protected static Galaxy galaxy;
 
-    [SerializeField]private ProductInfoDisplay productInfoDisplay;
+    [SerializeField]private GameObject calendarUI;
+    [SerializeField]private ProductDisplayInfo productDisplayInfo;
     [SerializeField]private TextMeshProUGUI galaxyName;
+    [SerializeField]private TextMeshProUGUI rumorDayText;
 
     protected void Awake() {
         productChangeEvent = new UnityEvent();
-        productChangeEvent.AddListener(productInfoDisplay.DisplayProduct);
+        productChangeEvent.AddListener(productDisplayInfo.UpdateDisplay);
 
         if (!isSelectingGalaxy) {
             product = null;
@@ -32,6 +35,7 @@ public class ProductUI : MonoBehaviour {
             productChangeEvent.Invoke();
         }
 
+        rumorDay = 0;
         isSelectingGalaxy = false;
     }
 
@@ -57,6 +61,10 @@ public class ProductUI : MonoBehaviour {
             return isSelectingGalaxy;
         }
 
+        public static int GetRumorDay() {
+            return rumorDay;
+        }
+
         public static Product GetProduct() {
             return product;
         }
@@ -68,6 +76,11 @@ public class ProductUI : MonoBehaviour {
     #endregion
 
     #region Setters
+
+        public static void SetRumorDay(int value) {
+            rumorDay = value;
+            productChangeEvent.Invoke();
+        }
 
         public static void SetProduct(Product value) {
             product = value;

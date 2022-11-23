@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour {
     [SerializeField]private GameObject menu;
+    [SerializeField]private GameObject unfocus;
 
     private void Start() {
         menu.transform.SetAsLastSibling();

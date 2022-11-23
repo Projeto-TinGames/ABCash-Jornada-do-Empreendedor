@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProductBranchUI : ProductUI {
+public class ProductDisplayBranchUI : ProductDisplayUI {
     [SerializeField]private GameObject exitButton;
     
     /*public void Choose() {

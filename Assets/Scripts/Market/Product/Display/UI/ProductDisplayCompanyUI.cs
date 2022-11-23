@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProductCompanyUI : ProductUI {
+public class ProductDisplayCompanyUI : ProductDisplayUI {
     [SerializeField]private GameObject navUI;
 
     protected override void Start() {

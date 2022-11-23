@@ -19,7 +19,7 @@ public class UniverseDisplay : MonoBehaviour {
     private void Start() {
         transform.SetAsFirstSibling();
 
-        if (!ProductUI.GetIsSelectingGalaxy()) {
+        if (!ProductDisplayUI.GetIsSelectingGalaxy()) {
             navMenu.SetActive(true);
         }
         

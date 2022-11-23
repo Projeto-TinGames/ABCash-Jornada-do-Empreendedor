@@ -15,13 +15,13 @@ public class ProductDisplay : MonoBehaviour {
     public void SelectProduct() {
         button.Select();
 
-        if (ProductUI.GetProduct() != null) {
-            if (ProductUI.GetProduct().GetId() != product.GetId()) {
-                ProductUI.SetProduct(product);
+        if (ProductDisplayUI.GetProduct() != null) {
+            if (ProductDisplayUI.GetProduct().GetId() != product.GetId()) {
+                ProductDisplayUI.SetProduct(product);
             }
         }
         else {
-            ProductUI.SetProduct(product);
+            ProductDisplayUI.SetProduct(product);
         }
     }
 

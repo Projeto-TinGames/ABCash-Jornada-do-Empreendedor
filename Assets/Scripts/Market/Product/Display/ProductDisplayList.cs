@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ProductListDisplay : MonoBehaviour {
+public class ProductDisplayList : MonoBehaviour {
     private List<ProductDisplay> listProductDisplay = new List<ProductDisplay>();
 
     [SerializeField]private ProductDisplay productDisplayPrefab;
@@ -25,7 +25,7 @@ public class ProductListDisplay : MonoBehaviour {
 
     private void Update() {
         int productId = 0;
-        Product product = ProductUI.GetProduct();
+        Product product = ProductDisplayUI.GetProduct();
 
         if (product != null) {
             productId = product.GetId();
