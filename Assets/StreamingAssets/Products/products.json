@@ -17,9 +17,9 @@
         {
             "id": 2,
             "name": "Produto C",
-            "price": 3.0,
+            "price": 4.0,
             "level": 1,
-            "productionTimeCounter": 30
+            "productionTimeCounter": 40
         }
     ]
 }

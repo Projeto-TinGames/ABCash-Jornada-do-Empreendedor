@@ -9,12 +9,12 @@ public class ProductDisplayList : MonoBehaviour {
     [SerializeField]private ProductDisplay productDisplayPrefab;
 
     private void Start() {
-        for (int i = 0; i < ProductManager.GetProducts().Count; i++) {
-            Product product = ProductManager.GetProducts(i);
+        for (int i = 0; i < Company.GetProducts().Count; i++) {
+            Product product = Company.GetProducts(i);
 
             ProductDisplay display = Instantiate(productDisplayPrefab);
 
-            display.SetProduct(product);
+            display.SetProductId(i);
 
             display.transform.SetParent(transform);
             display.transform.localScale = Vector3.one;

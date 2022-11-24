@@ -10,6 +10,7 @@ public class CompanyData {
     [SerializeField]private int currentBranchId;
     [SerializeField]private List<BranchData> branches = new List<BranchData>();
     [SerializeField]private List<AlienData> aliens = new List<AlienData>();
+    [SerializeField]private List<Product> products = new List<Product>();
 
     public CompanyData() {
         this.name = Company.GetName();
@@ -25,6 +26,8 @@ public class CompanyData {
         foreach (Alien alien in Company.GetAliens()) {
             this.aliens.Add(new AlienData(alien));
         }
+
+        this.products = Company.GetProducts();
     }
 
     #region Getters
@@ -41,6 +44,14 @@ public class CompanyData {
             return currentBranchId;
         }
 
+        public List<AlienData> GetAliens() {
+            return aliens;
+        }
+
+        public AlienData GetAliens(int index) {
+            return aliens[index];
+        }
+
         public List<BranchData> GetBranches() {
             return branches;
         }
@@ -49,12 +60,12 @@ public class CompanyData {
             return branches[index];
         }
 
-        public List<AlienData> GetAliens() {
-            return aliens;
+        public List<Product> GetProducts() {
+            return products;
         }
 
-        public AlienData GetAliens(int index) {
-            return aliens[index];
+        public Product GetProducts(int index) {
+            return products[index];
         }
 
     #endregion

@@ -10,7 +10,7 @@ public class TendencyData {
     [SerializeField]private List<bool> isRumor = new List<bool>();
 
     public TendencyData(Tendency tendency) {
-        this.productId = tendency.GetProduct().GetId();
+        this.productId = tendency.GetProductId();
         this.valorizations = tendency.GetValorizations();
         this.rumorValorizations = tendency.GetRumorValorizations();
         this.isRumor = tendency.GetIsRumor();

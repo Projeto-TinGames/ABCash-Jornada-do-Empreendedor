@@ -7,7 +7,7 @@ public class Market {
 
     public Market() {
         foreach (Product product in ProductManager.GetProducts()) {
-            AddTendency(product);
+            AddTendency(product.GetId());
         }
     }
 
@@ -27,8 +27,8 @@ public class Market {
 
     #region Add
 
-        public void AddTendency(Product product) {
-            Tendency tendency = new Tendency(product);
+        public void AddTendency(int productId) {
+            Tendency tendency = new Tendency(productId);
             tendencies.Add(tendency);
         }
 
@@ -57,7 +57,7 @@ public class Market {
         }
 
         public Tendency GetTendencies(Product product) {
-            return tendencies.Find(tendency => tendency.GetProduct().GetId() == product.GetId());
+            return tendencies.Find(tendency => tendency.GetProductId() == product.GetId());
         }
 
     #endregion

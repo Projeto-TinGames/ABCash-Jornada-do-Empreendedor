@@ -22,14 +22,22 @@ public static class ProductManager {
     }
 
     private static void DefineProducts(string dataAsJson) {
-        ProductData data = JsonUtility.FromJson<ProductData>(dataAsJson);
+        if (loadedProducts == null) {
+            ProductData data = JsonUtility.FromJson<ProductData>(dataAsJson);
 
-        foreach (Product product in data.GetProducts()) {
-            product.SetProductionTimeMetrics();
+            foreach (Product product in data.GetProducts()) {
+                product.SetProductionTimeMetrics();
+            }
+            loadedProducts = data.GetProducts();
+
+            if (Company.GetProducts().Count == 0) {
+                for (int i = 0; i < 3; i++) {
+                    Company.AddProduct(loadedProducts[i]);
+                }
+            }
+
+            Universe.Generate();
         }
-        loadedProducts = data.GetProducts();
-
-        Universe.Generate();
     }
 
     public static List<Product> GetProducts() {

@@ -11,6 +11,7 @@ public static class Company {
     private static int currentBranchId = -1;
     private static Dictionary<int, Branch> branches = new Dictionary<int, Branch>();
     private static List<Alien> aliens = new List<Alien>();
+    private static List<Product> products = new List<Product>();
 
     public static void Update() {
         foreach (KeyValuePair<int, Branch> branch in Company.GetBranches()) {
@@ -39,6 +40,8 @@ public static class Company {
             employee.Work();
             aliens.Add(employee);
         }
+
+        products = companyData.GetProducts();
     }
 
     public static bool Pay(float value) {
@@ -62,6 +65,10 @@ public static class Company {
 
         public static void AddBranch(Branch branch) {
             branches.Add(branch.GetId(), branch);
+        }
+
+        public static void AddProduct(Product product) {
+            products.Add(product);
         }
 
     #endregion
@@ -88,6 +95,14 @@ public static class Company {
             branches.Remove(index);
         }
 
+        public static void RemoveProduct(Product product) {
+            products.Remove(product);
+        }
+
+        public static void RemoveProduct(int index) {
+            products.RemoveAt(index);
+        }
+
     #endregion
 
     #region Getters
@@ -108,6 +123,14 @@ public static class Company {
             return currentBranchId;
         }
 
+        public static List<Alien> GetAliens() {
+            return aliens;
+        }
+
+        public static Alien GetAliens(int index) {
+            return aliens[index];
+        }
+
         public static Dictionary<int, Branch> GetBranches() {
             return branches;
         }
@@ -116,12 +139,12 @@ public static class Company {
             return branches[index];
         }
 
-        public static List<Alien> GetAliens() {
-            return aliens;
+        public static List<Product> GetProducts() {
+            return products;
         }
-
-        public static Alien GetAliens(int index) {
-            return aliens[index];
+        
+        public static Product GetProducts(int index) {
+            return products[index];
         }
 
     #endregion

@@ -5,13 +5,13 @@ using UnityEngine;
 public class Tendency {
     private const float rumorConfirmationPrice = 200f;
 
-    private Product product;
+    private int productId;
     private List<float> valorizations = new List<float>();
     private List<float> rumorValorizations = new List<float>();
     private List<bool> isRumor = new List<bool>();
 
-    public Tendency(Product product) {
-        this.product = product;
+    public Tendency(int productId) {
+        this.productId = productId;
 
         for (int i = 0; i < 30; i++) { // Generates the valorization and rumor valorization for each day in the month
             this.AddValorization();
@@ -21,7 +21,7 @@ public class Tendency {
     }
 
     public Tendency(TendencyData data) {
-        this.product = ProductManager.GetProducts(data.GetProductId());
+        this.productId = data.GetProductId();
         this.valorizations = data.GetValorizations();
         this.rumorValorizations = data.GetRumorValorizations();
         this.isRumor = data.GetIsRumor();
@@ -71,15 +71,17 @@ public class Tendency {
 
     #region Getters
 
-        public Product GetProduct() {
-            return product;
+        public int GetProductId() {
+            return productId;
         }
 
         public float GetProductNormalizedPrice(int index = 0) {
+            Product product = ProductManager.GetProducts(productId);
             return product.GetPrice() + product.GetPrice() * valorizations[index];
         }
 
         public float GetProductRumorNormalizedPrice(int index = 0) {
+            Product product = ProductManager.GetProducts(productId);
             return product.GetPrice() + product.GetPrice() * rumorValorizations[index];
         }
 

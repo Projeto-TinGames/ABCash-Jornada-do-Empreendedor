@@ -59,7 +59,7 @@ public class GalaxyDisplay : MonoBehaviour {
     }
 
     public void SelectProductInterfaceGalaxy() {
-        ProductDisplayUI.SetGalaxy(galaxy);
+        ProductDisplayUI.SetGalaxyId(galaxy.GetId());
         SceneController.instance.Load("sc_products");
     }
 

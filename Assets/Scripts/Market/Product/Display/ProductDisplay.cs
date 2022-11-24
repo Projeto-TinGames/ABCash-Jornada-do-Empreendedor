@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public class ProductDisplay : MonoBehaviour {
-    private Product product;
+    private int productId;
     private Button button;
 
     private void Awake() {
@@ -16,27 +16,16 @@ public class ProductDisplay : MonoBehaviour {
         button.Select();
 
         if (ProductDisplayUI.GetProduct() != null) {
-            if (ProductDisplayUI.GetProduct().GetId() != product.GetId()) {
-                ProductDisplayUI.SetProduct(product);
+            if (ProductDisplayUI.GetProduct().GetId() != productId) {
+                ProductDisplayUI.SetProductId(productId);
             }
-        }
-        else {
-            ProductDisplayUI.SetProduct(ProductManager.GetProducts(product.GetId()));
         }
     }
 
-    #region Getters
-
-        public Product GetProduct() {
-            return product;
-        }
-
-    #endregion
-
     #region Setters
 
-        public void SetProduct(Product product) {
-            this.product = product;
+        public void SetProductId(int productId) {
+            this.productId = productId;
         }
 
     #endregion

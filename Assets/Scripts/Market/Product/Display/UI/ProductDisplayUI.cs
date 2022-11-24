@@ -9,39 +9,45 @@ public class ProductDisplayUI : MonoBehaviour {
 
     protected static bool isSelectingGalaxy;
     protected static int rumorDay;
-    protected static Product product;
-    protected static Galaxy galaxy;
+    protected static int productId;
+    protected static int galaxyId = -1;
 
     [SerializeField]private ProductDisplayInfo productDisplayInfo;
     [SerializeField]private TextMeshProUGUI galaxyName;
     [SerializeField]private TextMeshProUGUI rumorDayText;
 
-    protected void Awake() {
+    private void Awake() {
+        transform.SetAsFirstSibling();
+
         refreshDisplayEvent.AddListener(productDisplayInfo.Refresh);
         refreshDisplayEvent.AddListener(SetRumorDayText);
-
-        if (!isSelectingGalaxy) {
-            product = null;
-            galaxy = null;
-            rumorDay = 0;
-        }
     }
 
     protected virtual void Start() {
-        transform.SetAsFirstSibling();
-
-        if (galaxy != null) {
-            galaxyName.text = galaxy.GetName();
-            refreshDisplayEvent.Invoke();
-        }
-
         SetRumorDayText();
+        SetGalaxyNameText();
+        FinishGalaxySelection();
 
-        isSelectingGalaxy = false;
+        refreshDisplayEvent.Invoke();
     }
 
-    protected void SetRumorDayText() {
+    private void SetRumorDayText() {
         rumorDayText.text = $"Dia\n{rumorDay+1}";
+    }
+
+    private void SetGalaxyNameText() {
+        if (galaxyId != -1) {
+            Galaxy galaxy = Universe.GetGalaxies(galaxyId);
+            galaxyName.text = galaxy.GetName();
+        }
+    }
+
+    private void FinishGalaxySelection() {
+        if (!isSelectingGalaxy) {
+            galaxyId = -1;
+            productId = rumorDay = 0;
+        }
+        isSelectingGalaxy = false;
     }
 
     public void SelectGalaxy() {
@@ -53,12 +59,14 @@ public class ProductDisplayUI : MonoBehaviour {
     }
 
     public void Research() {
-        Tendency tendency = galaxy.GetMarket().GetTendencies(product.GetId());
+        Galaxy galaxy = Universe.GetGalaxies(galaxyId);
+        Tendency tendency = galaxy.GetMarket().GetTendencies(productId);
         tendency.Research(rumorDay);
         refreshDisplayEvent.Invoke();
     }
 
     public void Upgrade() {
+        Product product = Company.GetProducts(productId);
         product.Upgrade();
         refreshDisplayEvent.Invoke();
     }
@@ -74,11 +82,16 @@ public class ProductDisplayUI : MonoBehaviour {
         }
 
         public static Product GetProduct() {
+            Product product = Company.GetProducts(productId);
             return product;
         }
 
         public static Galaxy GetGalaxy() {
-            return galaxy;
+            if (galaxyId != -1) {
+                Galaxy galaxy = Universe.GetGalaxies(galaxyId);
+                return galaxy;
+            }
+            return null;
         }
 
     #endregion
@@ -90,13 +103,14 @@ public class ProductDisplayUI : MonoBehaviour {
             refreshDisplayEvent.Invoke();
         }
 
-        public static void SetProduct(Product value) {
-            product = value;
+        public static void SetProductId(int value) {
+            productId = value;
             refreshDisplayEvent.Invoke();
         }
 
-        public static void SetGalaxy(Galaxy value) {
-            galaxy = value;
+        public static void SetGalaxyId(int value) {
+            galaxyId = value;
+            refreshDisplayEvent.Invoke();
         }
 
     #endregion
