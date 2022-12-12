@@ -24,11 +24,11 @@ public class ProductDisplayInfo : MonoBehaviour {
         //image = product.GetSprite();
         DisplayPrice();
         DisplayUpgrade();
-        time.text = $"{product.GetProductionTimeDays()}d {product.GetProductionTimeHours()}h {product.GetProductionTimeMinutes()}m {product.GetProductionTimeSeconds()}s";
+        time.text = $"Tempo: {product.GetProductionTimeDays()}d {product.GetProductionTimeHours()}h {product.GetProductionTimeMinutes()}m {product.GetProductionTimeSeconds()}s";
     }
 
     private void DisplayPrice() {
-        price.text = $"{product.GetPrice().ToString("C2")}";
+        price.text = $"Preço: {product.GetPrice().ToString("C2")}";
         price.color = Color.white;
 
         research.gameObject.SetActive(false);

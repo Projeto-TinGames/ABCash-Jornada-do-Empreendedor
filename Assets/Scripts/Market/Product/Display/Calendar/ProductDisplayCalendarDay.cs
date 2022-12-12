@@ -18,11 +18,19 @@ public class ProductDisplayCalendarDay : MonoBehaviour {
         dayText.text = $"Dia\n{day+1}";
 
         if (ProductDisplayUI.GetRumorDay() == day) {
-            dayText.color = Color.red;
+            Select();
         }
     }
 
     public void UpdateRumorDay() {
         calendarDisplay.Select(day);
+    }
+
+    public void Select() {
+        dayText.color = Color.red;
+    }
+
+    public void Deselect() {
+        dayText.color = new Color(.1960f, .1960f, .1960f, 1);
     }
 }

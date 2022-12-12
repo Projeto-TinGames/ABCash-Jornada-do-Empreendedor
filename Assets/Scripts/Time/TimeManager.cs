@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class TimeManager : MonoBehaviour {
     public static TimeManager instance;
 
+    private int playTimeCounter = 0;
     private float speed = 1f; 
 
     [System.NonSerialized]public UnityEvent UpdateUI = new UnityEvent();
@@ -30,6 +31,7 @@ public class TimeManager : MonoBehaviour {
         Company.Update();
 
         UpdateUI.Invoke();
+        playTimeCounter++;
     }
 
     public void Play() {
@@ -47,4 +49,12 @@ public class TimeManager : MonoBehaviour {
 
         Play();
     }
+
+    #region Getters
+
+        public int GetPlayTimeCounter() {
+            return playTimeCounter;
+        }
+
+    #endregion
 }
