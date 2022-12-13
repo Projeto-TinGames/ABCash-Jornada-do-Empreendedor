@@ -18,7 +18,7 @@ public class BranchCreation : MonoBehaviour {
     }
 
     public void Sector() {
-        SceneController.instance.Load("sc_products");
+        SceneController.instance.Load("sc_branch_creation_products");
     }
 
     public void Create() {

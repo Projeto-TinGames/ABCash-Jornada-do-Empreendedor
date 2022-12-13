@@ -12,33 +12,41 @@ public class ProductDisplayUI : MonoBehaviour {
     protected static int productId;
     protected static int galaxyId = -1;
 
+    protected static string scene;
+
     [SerializeField]private ProductDisplayInfo productDisplayInfo;
     [SerializeField]private TextMeshProUGUI galaxyName;
-    [SerializeField]private TextMeshProUGUI rumorDayText;
+
+    [SerializeField]private GameObject calendarButton;
 
     private void Awake() {
         transform.SetAsFirstSibling();
 
         refreshDisplayEvent.AddListener(productDisplayInfo.Refresh);
-        refreshDisplayEvent.AddListener(SetRumorDayText);
+        refreshDisplayEvent.AddListener(SetGalaxyUI);
     }
 
     protected virtual void Start() {
-        SetRumorDayText();
-        SetGalaxyNameText();
         FinishGalaxySelection();
+        
+        SetGalaxyUI();
 
         refreshDisplayEvent.Invoke();
     }
 
-    private void SetRumorDayText() {
-        rumorDayText.text = $"Dia\n{rumorDay+1}";
+    private void SetCalendarUI(bool active) {
+        calendarButton.SetActive(active);
+        calendarButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Dia\n{rumorDay+1}";
     }
 
-    private void SetGalaxyNameText() {
+    private void SetGalaxyUI() {
         if (galaxyId != -1) {
             Galaxy galaxy = Universe.GetGalaxies(galaxyId);
             galaxyName.text = galaxy.GetName();
+            SetCalendarUI(true);
+        }
+        else {
+            SetCalendarUI(false);
         }
     }
 
@@ -76,6 +84,10 @@ public class ProductDisplayUI : MonoBehaviour {
     }
 
     #region Getters
+
+        public static string GetScene() {
+            return scene;
+        }
 
         public static int GetRumorDay() {
             return rumorDay;

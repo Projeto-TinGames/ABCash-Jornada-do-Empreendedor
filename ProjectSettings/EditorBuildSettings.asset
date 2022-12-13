@@ -9,14 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/sc_menu.unity
     guid: a33a5c78b4f0fc845b18c68eac4f239f
   - enabled: 1
+    path: Assets/Scenes/sc_branch/sc_branch.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
     path: Assets/Scenes/sc_branch/sc_branch_contract.unity
     guid: dd14e545203277f46b50a674d632c5bb
   - enabled: 1
     path: Assets/Scenes/sc_branch/sc_branch_creation.unity
     guid: 34172a22a6222964fa0655be13c44679
   - enabled: 1
-    path: Assets/Scenes/sc_branch/sc_branch.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/sc_branch/sc_branch_creation_products.unity
+    guid: ff27f05181c000643ac98fc647f175db
   - enabled: 1
     path: Assets/Scenes/sc_company/sc_company_creation.unity
     guid: 55a1d819868000146af97ffe51fe956d

@@ -7,6 +7,7 @@ public class ProductDisplayCompanyUI : ProductDisplayUI {
 
     protected override void Start() {
         navUI.SetActive(true);
+        scene = "sc_products";
 
         base.Start();
     }
