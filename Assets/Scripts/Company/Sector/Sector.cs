@@ -33,18 +33,20 @@ public class Sector {
     private void Produce() {
         Market market = galaxy.GetMarket();
 
-        foreach (Alien alien in aliens) {
-            productionTimeCounter++;
-        }
-        if (productionTimeCounter >= product.GetProductionTimeCounter()) {
-            float money = market.GetTendencies(product).GetProductNormalizedPrice();
-            Company.AddMoney(money);
-            
-            productionTimeCounter = 0;
-        }
+        if (aliens.Count > 0) {
+            foreach (Alien alien in aliens) {
+                productionTimeCounter++;
+            }
+            if (productionTimeCounter >= product.GetProductionTimeCounter()) {
+                float money = market.GetTendencies(product).GetProductNormalizedPrice();
+                Company.AddMoney(money);
+                
+                productionTimeCounter = 0;
+            }
 
-        TimeConverter time = new TimeConverter(product.GetProductionTimeCounter() - productionTimeCounter, aliens.Count);
-        //Debug.Log($"{time.GetDays()}, {time.GetHours()}, {time.GetMinutes()}, {time.GetSeconds()}");
+            TimeConverter time = new TimeConverter(product.GetProductionTimeCounter() - productionTimeCounter, aliens.Count);
+            //Debug.Log($"{time.GetDays()}, {time.GetHours()}, {time.GetMinutes()}, {time.GetSeconds()}");
+        }
     }
 
     #region Add

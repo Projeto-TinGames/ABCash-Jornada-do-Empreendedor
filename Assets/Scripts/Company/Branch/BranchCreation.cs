@@ -17,13 +17,15 @@ public class BranchCreation : MonoBehaviour {
         }
     }
 
-    public void Sector() {
+    public void SelectProduct() {
         SceneController.instance.Load("sc_branch_creation_products");
     }
 
-    public void Create() {
+    public void CreateBranch() {
         if (product != null) {
             Galaxy galaxy = galaxyDisplay.GetGalaxy();
+            galaxy.SetHasBranch(true);
+            Universe.Generate(galaxy);
 
             Branch branch = new Branch(galaxy.GetId());
             Sector sector = new Sector(product, galaxyDisplay.GetGalaxy());
@@ -31,7 +33,6 @@ public class BranchCreation : MonoBehaviour {
             branch.AddSector(sector);
             Company.AddBranch(branch);
 
-            galaxyDisplay.Deselect();
             galaxyDisplay = null;
             product = null;
 
