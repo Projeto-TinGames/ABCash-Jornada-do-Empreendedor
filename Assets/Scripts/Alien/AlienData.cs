@@ -7,8 +7,8 @@ public class AlienData {
     [SerializeField]private int speciesId;
     [SerializeField]private string name;
     [SerializeField]private float[] color;
-    [SerializeField]private string planet;
-    [SerializeField]private string sector;
+    [SerializeField]private int galaxyId;
+    [SerializeField]private int productId;
     [SerializeField]private int age;
     [SerializeField]private int rank;
     [SerializeField]private int status = 100;
@@ -20,8 +20,8 @@ public class AlienData {
         this.speciesId = alien.GetSpeciesId();
         this.name = alien.GetName();
         this.color = new float[]{alien.GetColor().r, alien.GetColor().g, alien.GetColor().b};
-        this.planet = alien.GetPlanet();
-        this.sector = alien.GetSector();
+        this.galaxyId = alien.GetGalaxyId();
+        this.productId = alien.GetProductId();
         this.age = alien.GetAge();
         this.rank = alien.GetRank();
         this.status = alien.GetStatus();
@@ -48,12 +48,12 @@ public class AlienData {
             return color[index];
         }
 
-        public string GetPlanet() {
-            return planet;
+        public int GetGalaxyId() {
+            return galaxyId;
         }
 
-        public string GetSector() {
-            return sector;
+        public int GetProductId() {
+            return productId;
         }
 
         public int GetAge() {

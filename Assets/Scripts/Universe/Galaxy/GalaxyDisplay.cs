@@ -21,8 +21,6 @@ public class GalaxyDisplay : MonoBehaviour {
         galaxyButton.interactable = true;
         
         galaxyName.text = galaxy.GetName();
-
-        LoadButton();
     }
 
     private void ChangeColors() {

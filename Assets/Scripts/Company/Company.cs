@@ -33,9 +33,8 @@ public static class Company {
             branches.Add(branch.GetId(), branch);
         }
 
-        AlienGenerator alienGenerator = new AlienGenerator();
-        
         foreach (AlienData alienData in companyData.GetAliens()) {
+            AlienGenerator alienGenerator = new AlienGenerator();
             Alien employee = alienGenerator.LoadAlien(alienData);
             employee.Work();
             aliens.Add(employee);
@@ -60,7 +59,7 @@ public static class Company {
         }
 
         public static void AddAlien(Alien alien) {
-            aliens.Add(alien);
+            aliens.Insert(0, alien);
         }
 
         public static void AddBranch(Branch branch) {

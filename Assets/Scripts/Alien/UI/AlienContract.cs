@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class AlienContract : MonoBehaviour {
     private Alien alien;
-    [SerializeField]private AlienDisplay display;
+    [SerializeField]private AlienInfo display;
 
     [SerializeField]private Button acceptButton;
     [SerializeField]private Button rejectButton;
@@ -58,7 +58,7 @@ public class AlienContract : MonoBehaviour {
         alien = alienGenerator.GetRandomAlien();
         alien.Work();
 
-        display.RefreshDisplay(alien);
+        //display.RefreshDisplay(alien);
     }
 
     private void Accept() {

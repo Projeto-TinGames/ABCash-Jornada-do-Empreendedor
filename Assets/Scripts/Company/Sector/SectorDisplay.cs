@@ -25,13 +25,13 @@ public class SectorDisplay : MonoBehaviour {
         //SectorManager.instance.OpenAdd(this);
     }
 
-    public void AddEmployee() {
+    /*public void AddEmployee() {
         EmployeesManager.instance.OpenAdd(sector);
     }
 
     public void RemoveEmployee() {
         EmployeesManager.instance.OpenRemove(sector);
-    }
+    }*/
 
     #region Set Functions
 

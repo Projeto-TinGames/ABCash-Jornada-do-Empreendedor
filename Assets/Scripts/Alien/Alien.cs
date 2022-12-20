@@ -14,8 +14,8 @@ public abstract class Alien {
     private string species;
     private Sprite sprite;
     private Color color;
-    private string planet;
-    private string sector;
+    private int galaxyId;
+    private int productId;
     private int age;
     private int rank;
     private int status = 100;
@@ -33,8 +33,8 @@ public abstract class Alien {
 
             GenerateName();
             GenerateColor();
-            GeneratePlanet();
-            GenerateSector();
+            GenerateGalaxy();
+            GenerateProduct();
             GenerateAge();
             GenerateRank();
             GenerateAgility();
@@ -50,13 +50,12 @@ public abstract class Alien {
             color = new Color(Random.Range(0f,1f), Random.Range(0f,1f), Random.Range(0f,1F));
         }
 
-        private void GeneratePlanet() {
-            string[] planets = new string[]{"Sinertag","Lemeb Vono", "Amenaip"};
-            planet = planets[Random.Range(0,planets.Length)];
+        private void GenerateGalaxy() {
+            galaxyId = Random.Range(0,Universe.GetGalaxies().Count);
         }
 
-        private void GenerateSector() {
-            sector = "Test";
+        private void GenerateProduct() {
+            productId = Random.Range(0,ProductManager.GetProducts().Count);
         }
 
         private void GenerateAge() {
@@ -87,8 +86,8 @@ public abstract class Alien {
             wisdom = Random.Range(1,25)*rank*wisdomMultiplier + (age/25);
         }
 
-        private void GenerateSalary() { //Precisa criar lógica para levar em conta a distância do planeta em que mora
-            salary = (agility+wisdom)*100;
+        private void GenerateSalary() { //Precisa criar lógica para levar em conta a distância da galáxia em que mora
+            salary = (agility+wisdom)*10;
         }
 
     #endregion
@@ -127,12 +126,12 @@ public abstract class Alien {
             return color;
         }
 
-        public string GetPlanet() {
-            return planet;
+        public int GetGalaxyId() {
+            return galaxyId;
         }
 
-        public string GetSector() {
-            return sector;
+        public int GetProductId() {
+            return productId;
         }
 
         public int GetAge() {
@@ -167,8 +166,8 @@ public abstract class Alien {
             name = alienData.GetName();
             sprite = Resources.Load<Sprite>($"Sprites/Aliens/{species}");
             color = new Color(alienData.GetColor(0), alienData.GetColor(1), alienData.GetColor(2));
-            planet = alienData.GetPlanet();
-            sector = alienData.GetSector();
+            galaxyId = alienData.GetGalaxyId();
+            productId = alienData.GetProductId();
             age = alienData.GetAge();
             rank = alienData.GetRank();
             status = alienData.GetStatus();
@@ -209,12 +208,12 @@ public abstract class Alien {
             color = value;
         }
 
-        public void SetPlanet(string value) {
-            planet = value;
+        public void SetPlanet(int value) {
+            galaxyId = value;
         }
 
-        public void SetSector(string value) {
-            sector = value;
+        public void SetSector(int value) {
+            productId = value;
         }
 
         public void SetAge(int value) {
