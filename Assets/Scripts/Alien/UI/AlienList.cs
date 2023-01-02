@@ -8,6 +8,7 @@ public class AlienList : MonoBehaviour {
     public static UnityEvent refreshList = new UnityEvent();
     private List<AlienDisplay> alienDisplayList = new List<AlienDisplay>();
 
+    private List<Alien> aliens;
     [SerializeField]private AlienDisplay contractDisplay;
     [SerializeField]private AlienDisplay alienDisplayPrefab;
 
@@ -16,6 +17,7 @@ public class AlienList : MonoBehaviour {
     }
 
     private void Start() {
+        aliens = Company.GetAliens();
         refreshList.Invoke();
     }
 
@@ -26,7 +28,7 @@ public class AlienList : MonoBehaviour {
             Destroy(transform.GetChild(i).gameObject);
         }
 
-        foreach (Alien alien in Company.GetAliens()) {
+        foreach (Alien alien in aliens) {
             AlienDisplay display = Instantiate(alienDisplayPrefab);
 
             display.SetAlien(alien);

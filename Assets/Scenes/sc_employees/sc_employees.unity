@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 206813483}
   - component: {fileID: 206813486}
   m_Layer: 5
-  m_Name: Contract
+  m_Name: Add
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2467,7 +2467,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1380656268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcb8de120a1de0543826e20d52a937f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e5971245f8cab4439504f51efb5ae76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1403123737

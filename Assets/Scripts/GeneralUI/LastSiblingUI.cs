@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LowPriorityUI : MonoBehaviour {
+public class LastSiblingUI : MonoBehaviour {
     private void Awake() {
-        transform.SetAsFirstSibling();
+        transform.SetAsLastSibling();
     }
 }

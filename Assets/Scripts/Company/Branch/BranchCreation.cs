@@ -27,17 +27,17 @@ public class BranchCreation : MonoBehaviour {
             galaxy.SetHasBranch(true);
             Universe.Generate(galaxy);
 
-            Branch branch = new Branch(galaxy.GetId());
+            Branch branch = new Branch(galaxy.GetId(), galaxy.GetName());
             Sector sector = new Sector(product, galaxyDisplay.GetGalaxy());
 
             branch.AddSector(sector);
             Company.AddBranch(branch);
 
             galaxyDisplay = null;
-            product = null;
-
             isCreating = false;
             product = null;
+
+            Company.SetCurrentBranchId(branch.GetId());
             SceneController.instance.Load("sc_branch");
         }
     }

@@ -5,10 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class BranchData {
     [SerializeField]private int id;
+    [SerializeField]private string name;
     [SerializeField]private List<SectorData> sectors = new List<SectorData>();
 
     public BranchData(Branch branch) {
         this.id = branch.GetId();
+        this.name = branch.GetName();
 
         foreach (Sector sector in branch.GetSectors()) {
             this.sectors.Add(new SectorData(sector));
@@ -41,6 +43,10 @@ public class BranchData {
             return id;
         }
 
+        public string GetName() {
+            return name;
+        }
+
         public List<SectorData> GetSectors() {
             return sectors;
         }
@@ -55,6 +61,10 @@ public class BranchData {
 
         public void SetId(int value) {
             id = value;
+        }
+
+        public void SetName(string value) {
+            name = value;
         }
 
         public void SetSectors(List<SectorData> value) {

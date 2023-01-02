@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Branch {
     private int id;
+    private string name;
     private List<Sector> sectors = new List<Sector>();
 
-    public Branch(int id) {
+    private Sector currentSector;
+
+    public Branch(int id, string name) {
         this.id = id;
+        this.name = name;
     }
 
     public Branch(BranchData branchData) {
         this.id = branchData.GetId();
+        this.name = branchData.GetName();
         
         foreach (SectorData sectorData in branchData.GetSectors()) {
             Sector sector = new Sector(sectorData);
@@ -35,12 +40,19 @@ public class Branch {
 
     #region Remove
 
+        public void RemoveSector() {
+            sectors.Remove(currentSector);
+            currentSector = null;
+        }
+
         public void RemoveSector(Sector sector) {
             sectors.Remove(sector);
+            currentSector = null;
         }
 
         public void RemoveSector(int index) {
             sectors.RemoveAt(index);
+            currentSector = null;
         }
 
     #endregion
@@ -51,12 +63,20 @@ public class Branch {
             return id;
         }
 
+        public string GetName() {
+            return name;
+        }
+
         public List<Sector> GetSectors() {
             return sectors;
         }
 
         public Sector GetSectors(int index) {
             return sectors[index];
+        }
+
+        public Sector GetCurrentSector() {
+            return currentSector;
         }
 
     #endregion
@@ -67,12 +87,20 @@ public class Branch {
             id = value;
         }
 
+        public void SetName(string value) {
+            name = value;
+        }
+
         public void SetSectors(List<Sector> value) {
             sectors = value;
         }
 
         public void SetSectors(int index, Sector value) {
             sectors[index] = value;
+        }
+
+        public void SetCurrentSector(Sector value) {
+            currentSector = value;
         }
 
     #endregion

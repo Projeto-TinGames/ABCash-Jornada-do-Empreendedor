@@ -118,10 +118,6 @@ public static class Company {
             return money;
         }
 
-        public static int GetCurrentBranchId() {
-            return currentBranchId;
-        }
-
         public static List<Alien> GetAliens() {
             return aliens;
         }
@@ -136,6 +132,14 @@ public static class Company {
         
         public static Branch GetBranches(int index) {
             return branches[index];
+        }
+
+        public static int GetCurrentBranchId() {
+            return currentBranchId;
+        }
+
+        public static Branch GetCurrentBranch() {
+            return branches[currentBranchId];
         }
 
         public static List<Product> GetProducts() {

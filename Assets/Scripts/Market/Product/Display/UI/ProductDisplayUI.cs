@@ -20,8 +20,6 @@ public class ProductDisplayUI : MonoBehaviour {
     [SerializeField]private GameObject calendarButton;
 
     private void Awake() {
-        transform.SetAsFirstSibling();
-
         refreshDisplayEvent.AddListener(productDisplayInfo.Refresh);
         refreshDisplayEvent.AddListener(SetGalaxyUI);
     }

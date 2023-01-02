@@ -1,37 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SectorDisplay : MonoBehaviour {
-    
     private Sector sector;
 
-    [SerializeField]private GameObject addSector;
-    [SerializeField]private GameObject addEmployee;
-    [SerializeField]private GameObject removeEmployee;
+    [SerializeField]private TextMeshProUGUI productText;
+    [SerializeField]private TextMeshProUGUI employeesText;
+    [SerializeField]private TextMeshProUGUI timeText;
 
-    public void UpdateStatus() {
-        if (sector == null) {
-            addSector.SetActive(true);
+    private void Start() {
+        productText.text = $"Produto: {sector.GetProduct().GetName()}";
+        employeesText.text = $"Número de empregados: {sector.GetAliens().Count}";
+        timeText.text = "Tempo: Nenhum empregado está produzindo.";
+    }
+
+    private void Update() {
+        TimeConverter time = new TimeConverter(sector.GetProductionTimeCounter());
+
+        if (sector.GetAliens().Count > 0) {
+            timeText.text = $"Tempo: {time.GetDays()}d {time.GetHours()}h {time.GetMinutes()}m {time.GetSeconds()}s";
         }
         else {
-            addSector.SetActive(false);
-            addEmployee.SetActive(true);
-            removeEmployee.SetActive(true);
+            timeText.text = "Tempo: Nenhum empregado está produzindo.";
         }
     }
 
-    public void AddSector() {
-        //SectorManager.instance.OpenAdd(this);
+    public void ChooseSector() {
+        SectorUI.chooseSectorEvent.Invoke(sector);
     }
-
-    /*public void AddEmployee() {
-        EmployeesManager.instance.OpenAdd(sector);
-    }
-
-    public void RemoveEmployee() {
-        EmployeesManager.instance.OpenRemove(sector);
-    }*/
 
     #region Set Functions
 

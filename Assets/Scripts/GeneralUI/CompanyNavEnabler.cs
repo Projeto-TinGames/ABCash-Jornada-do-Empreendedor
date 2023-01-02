@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmployeesUI : MonoBehaviour {
+public class CompanyNavEnabler : MonoBehaviour {
     [SerializeField]private GameObject navMenu;
 
-    private void Start() {
+    private void Awake() {
         navMenu.SetActive(true);
     }
 }
