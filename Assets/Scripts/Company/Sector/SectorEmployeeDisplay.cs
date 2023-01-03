@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class SectorEmployeeDisplay : MonoBehaviour {
     private Alien alien;
-    [SerializeField]private int id;
+    private int id;
 
+    [SerializeField]private GameObject text;
     [SerializeField]private Image alienImage;
     [SerializeField]private Button button;
 
@@ -20,6 +21,10 @@ public class SectorEmployeeDisplay : MonoBehaviour {
 
     #region Getters
 
+        public int GetId() {
+            return id;
+        }
+
         public Alien GetAlien() {
             return alien;
         }
@@ -27,12 +32,18 @@ public class SectorEmployeeDisplay : MonoBehaviour {
     #endregion
 
     #region Setters
+
+        public void SetId(int value) {
+            this.id = value;
+        }
     
         public void SetAlien(Alien alien) {
             this.alien = alien;
 
             alienImage.sprite = alien.GetSprite();
             alienImage.color = alien.GetColor();
+            alienImage.gameObject.SetActive(true);
+            text.SetActive(false);
         }
 
     #endregion

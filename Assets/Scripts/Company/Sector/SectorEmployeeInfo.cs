@@ -34,6 +34,8 @@ public class SectorEmployeeInfo : MonoBehaviour {
 
     private void RefreshInfo(SectorEmployeeDisplay display) {
         alienDisplay = display;
+        SectorEmployees.SetCurrentEmployee(display.GetId());
+
         alien = alienDisplay.GetAlien();
 
         info.SetActive(false);

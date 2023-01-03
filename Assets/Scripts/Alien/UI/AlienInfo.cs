@@ -8,7 +8,7 @@ using TMPro;
 public class AlienInfo : MonoBehaviour {
     public static UnityEvent<AlienDisplay> refreshInfo = new UnityEvent<AlienDisplay>();
 
-    private Alien alien;
+    protected Alien alien;
     private AlienDisplay alienDisplay;
     [SerializeField]private new TextMeshProUGUI name;
     [SerializeField]private Image image;
@@ -17,7 +17,7 @@ public class AlienInfo : MonoBehaviour {
     [SerializeField]private TextMeshProUGUI agility;
     [SerializeField]private TextMeshProUGUI wisdom;
     [SerializeField]private TextMeshProUGUI salary;
-    [SerializeField]private GameObject contractButton;
+    [SerializeField]protected GameObject contractButton;
 
     private void Awake() {
         refreshInfo.AddListener(RefreshInfo);
@@ -29,7 +29,7 @@ public class AlienInfo : MonoBehaviour {
         }
     }
 
-    private void RefreshInfo(AlienDisplay display) {
+    protected virtual void RefreshInfo(AlienDisplay display) {
         alienDisplay = display;
         alien = alienDisplay.GetAlien();
 
