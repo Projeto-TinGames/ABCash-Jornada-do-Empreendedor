@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
     public static SceneController instance;
-    [System.NonSerialized]public string currentScene = "sc_universe";
+    private string scene = "sc_universe";
 
     //[SerializeField]private Animator crossfade;
     //private float transitionTime = .2f;
@@ -21,7 +21,7 @@ public class SceneController : MonoBehaviour {
     }
 
     public void Load(string scene) {
-        currentScene = scene;
+        this.scene = scene;
         SceneManager.LoadScene(scene);
         //StartCoroutine(LoadScene(scene));
     }
@@ -34,6 +34,19 @@ public class SceneController : MonoBehaviour {
         SceneManager.LoadScene(scene);
     }*/
 
-    
+    #region Getters
 
+        public string GetScene() {
+            return scene;
+        }
+
+    #endregion
+
+    #region Setters
+
+        public void SetScene(string value) {
+            scene = value;
+        }
+
+    #endregion
 }

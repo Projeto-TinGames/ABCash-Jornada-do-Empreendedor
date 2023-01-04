@@ -12,7 +12,7 @@ public class SaveData {
     public SaveData() {
         this.company = new CompanyData();
         this.universe = new UniverseData();
-        this.scene = SceneController.instance.currentScene;
+        this.scene = SceneController.instance.GetScene();
     }
 
     #region Getters

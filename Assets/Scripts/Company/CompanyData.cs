@@ -7,7 +7,6 @@ public class CompanyData {
     [SerializeField]private string name;
     [SerializeField]private float money;
 
-    [SerializeField]private int currentBranchId;
     [SerializeField]private List<BranchData> branches = new List<BranchData>();
     [SerializeField]private List<AlienData> aliens = new List<AlienData>();
     [SerializeField]private List<Product> products = new List<Product>();
@@ -20,8 +19,6 @@ public class CompanyData {
             BranchData branch = new BranchData(entry.Value);
             this.branches.Add(branch);
         }
-
-        this.currentBranchId = Company.GetCurrentBranchId();
 
         foreach (Alien alien in Company.GetAliens()) {
             this.aliens.Add(new AlienData(alien));
@@ -38,10 +35,6 @@ public class CompanyData {
 
         public float GetMoney() {
             return money;
-        }
-
-        public int GetCurrentBranchId() {
-            return currentBranchId;
         }
 
         public List<AlienData> GetAliens() {

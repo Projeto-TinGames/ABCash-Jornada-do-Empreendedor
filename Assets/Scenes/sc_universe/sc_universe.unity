@@ -289,11 +289,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2146500183214026776, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
   m_PrefabInstance: {fileID: 702440221}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &996091269 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 394686285, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
-  m_PrefabInstance: {fileID: 702440221}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1869312267
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,8 +334,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1869312267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 439d79424599f244d9da280a697e3e49, type: 3}
+  m_Script: {fileID: 11500000, guid: 56209669553fecb48a81e82521e4678f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMenu: {fileID: 996091269}
   galaxy: {fileID: 3300661147722446323, guid: 61398a43c7991444cb5c1721445e91c1, type: 3}

@@ -8,7 +8,6 @@ public static class Company {
     private static string name;
     private static float money = 10000f;
 
-    private static int currentBranchId = -1;
     private static Dictionary<int, Branch> branches = new Dictionary<int, Branch>();
     private static List<Alien> aliens = new List<Alien>();
     private static List<Product> products = new List<Product>();
@@ -19,14 +18,16 @@ public static class Company {
         }
     }
 
-    public static void Load(CompanyData companyData) {
+    public static void Reset() {
         branches.Clear();
         aliens.Clear();
+    }
+
+    public static void Load(CompanyData companyData) {
+        Reset();
 
         name = companyData.GetName();
         money = companyData.GetMoney();
-
-        currentBranchId = companyData.GetCurrentBranchId();
 
         foreach (BranchData branchData in companyData.GetBranches()) {
             Branch branch = new Branch(branchData);
@@ -131,15 +132,11 @@ public static class Company {
         }
         
         public static Branch GetBranches(int index) {
-            return branches[index];
-        }
+            if (branches.ContainsKey(index)) {
+                return branches[index];
+            }
 
-        public static int GetCurrentBranchId() {
-            return currentBranchId;
-        }
-
-        public static Branch GetCurrentBranch() {
-            return branches[currentBranchId];
+            return null;
         }
 
         public static List<Product> GetProducts() {
@@ -164,10 +161,6 @@ public static class Company {
 
         public static void SetMoney(float value) {
             money = value;
-        }
-
-        public static void SetCurrentBranchId(int value) {
-            currentBranchId = value;
         }
 
     #endregion

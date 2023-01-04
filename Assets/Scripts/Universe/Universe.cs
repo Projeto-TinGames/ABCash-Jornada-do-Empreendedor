@@ -19,9 +19,13 @@ public static class Universe {
         }
     }
 
-    public static void Load(UniverseData universeData) {
+    public static void Reset() {
         galaxies.Clear();
         galaxyMatrix.Clear();
+    }
+
+    public static void Load(UniverseData universeData) {
+        Reset();
 
         foreach (GalaxyData galaxyData in universeData.GetGalaxies()) {
             Galaxy galaxy = new Galaxy(galaxyData);
@@ -69,10 +73,6 @@ public static class Universe {
 
                 galaxies.Add(newGalaxy);
                 galaxyMatrix[x].Add(y,newGalaxy);
-
-                if (UniverseDisplay.instance != null) {
-                    UniverseDisplay.instance.AddGalaxy(newGalaxy);
-                }
             }
         }
 

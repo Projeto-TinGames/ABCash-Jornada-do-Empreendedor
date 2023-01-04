@@ -7,8 +7,6 @@ public class Branch {
     private string name;
     private List<Sector> sectors = new List<Sector>();
 
-    private Sector currentSector;
-
     public Branch(int id, string name) {
         this.id = id;
         this.name = name;
@@ -40,19 +38,12 @@ public class Branch {
 
     #region Remove
 
-        public void RemoveSector() {
-            sectors.Remove(currentSector);
-            currentSector = null;
-        }
-
         public void RemoveSector(Sector sector) {
             sectors.Remove(sector);
-            currentSector = null;
         }
 
         public void RemoveSector(int index) {
             sectors.RemoveAt(index);
-            currentSector = null;
         }
 
     #endregion
@@ -75,10 +66,6 @@ public class Branch {
             return sectors[index];
         }
 
-        public Sector GetCurrentSector() {
-            return currentSector;
-        }
-
     #endregion
 
     #region Setters
@@ -97,10 +84,6 @@ public class Branch {
 
         public void SetSectors(int index, Sector value) {
             sectors[index] = value;
-        }
-
-        public void SetCurrentSector(Sector value) {
-            currentSector = value;
         }
 
     #endregion

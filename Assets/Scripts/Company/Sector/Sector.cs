@@ -5,9 +5,11 @@ using UnityEngine;
 public class Sector {
     private Galaxy galaxy; // Galaxy that the sector sell its products to
     private Product product;
-    private List<Alien> aliens = new List<Alien>();
+    private Alien chief;
+    private Alien[] employees = new Alien[4];
 
     private int productionTimeCounter;
+    private int employeeCounter;
 
     public Sector(Product product, Galaxy galaxy) {
         this.product = product;
@@ -15,14 +17,21 @@ public class Sector {
     }
 
     public Sector(SectorData sectorData) {
+        AlienGenerator alienGenerator;
+
         this.galaxy = Universe.GetGalaxies(sectorData.GetGalaxyId());
         this.product = ProductManager.GetProducts(sectorData.GetProductId());
+
+        alienGenerator = new AlienGenerator();
+        Alien chief = alienGenerator.LoadAlien(sectorData.GetChief());
+        this.chief = chief;
+
         this.productionTimeCounter = sectorData.GetProductionTime();
 
-        foreach (AlienData alienData in sectorData.GetAliens()) {
-            AlienGenerator alienGenerator = new AlienGenerator();
+        foreach (AlienData alienData in sectorData.GetEmployees()) {
+            alienGenerator = new AlienGenerator();
             Alien alien = alienGenerator.LoadAlien(alienData);
-            aliens.Add(alien);
+            AddEmployee(alien);
         }
     }
 
@@ -33,7 +42,9 @@ public class Sector {
     private void Produce() {
         Market market = galaxy.GetMarket();
 
-        if (aliens.Count > 0) {
+        //Criar lógica para empregados e chefe separados
+
+        /*if (aliens.Length > 0) {
             foreach (Alien alien in aliens) {
                 productionTimeCounter++;
             }
@@ -46,7 +57,7 @@ public class Sector {
 
             TimeConverter time = new TimeConverter(product.GetProductionTimeCounter() - productionTimeCounter, aliens.Count);
             //Debug.Log($"{time.GetDays()}, {time.GetHours()}, {time.GetMinutes()}, {time.GetSeconds()}");
-        }
+        }*/
     }
 
     #region Add
@@ -55,8 +66,9 @@ public class Sector {
             productionTimeCounter += value;
         }
 
-        public void AddAlien(Alien alien) {
-            aliens.Add(alien);
+        public void AddEmployee(Alien alien) {
+            employees[employeeCounter] = alien;
+            employeeCounter++;
         }
 
     #endregion
@@ -68,11 +80,17 @@ public class Sector {
         }
 
         public void RemoveAlien(Alien alien) {
-            aliens.Remove(alien);
+            for (int i = 0; i < employeeCounter; i++) {
+                if (employees[i] == alien) {
+                    RemoveAlien(i);
+                    break;
+                }
+            }
         }
 
         public void RemoveAlien(int index) {
-            aliens.RemoveAt(index);
+            employees[index] = null;
+            employeeCounter--;
         }
 
     #endregion
@@ -91,12 +109,16 @@ public class Sector {
             return product;
         }
 
-        public List<Alien> GetAliens() {
-            return aliens;
+        public Alien GetChief() {
+            return chief;
+        }
+
+        public Alien[] GetEmployees() {
+            return employees;
         }
 
         public Alien GetAliens(int index) {
-            return aliens[index];
+            return employees[index];
         }
 
     #endregion
@@ -115,12 +137,16 @@ public class Sector {
             product = value;
         }
 
-        public void SetAliens(List<Alien> value) {
-            aliens = value;
+        public void SetChief(Alien value) {
+            chief = value;
+        }
+
+        public void SetAliens(Alien[] value) {
+            employees = value;
         }
 
         public void SetAliens(int index, Alien value) {
-            aliens[index] = value;
+            employees[index] = value;
         }
 
     #endregion

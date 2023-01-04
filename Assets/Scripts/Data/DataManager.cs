@@ -24,6 +24,26 @@ public class DataManager : MonoBehaviour {
 
         ProductManager.Start();
     }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.L)) { //Premade load for testing
+            Company.Reset();
+            Universe.Reset();
+
+            Universe.Generate();
+            Universe.Generate(Universe.GetGalaxies(0));
+
+            Branch branch = new Branch(0, "0,0");
+            branch.AddSector(new Sector(ProductManager.GetProducts(0), Universe.GetGalaxies(0)));
+            branch.GetSectors(0).AddEmployee(new Wadop());
+            branch.GetSectors(0).SetChief(new Dodal());
+
+            Company.AddAlien(new Repinch());
+            Company.AddBranch(branch);
+
+            SceneController.instance.Load(SceneController.instance.GetScene());
+        }
+    }
     
     public void Load(string filePath, UnityEvent<string> FinishLoadEvent) {
         string dataAsJson;
