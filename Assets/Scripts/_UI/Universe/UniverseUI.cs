@@ -28,13 +28,13 @@ public class UniverseUI : MonoBehaviour {
         }
     }
 
-    public void AddGalaxy(Galaxy newGalaxy) {
+    private void AddGalaxy(Galaxy newGalaxy) {
         GameObject newDisplay = Instantiate(galaxy);
         newDisplay.transform.SetParent(transform);
         newDisplay.transform.localPosition = newGalaxy.GetPosition();
         newDisplay.transform.localScale = Vector3.one;
         
-        GalaxyDisplay galaxyDisplay = newDisplay.GetComponent<GalaxyDisplay>();
+        GalaxyDisplay galaxyDisplay = newDisplay.GetComponentInChildren<GalaxyDisplay>();
         galaxyDisplay.SetGalaxy(newGalaxy);
         galaxyDisplay.LoadButton();
     }

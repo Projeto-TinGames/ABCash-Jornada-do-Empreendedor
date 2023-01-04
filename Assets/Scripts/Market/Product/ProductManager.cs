@@ -26,6 +26,7 @@ public static class ProductManager {
             ProductData data = JsonUtility.FromJson<ProductData>(dataAsJson);
 
             foreach (Product product in data.GetProducts()) {
+                product.SetSprite();
                 product.SetProductionTimeMetrics();
             }
             loadedProducts = data.GetProducts();

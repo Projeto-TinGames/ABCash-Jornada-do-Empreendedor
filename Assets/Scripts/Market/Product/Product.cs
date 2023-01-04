@@ -15,12 +15,15 @@ public class Product {
     private int productionTimeMinutes;
     private int productionTimeSeconds;
 
-    public Product(string name, float price, int productionTimeCounter) {
+    private Sprite sprite;
+
+    /*public Product(int id, string name, float price, int productionTimeCounter) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.level = 1;
         SetProductionTimeCounter(productionTimeCounter);
-    }
+    }*/
 
     public void Upgrade() {
         level++;
@@ -34,6 +37,10 @@ public class Product {
 
         public string GetName() {
             return name;
+        }
+
+        public Sprite GetSprite() {
+            return sprite;
         }
 
         public float GetBasePrice() {
@@ -68,6 +75,10 @@ public class Product {
             return productionTimeSeconds;
         }
 
+        public string GetProductionTime() {
+            return $"{GetProductionTimeDays()}d {GetProductionTimeHours()}h {GetProductionTimeMinutes()}m {GetProductionTimeSeconds()}s";
+        }
+
     #endregion
 
     #region Setters
@@ -78,6 +89,10 @@ public class Product {
 
         public void SetName(string value) {
             name = value;
+        }
+
+        public void SetSprite() {
+            sprite = Resources.Load<Sprite>($"Sprites/Products/{id}");
         }
 
         public void SetBasePrice(float value) {

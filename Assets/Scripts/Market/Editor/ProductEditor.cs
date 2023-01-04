@@ -12,40 +12,41 @@ public class ProductEditor : Editor {
 
     public override void OnInspectorGUI() {
         ProductObject productObject = (ProductObject)target;
+        Product product = productObject.GetProduct();
 
-        if (string.IsNullOrEmpty(productObject.GetProduct().GetName())) {
+        if (string.IsNullOrEmpty(product.GetName())) {
             name = EditorGUILayout.TextField("Name:",name);
             if (GUILayout.Button("Save Name")) {
-                productObject.GetProduct().SetName(name);
-                productObject.GetProduct().SetId(-1);
-                productObject.GetProduct().SetLevel(1);
+                product.SetName(name);
+                product.SetId(-1);
+                product.SetLevel(1);
             }
         }
         else {
             GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Name: " + productObject.GetProduct().GetName());
-                if (productObject.GetProduct().GetId() != -1) {
-                    EditorGUILayout.LabelField("Id: " + productObject.GetProduct().GetId());
+                EditorGUILayout.LabelField("Name: " + product.GetName());
+                if (product.GetId() != -1) {
+                    EditorGUILayout.LabelField("Id: " + product.GetId());
                 } 
             GUILayout.EndHorizontal();
             EditorGUILayout.LabelField("",GUI.skin.horizontalSlider);
 
             GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField("Price:");
-                productObject.GetProduct().SetBasePrice(EditorGUILayout.FloatField(productObject.GetProduct().GetBasePrice()));
+                product.SetBasePrice(EditorGUILayout.FloatField(product.GetBasePrice()));
             GUILayout.EndHorizontal();
 
             EditorGUILayout.LabelField("Production Time:");
             GUILayout.BeginHorizontal();
-                productObject.GetProduct().SetProductionTimeDays(EditorGUILayout.IntField(productObject.GetProduct().GetProductionTimeDays()));
-                productObject.GetProduct().SetProductionTimeHours(EditorGUILayout.IntField(productObject.GetProduct().GetProductionTimeHours()));
-                productObject.GetProduct().SetProductionTimeMinutes(EditorGUILayout.IntField(productObject.GetProduct().GetProductionTimeMinutes()));
-                productObject.GetProduct().SetProductionTimeSeconds(EditorGUILayout.IntField(productObject.GetProduct().GetProductionTimeSeconds()));
+                product.SetProductionTimeDays(EditorGUILayout.IntField(product.GetProductionTimeDays()));
+                product.SetProductionTimeHours(EditorGUILayout.IntField(product.GetProductionTimeHours()));
+                product.SetProductionTimeMinutes(EditorGUILayout.IntField(product.GetProductionTimeMinutes()));
+                product.SetProductionTimeSeconds(EditorGUILayout.IntField(product.GetProductionTimeSeconds()));
             GUILayout.EndHorizontal();
 
             if (GUILayout.Button("Save Data")) {
-                productObject.GetProduct().SetProductionTimeCounter();
-                SaveData(productObject.GetProduct());
+                product.SetProductionTimeCounter();
+                SaveData(product);
             }
         }
 

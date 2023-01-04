@@ -8,10 +8,7 @@ public class GalaxyDisplay : ClickableDisplayUI {
     private Galaxy galaxy;
 
     [SerializeField]private GameObject infoElements;
-
     [SerializeField]private TextMeshProUGUI galaxyName;
-
-    [SerializeField]private Button galaxyButton;
     [SerializeField]private Button createButton;
     [SerializeField]private Button enterButton;
 
@@ -21,20 +18,13 @@ public class GalaxyDisplay : ClickableDisplayUI {
         galaxyName.text = galaxy.GetName();
     }
 
-    private void ChangeColors() {
-        ColorBlock colors = galaxyButton.colors;
-        colors.normalColor = new Color(0,1,0,1);
-        colors.highlightedColor = new Color(0,0.78f,0,1);
-        colors.pressedColor = new Color(0,0.45f,0,1);
-        colors.selectedColor = new Color(0,0.78f,0,1);
-        colors.disabledColor = new Color(0,0.2f,0,0.5f);
-
-        galaxyButton.colors = colors;
+    private void ChangeColor() {
+        GetComponent<Image>().color = Color.green;
     }
 
     public virtual void LoadButton() {
         if (Company.GetBranches(galaxy.GetId()) != null) {
-            ChangeColors();
+            ChangeColor();
             enterButton.gameObject.SetActive(true);
         }
         else {
@@ -73,7 +63,7 @@ public class GalaxyDisplay : ClickableDisplayUI {
             this.galaxy = galaxy;
             
             if (Company.GetBranches(galaxy.GetId()) != null) {
-                ChangeColors();
+                ChangeColor();
             }
         }
 
