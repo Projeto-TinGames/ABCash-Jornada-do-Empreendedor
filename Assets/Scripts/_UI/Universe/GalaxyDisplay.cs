@@ -6,12 +6,14 @@ using TMPro;
 
 public class GalaxyDisplay : ClickableDisplayUI {
     private Galaxy galaxy;
+    private bool select = false;
     private bool enableInfo = false;
 
     [SerializeField]private GameObject info;
     [SerializeField]private TextMeshProUGUI galaxyName;
     [SerializeField]private Button createButton;
     [SerializeField]private Button enterButton;
+    [SerializeField]private Button selectButton;
 
     protected override void Start() {
         base.Start();
@@ -24,17 +26,25 @@ public class GalaxyDisplay : ClickableDisplayUI {
     }
 
     protected virtual void LoadButton() {
-        if (Company.GetBranches(galaxy.GetId()) != null) {
-            ChangeColor();
-            enterButton.gameObject.SetActive(true);
+        ChangeColor();
+
+        if (select) {
+            selectButton.gameObject.SetActive(true);
         }
         else {
-            createButton.gameObject.SetActive(true);
+            if (Company.GetBranches(galaxy.GetId()) != null) {
+                enterButton.gameObject.SetActive(true);
+            }
+            else {
+                createButton.gameObject.SetActive(true);
+            }
         }
     }
 
     private void ChangeColor() {
-        GetComponent<Image>().color = Color.green;
+        if (Company.GetBranches(galaxy.GetId()) != null) {
+            GetComponent<Image>().color = Color.green;
+        }
     }
 
     public override void Click() {
@@ -53,16 +63,26 @@ public class GalaxyDisplay : ClickableDisplayUI {
         info.SetActive(false);
     }
 
+    public virtual void SelectGalaxy() {
+        EventHandlerUI.setGalaxy.Invoke(galaxy);
+        SceneController.instance.LoadPreviousScene();
+    }
+
     public void Enter() {
-        //BranchUI.SetBranch(galaxy.GetId());
+        EventHandlerUI.setGalaxy.Invoke(galaxy);
         SceneController.instance.Load("sc_branch");
     }
 
     public void Create() {
+        EventHandlerUI.setGalaxy.Invoke(galaxy);
         SceneController.instance.Load("sc_branch_creation");
     }
 
     #region Getters
+
+        public bool GetSelect() {
+            return select;
+        }
 
         public Galaxy GetGalaxy() {
             return galaxy;
@@ -71,6 +91,10 @@ public class GalaxyDisplay : ClickableDisplayUI {
     #endregion
 
     #region Setters
+
+        public void SetSelect(bool value) {
+            select = value;
+        }
 
         public void SetGalaxy(Galaxy galaxy) {
             this.galaxy = galaxy;

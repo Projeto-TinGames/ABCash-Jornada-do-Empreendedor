@@ -33,7 +33,7 @@ public class ProductUI : MonoBehaviour {
     }
 
     private void Start() {
-        foreach (Product product in ProductManager.GetProducts()) {
+        foreach (Product product in Company.GetProducts()) {
             ProductDisplay display = Instantiate(displayPrefab);
             display.SetProduct(product);
 
@@ -65,7 +65,7 @@ public class ProductUI : MonoBehaviour {
     }
 
     private void UpdateInfo() {
-        Product product = ProductManager.GetProducts(productId);
+        Product product = Company.GetProducts(productId);
 
         infoName.text = product.GetName();
         infoImage.sprite = product.GetSprite();
@@ -103,6 +103,25 @@ public class ProductUI : MonoBehaviour {
         }
     }
 
+    public void SelectGalaxy() {
+        SceneController.instance.Load("sc_universe_select");
+    }
+
+    public void Upgrade() {
+        Product product = Company.GetProducts(productId);
+        product.Upgrade();
+
+        UpdateInfo();
+    }
+
+    public void Research() {
+        Galaxy galaxy = Universe.GetGalaxies(galaxyId);
+        Tendency tendency = galaxy.GetMarket().GetTendencies(productId);
+        tendency.Research(dayId);
+
+        UpdateInfo();
+    }
+
     #region Setters
 
         private void SetProduct(Product product) {
@@ -110,11 +129,8 @@ public class ProductUI : MonoBehaviour {
             UpdateInfo();
         }
 
-        private void SetGalaxy(Galaxy galaxy) {
+        private static void SetGalaxy(Galaxy galaxy) {
             galaxyId = galaxy.GetId();
-
-            UpdateGalaxy();
-            UpdateInfo();
         }
 
         private void SetDay(int day) {

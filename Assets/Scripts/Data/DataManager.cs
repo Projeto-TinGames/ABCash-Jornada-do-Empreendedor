@@ -41,7 +41,7 @@ public class DataManager : MonoBehaviour {
             Company.AddAlien(new Repinch());
             Company.AddBranch(branch);
 
-            SceneController.instance.Load(SceneController.instance.GetScene());
+            SceneController.instance.Load("sc_universe");
         }
     }
     

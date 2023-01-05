@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
     public static SceneController instance;
-    private string scene = "sc_universe";
+    private string scene;
+    private string previousScene;
 
     //[SerializeField]private Animator crossfade;
     //private float transitionTime = .2f;
@@ -14,6 +15,11 @@ public class SceneController : MonoBehaviour {
     private void Awake() {
         if (instance == null) {
             instance = this;
+            scene = string.Copy(SceneManager.GetActiveScene().name);
+            previousScene = string.Copy(SceneManager.GetActiveScene().name);
+
+            transform.parent = null;
+            DontDestroyOnLoad(gameObject);
         }
         else {
             Destroy(gameObject);
@@ -21,7 +27,8 @@ public class SceneController : MonoBehaviour {
     }
 
     public void Load(string scene) {
-        this.scene = scene;
+        this.previousScene = string.Copy(this.scene);
+        this.scene = string.Copy(scene);
         SceneManager.LoadScene(scene);
         //StartCoroutine(LoadScene(scene));
     }
@@ -33,6 +40,10 @@ public class SceneController : MonoBehaviour {
         
         SceneManager.LoadScene(scene);
     }*/
+
+    public void LoadPreviousScene() {
+        Load(string.Copy(previousScene));
+    }
 
     #region Getters
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UniverseUI : MonoBehaviour {
+    [SerializeField]private bool select;
     [SerializeField]private GameObject galaxy;
 
     private static int galaxyId;
@@ -48,6 +49,11 @@ public class UniverseUI : MonoBehaviour {
         newDisplay.transform.localScale = Vector3.one;
         
         GalaxyDisplay galaxyDisplay = newDisplay.GetComponentInChildren<GalaxyDisplay>();
+
+        if (select) {
+            galaxyDisplay.SetSelect(true);
+        }
+
         galaxyDisplay.SetGalaxy(newGalaxy);
 
         displayList.Add(galaxyDisplay);

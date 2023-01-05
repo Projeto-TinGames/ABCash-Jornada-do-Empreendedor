@@ -290,7 +290,7 @@ RectTransform:
   - {fileID: 561337975}
   - {fileID: 752184852}
   m_Father: {fileID: 1420461548}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1061,6 +1061,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5211182061317515619, guid: fc414355b89867c478917ad819ac9c0e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8436682578168318536, guid: fc414355b89867c478917ad819ac9c0e, type: 3}
       propertyPath: m_Name
       value: prefab_scene_general
