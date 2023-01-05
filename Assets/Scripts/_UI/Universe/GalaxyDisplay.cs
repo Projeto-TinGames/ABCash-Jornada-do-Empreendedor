@@ -6,23 +6,24 @@ using TMPro;
 
 public class GalaxyDisplay : ClickableDisplayUI {
     private Galaxy galaxy;
+    private bool enableInfo = false;
 
-    [SerializeField]private GameObject infoElements;
+    [SerializeField]private GameObject info;
     [SerializeField]private TextMeshProUGUI galaxyName;
     [SerializeField]private Button createButton;
     [SerializeField]private Button enterButton;
 
     protected override void Start() {
         base.Start();
-        
+        enableInfo = true;
+    }
+
+    private void LoadUI() {
         galaxyName.text = galaxy.GetName();
+        LoadButton();
     }
 
-    private void ChangeColor() {
-        GetComponent<Image>().color = Color.green;
-    }
-
-    public virtual void LoadButton() {
+    protected virtual void LoadButton() {
         if (Company.GetBranches(galaxy.GetId()) != null) {
             ChangeColor();
             enterButton.gameObject.SetActive(true);
@@ -32,21 +33,33 @@ public class GalaxyDisplay : ClickableDisplayUI {
         }
     }
 
+    private void ChangeColor() {
+        GetComponent<Image>().color = Color.green;
+    }
+
     public override void Click() {
-        infoElements.SetActive(true);
+        EventHandlerUI.clickGalaxyDisplay.Invoke(galaxy);
+    }
+
+    public override void Select() {
+        base.Select();
+
+        if (enableInfo) {
+            info.SetActive(true);
+        }
     }
 
     public void Deselect() {
-        infoElements.SetActive(false);
-    }
-
-    public void Create() {
-        SceneController.instance.Load("sc_branch_creation");
+        info.SetActive(false);
     }
 
     public void Enter() {
         //BranchUI.SetBranch(galaxy.GetId());
         SceneController.instance.Load("sc_branch");
+    }
+
+    public void Create() {
+        SceneController.instance.Load("sc_branch_creation");
     }
 
     #region Getters
@@ -61,10 +74,7 @@ public class GalaxyDisplay : ClickableDisplayUI {
 
         public void SetGalaxy(Galaxy galaxy) {
             this.galaxy = galaxy;
-            
-            if (Company.GetBranches(galaxy.GetId()) != null) {
-                ChangeColor();
-            }
+            LoadUI();
         }
 
     #endregion

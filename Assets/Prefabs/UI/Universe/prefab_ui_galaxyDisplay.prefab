@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9fa5b16041d8c8439778a9f08eda2ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infoElements: {fileID: 6448239481625887190}
+  info: {fileID: 6448239481625887190}
   galaxyName: {fileID: 6030816783758123277}
   createButton: {fileID: 5697911076067295341}
   enterButton: {fileID: 8857071707602842437}

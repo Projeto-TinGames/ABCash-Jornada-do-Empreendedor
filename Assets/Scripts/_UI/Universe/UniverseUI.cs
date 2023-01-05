@@ -5,6 +5,13 @@ using UnityEngine;
 public class UniverseUI : MonoBehaviour {
     [SerializeField]private GameObject galaxy;
 
+    private static int galaxyId;
+    private List<GalaxyDisplay> displayList = new List<GalaxyDisplay>();
+
+    private void Awake() {
+        EventHandlerUI.clickGalaxyDisplay.AddListener(SetGalaxy);
+    }
+
     private void Start() {
         gameObject.AddComponent<FirstSiblingUI>();
         
@@ -13,6 +20,10 @@ public class UniverseUI : MonoBehaviour {
         }
 
         LoadMap();
+    }
+
+    private void Update() {
+        displayList[galaxyId].Select();
     }
 
     private void FixedUpdate() {
@@ -26,6 +37,8 @@ public class UniverseUI : MonoBehaviour {
         foreach (Galaxy galaxy in Universe.GetGalaxies()) {
             AddGalaxy(galaxy);
         }
+
+        transform.localPosition = -Universe.GetGalaxies(galaxyId).GetPosition();
     }
 
     private void AddGalaxy(Galaxy newGalaxy) {
@@ -36,6 +49,17 @@ public class UniverseUI : MonoBehaviour {
         
         GalaxyDisplay galaxyDisplay = newDisplay.GetComponentInChildren<GalaxyDisplay>();
         galaxyDisplay.SetGalaxy(newGalaxy);
-        galaxyDisplay.LoadButton();
+
+        displayList.Add(galaxyDisplay);
     }
+
+    #region Setters
+
+        private void SetGalaxy(Galaxy galaxy) {
+            displayList[galaxyId].Deselect();
+            galaxyId = galaxy.GetId();
+            transform.localPosition = -Universe.GetGalaxies(galaxyId).GetPosition();
+        }
+
+    #endregion
 }

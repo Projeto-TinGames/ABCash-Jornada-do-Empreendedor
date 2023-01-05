@@ -20,7 +20,7 @@ public abstract class ClickableDisplayUI : MonoBehaviour {
         Select();
     }
 
-    public void Select() {
+    public virtual void Select() {
         button.Select();
     }
     

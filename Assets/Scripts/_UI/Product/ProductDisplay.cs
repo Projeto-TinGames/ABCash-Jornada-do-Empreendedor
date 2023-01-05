@@ -6,7 +6,7 @@ public class ProductDisplay : ClickableDisplayUI {
     private int productId;
 
     public override void Click() {
-        ProductUI.onChangeProduct.Invoke(this);
+        EventHandlerUI.setProduct.Invoke(GetProduct());
     }
 
     #region Getters

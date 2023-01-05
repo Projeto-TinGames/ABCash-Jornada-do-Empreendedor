@@ -6,18 +6,17 @@ using UnityEngine.UI;
 using TMPro;
 
 public class ProductUI : MonoBehaviour {
-    public static UnityEvent<Galaxy> onChangeGalaxy = new UnityEvent<Galaxy>();
-    public static UnityEvent<int> onChangeDay = new UnityEvent<int>();
-    public static UnityEvent<ProductDisplay> onChangeProduct = new UnityEvent<ProductDisplay>();
-
-    private static Galaxy selectedGalaxy;
-    private static int selectedDay;
-    private static ProductDisplay selectedDisplay;
     [SerializeField]private ProductDisplay displayPrefab;
 
     [SerializeField]private Transform productList;
-    [SerializeField]private Transform productInfo;
+    [SerializeField]private TextMeshProUGUI galaxyName;
+    [SerializeField]private TextMeshProUGUI dayName;
+    private List<ProductDisplay> displayList = new List<ProductDisplay>();
+    private static int galaxyId;
+    private static int productId;
+    private static int dayId;
 
+    [SerializeField]private Transform productInfo;
     [SerializeField]private TextMeshProUGUI infoName;
     [SerializeField]private Image infoImage;
     [SerializeField]private TextMeshProUGUI infoPrice;
@@ -27,7 +26,10 @@ public class ProductUI : MonoBehaviour {
 
     private void Awake() {
         gameObject.AddComponent<FirstSiblingUI>();
-        onChangeProduct.AddListener(ChangeProduct);
+
+        EventHandlerUI.setProduct.AddListener(SetProduct);
+        EventHandlerUI.setGalaxy.AddListener(SetGalaxy);
+        EventHandlerUI.setDay.AddListener(SetDay);
     }
 
     private void Start() {
@@ -38,24 +40,33 @@ public class ProductUI : MonoBehaviour {
             display.transform.SetParent(productList);
             display.transform.localScale = Vector3.one;
 
-            if (selectedDisplay == null) {
-                display.Click();
-            }
+            displayList.Add(display);
         }
+
+        displayList[productId].Click();
+        UpdateGalaxy();
+        UpdateDay();
     }
 
     private void Update() {
-        if (selectedDisplay != null) {
-            selectedDisplay.Select();
-        }    
+        UpdateProduct();
     }
 
-    private void ChangeProduct(ProductDisplay display) {
-        selectedDisplay = display;
-        UpdateInfo(display.GetProduct());
+    private void UpdateProduct() {
+        displayList[productId].Select();
     }
 
-    private void UpdateInfo(Product product) {
+    private void UpdateGalaxy() {
+        galaxyName.text = Universe.GetGalaxies(galaxyId).GetName();
+    }
+
+    private void UpdateDay() {
+        dayName.text = $"Dia\n{dayId+1}";
+    }
+
+    private void UpdateInfo() {
+        Product product = ProductManager.GetProducts(productId);
+
         infoName.text = product.GetName();
         infoImage.sprite = product.GetSprite();
         DisplayPrice(product);
@@ -69,20 +80,18 @@ public class ProductUI : MonoBehaviour {
 
         researchButton.gameObject.SetActive(false);
 
-        if (selectedGalaxy != null) {
-            Tendency tendency = selectedGalaxy.GetMarket().GetTendencies(product);
+        Tendency tendency = Universe.GetGalaxies(galaxyId).GetMarket().GetTendencies(product);
 
-            if (tendency.GetIsRumor(selectedDay)) {
-                researchButton.gameObject.SetActive(true);
-                infoPrice.text += $" + ({tendency.GetRumorValorizations(selectedDay)*100}%)";
-                infoPrice.text += $" = {tendency.GetProductRumorNormalizedPrice(selectedDay).ToString("C2")}";
-                infoPrice.color = Color.red;
-            }
-            else {
-                infoPrice.text += $" + ({tendency.GetValorizations(selectedDay)*100}%)";
-                infoPrice.text += $" = {tendency.GetProductNormalizedPrice(selectedDay).ToString("C2")}";
-                infoPrice.color = Color.green;
-            }
+        if (tendency.GetIsRumor(dayId)) {
+            researchButton.gameObject.SetActive(true);
+            infoPrice.text += $" + ({tendency.GetRumorValorizations(dayId)*100}%)";
+            infoPrice.text += $" = {tendency.GetProductRumorNormalizedPrice(dayId).ToString("C2")}";
+            infoPrice.color = Color.red;
+        }
+        else {
+            infoPrice.text += $" + ({tendency.GetValorizations(dayId)*100}%)";
+            infoPrice.text += $" = {tendency.GetProductNormalizedPrice(dayId).ToString("C2")}";
+            infoPrice.color = Color.green;
         }
     }
 
@@ -93,4 +102,27 @@ public class ProductUI : MonoBehaviour {
             upgradeButton.gameObject.SetActive(false);
         }
     }
+
+    #region Setters
+
+        private void SetProduct(Product product) {
+            productId = product.GetId();
+            UpdateInfo();
+        }
+
+        private void SetGalaxy(Galaxy galaxy) {
+            galaxyId = galaxy.GetId();
+
+            UpdateGalaxy();
+            UpdateInfo();
+        }
+
+        private void SetDay(int day) {
+            dayId = day;
+
+            UpdateDay();
+            UpdateInfo();
+        }
+
+    #endregion
 }
