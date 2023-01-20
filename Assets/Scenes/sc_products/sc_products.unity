@@ -2351,8 +2351,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -387.50003, y: 0}
-  m_SizeDelta: {x: -775, y: 0}
+  m_AnchoredPosition: {x: -385.00003, y: 0}
+  m_SizeDelta: {x: -769.99994, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1139508105
 MonoBehaviour:
@@ -2607,7 +2607,6 @@ MonoBehaviour:
   productList: {fileID: 1875741260}
   galaxyName: {fileID: 260226032}
   dayName: {fileID: 92656209}
-  productInfo: {fileID: 953772761}
   infoName: {fileID: 1979880433}
   infoImage: {fileID: 499236625}
   infoPrice: {fileID: 1574462696}

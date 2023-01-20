@@ -423,7 +423,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1011579793229777578}
         m_TargetAssemblyTypeName: GalaxyDisplay, Assembly-CSharp
         m_MethodName: Create
         m_Mode: 1
@@ -1568,7 +1568,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1011579793229777578}
         m_TargetAssemblyTypeName: GalaxyDisplay, Assembly-CSharp
         m_MethodName: Enter
         m_Mode: 1

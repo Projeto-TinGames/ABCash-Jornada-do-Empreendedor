@@ -12,11 +12,10 @@ public class ProductUI : MonoBehaviour {
     [SerializeField]private TextMeshProUGUI galaxyName;
     [SerializeField]private TextMeshProUGUI dayName;
     private List<ProductDisplay> displayList = new List<ProductDisplay>();
-    private static int galaxyId;
-    private static int productId;
-    private static int dayId;
+    protected static int galaxyId;
+    protected static int productId;
+    protected static int dayId;
 
-    [SerializeField]private Transform productInfo;
     [SerializeField]private TextMeshProUGUI infoName;
     [SerializeField]private Image infoImage;
     [SerializeField]private TextMeshProUGUI infoPrice;
