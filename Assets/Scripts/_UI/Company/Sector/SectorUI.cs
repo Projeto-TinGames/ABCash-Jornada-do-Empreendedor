@@ -5,7 +5,7 @@ using TMPro;
 
 public class SectorUI : MonoBehaviour {
     private static int tab;
-    private static Sector sector;
+    private static Sector sector = new Sector();
     [SerializeField]private GameObject productsUI;
     [SerializeField]private TextMeshProUGUI productsText;
 
@@ -15,12 +15,8 @@ public class SectorUI : MonoBehaviour {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void OnBeforeSceneLoadRuntimeMethod() { //Loads events out of scene
         EventHandlerUI.setSector.AddListener(SetSector);
-    }
-
-    private void Awake() {
-        if (sector == null) {
-            sector = new Sector(Company.GetProducts(0),Universe.GetGalaxies(0));
-        }
+        EventHandlerUI.setProduct.AddListener(SetProduct);
+        EventHandlerUI.setGalaxy.AddListener(SetGalaxy);
     }
 
     private void Start() {
@@ -50,6 +46,11 @@ public class SectorUI : MonoBehaviour {
         productsText.color = new Color(0.1960784f, 0.1960784f, 0.1960784f);
     }
 
+    public void Finish() {
+        EventHandlerUI.setSector.Invoke(sector);
+        SceneController.instance.Load("sc_branch_creation");
+    }
+
     #region Getters
 
         public static Sector GetSector() {
@@ -62,6 +63,14 @@ public class SectorUI : MonoBehaviour {
 
         public static void SetSector(Sector value) {
             sector = value;
+        }
+
+        public static void SetProduct(Product product) {
+            sector.SetProduct(product);
+        }
+
+        public static void SetGalaxy(Galaxy galaxy) {
+            sector.SetGalaxy(galaxy);
         }
 
     #endregion

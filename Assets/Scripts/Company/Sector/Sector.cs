@@ -6,10 +6,12 @@ public class Sector {
     private Galaxy galaxy; // Galaxy that the sector sell its products to
     private Product product;
     private Alien chief;
-    private Alien[] employees = new Alien[4];
+    private Alien[] aliens = new Alien[4];
 
     private int productionTimeCounter;
-    private int employeeCounter;
+    private int alienCounter;
+
+    public Sector() {}
 
     public Sector(Product product, Galaxy galaxy) {
         this.product = product;
@@ -28,7 +30,7 @@ public class Sector {
 
         this.productionTimeCounter = sectorData.GetProductionTime();
 
-        foreach (AlienData alienData in sectorData.GetEmployees()) {
+        foreach (AlienData alienData in sectorData.GetAliens()) {
             alienGenerator = new AlienGenerator();
             Alien alien = alienGenerator.LoadAlien(alienData);
             AddEmployee(alien);
@@ -67,8 +69,8 @@ public class Sector {
         }
 
         public void AddEmployee(Alien alien) {
-            employees[employeeCounter] = alien;
-            employeeCounter++;
+            aliens[alienCounter] = alien;
+            alienCounter++;
         }
 
     #endregion
@@ -80,8 +82,8 @@ public class Sector {
         }
 
         public void RemoveAlien(Alien alien) {
-            for (int i = 0; i < employeeCounter; i++) {
-                if (employees[i] == alien) {
+            for (int i = 0; i < alienCounter; i++) {
+                if (aliens[i] == alien) {
                     RemoveAlien(i);
                     break;
                 }
@@ -89,8 +91,8 @@ public class Sector {
         }
 
         public void RemoveAlien(int index) {
-            employees[index] = null;
-            employeeCounter--;
+            aliens[index] = null;
+            alienCounter--;
         }
 
     #endregion
@@ -114,11 +116,11 @@ public class Sector {
         }
 
         public Alien[] GetAliens() {
-            return employees;
+            return aliens;
         }
 
         public Alien GetAliens(int index) {
-            return employees[index];
+            return aliens[index];
         }
 
     #endregion
@@ -142,11 +144,11 @@ public class Sector {
         }
 
         public void SetAliens(Alien[] value) {
-            employees = value;
+            aliens = value;
         }
 
         public void SetAliens(int index, Alien value) {
-            employees[index] = value;
+            aliens[index] = value;
         }
 
     #endregion
