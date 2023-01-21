@@ -113,7 +113,7 @@ public class Sector {
             return chief;
         }
 
-        public Alien[] GetEmployees() {
+        public Alien[] GetAliens() {
             return employees;
         }
 

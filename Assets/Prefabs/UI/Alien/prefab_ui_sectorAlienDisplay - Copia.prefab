@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1067207726048394716}
   - component: {fileID: 1067207726675831740}
   - component: {fileID: 1067207726675831739}
-  - component: {fileID: 4406442650026303722}
+  - component: {fileID: 9196350084025794391}
   m_Layer: 5
-  m_Name: prefab_ui_alienDisplay
+  m_Name: prefab_ui_sectorAlienDisplay - Copia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4406442650026303722
+--- !u!114 &9196350084025794391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1067207726675831737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07768c9a23890314c880a463eb4c349a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c4d7f5d5e9123644b96493c48cee20d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   alienText: {fileID: 7335676127077914896}

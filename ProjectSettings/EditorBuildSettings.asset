@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/sc_company/sc_sector/sc_sector.unity
     guid: 6d9106b43d14e51408b9b58c4290317b
+  - enabled: 1
+    path: Assets/Scenes/sc_employees/sc_employees_select.unity
+    guid: cf5d230456bf8344ebf1ae3cd411d101
   m_configObjects: {}

@@ -60,7 +60,8 @@ public static class Company {
         }
 
         public static void AddAlien(Alien alien) {
-            aliens.Insert(0, alien);
+            aliens.Add(alien);
+            //aliens.Insert(0, alien);
         }
 
         public static void AddBranch(Branch branch) {

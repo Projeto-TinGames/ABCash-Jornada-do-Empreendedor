@@ -18,7 +18,7 @@ public class SectorData {
 
         this.chief = new AlienData(sector.GetChief());
         
-        foreach (Alien alien in sector.GetEmployees()) {
+        foreach (Alien alien in sector.GetAliens()) {
             if (alien != null) {
                 this.employees.Add(new AlienData(alien));
             }

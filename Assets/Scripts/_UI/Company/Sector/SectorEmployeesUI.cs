@@ -4,14 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class AlienUI : MonoBehaviour {
+public class SectorEmployeesUI : MonoBehaviour {
+    private static Alien[] aliens = null;
     private static int alienId;
-
-    private Alien alien;
 
     [SerializeField]private AlienDisplay displayPrefab;
     [SerializeField]private Transform alienList; 
-    [SerializeField]private AlienDisplay contractDisplay; 
 
     [SerializeField]private Transform alienInfo; 
     [SerializeField]private TextMeshProUGUI alienName;
@@ -21,15 +19,17 @@ public class AlienUI : MonoBehaviour {
     [SerializeField]private TextMeshProUGUI alienAgility;
     [SerializeField]private TextMeshProUGUI alienWisdom;
     [SerializeField]private TextMeshProUGUI alienSalary;
-    [SerializeField]private GameObject contractButton; 
-    [SerializeField]private GameObject selectButton; 
+    [SerializeField]private GameObject selectButton;
 
-    private List<Alien> aliens = new List<Alien>();
     private List<AlienDisplay> displayList = new List<AlienDisplay>();
 
     private void Start() {
-        EventHandlerUI.setAlien.AddListener(UpdateInfo);
-        aliens = Company.GetAliens();
+        EventHandlerUI.setSectorAlien.AddListener(UpdateInfo);
+        EventHandlerUI.selectAlien.AddListener(SelectAlien);
+
+        if (aliens == null) {
+            aliens = SectorUI.GetSector().GetAliens();
+        }
 
         UpdateList();
     }
@@ -41,15 +41,11 @@ public class AlienUI : MonoBehaviour {
     private void UpdateList() {
         displayList.Clear();
 
-        if (contractDisplay != null) {
-            displayList.Add(contractDisplay);
-        }
-
         for (int i = 1; i < alienList.childCount; i++) {
             Destroy(alienList.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < aliens.Count; i++) {
+        for (int i = 0; i < aliens.Length; i++) {
             Alien alien = aliens[i];
             AlienDisplay display = Instantiate(displayPrefab);
 
@@ -66,23 +62,17 @@ public class AlienUI : MonoBehaviour {
 
     private void UpdateInfo(AlienDisplay alienDisplay) {
         alienId = alienDisplay.GetId();
-        alien = alienDisplay.GetAlien();
+        Alien alien = alienDisplay.GetAlien();
 
-        contractButton.SetActive(false);
+        alienInfo.gameObject.SetActive(false);
+        selectButton.gameObject.SetActive(false);
 
-        if (selectButton != null) {
-            selectButton.SetActive(false);
-        }
-
-        if (alien == null) {
-            contractButton.SetActive(true);
-            AlienGenerator generator = new AlienGenerator();
-            alien = generator.GetRandomAlien();
+        if (alien != null) {
+            alienInfo.gameObject.SetActive(true);
         }
         else {
-            if (selectButton != null) {
-                selectButton.SetActive(true);
-            }
+            selectButton.gameObject.SetActive(true);
+            return;
         }
 
         Galaxy galaxyValue = Universe.GetGalaxies(alien.GetGalaxyId());
@@ -98,23 +88,17 @@ public class AlienUI : MonoBehaviour {
         alienSalary.text = $"Salário: {alien.GetSalary().ToString()}/dia";
     }
 
-    public void Contract() {
-        Company.AddAlien(alien);
-        UpdateList();
-
-        //alienId = 1;
-        //displayList[alienId].Click();
+    public void Change() {
+        SceneController.instance.Load("sc_employees_select");
     }
 
-    public void Select() {
-        Alien alien = displayList[alienId].GetAlien();
-        EventHandlerUI.selectAlien.Invoke(alien);
-        alienId--;
+    private static void SelectAlien(Alien alien) {
+        if (aliens[alienId] != null) {
+            Company.AddAlien(aliens[alienId]);
+        }
 
-        Close();
-    }
-
-    public void Close() {
-        SceneController.instance.LoadPreviousScene();
+        Company.RemoveAlien(alien);
+        
+        aliens[alienId] = alien;
     }
 }

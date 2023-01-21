@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class AlienDisplay : ClickableDisplayUI {
+    [SerializeField]private TextMeshProUGUI alienText;
     [SerializeField]private Image alienImage;
 
     private int id;
@@ -31,8 +33,14 @@ public class AlienDisplay : ClickableDisplayUI {
             this.id = id;
             this.alien = alien;
 
-            alienImage.sprite = alien.GetSprite();
-            alienImage.color = alien.GetColor();
+            if (this.alien != null) {
+                alienImage.gameObject.SetActive(true);
+                alienImage.sprite = alien.GetSprite();
+                alienImage.color = alien.GetColor();
+            }
+            else {
+                alienText.gameObject.SetActive(true);
+            }
         }
 
     #endregion

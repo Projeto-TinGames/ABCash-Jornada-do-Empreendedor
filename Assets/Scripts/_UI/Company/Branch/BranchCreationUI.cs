@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BranchCreationUI : MonoBehaviour {
+    private static int productId;
+    private static int galaxyId;
     private static Sector sector;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void OnBeforeSceneLoadRuntimeMethod() { //Loads events out of scene
+        EventHandlerUI.setProduct.AddListener(SetProduct);
+        EventHandlerUI.setGalaxy.AddListener(SetGalaxy);
+        EventHandlerUI.setSector.AddListener(SetSector);
+    }
 
     private void Awake() {
         gameObject.AddComponent<FirstSiblingUI>();
-        
-        EventHandlerUI.setSector.AddListener(SetSector);
     }
 
     public void Select() {
@@ -22,8 +29,16 @@ public class BranchCreationUI : MonoBehaviour {
 
     #region Setters
 
-        private void SetSector(Sector newSector) {
-            sector = newSector;
+        private static void SetProduct(Product product) {
+            productId = product.GetId();
+        }
+
+        private static void SetGalaxy(Galaxy galaxy) {
+            galaxyId = galaxy.GetId();
+        }
+
+        private static void SetSector(Sector value) {
+            sector = value;
         }
 
     #endregion

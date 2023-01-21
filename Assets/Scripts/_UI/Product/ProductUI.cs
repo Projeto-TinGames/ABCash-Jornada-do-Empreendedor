@@ -6,15 +6,19 @@ using UnityEngine.UI;
 using TMPro;
 
 public class ProductUI : MonoBehaviour {
+    private static int galaxyId;
+    private static int productId;
+    private static int dayId;
+    private List<ProductDisplay> displayList = new List<ProductDisplay>();
+
+    private static UnityEvent updateInfo = new UnityEvent();
+    private static UnityEvent updateDay = new UnityEvent();
+
     [SerializeField]private ProductDisplay displayPrefab;
 
     [SerializeField]private Transform productList;
     [SerializeField]private TextMeshProUGUI galaxyName;
     [SerializeField]private TextMeshProUGUI dayName;
-    private List<ProductDisplay> displayList = new List<ProductDisplay>();
-    protected static int galaxyId;
-    protected static int productId;
-    protected static int dayId;
 
     [SerializeField]private TextMeshProUGUI infoName;
     [SerializeField]private Image infoImage;
@@ -23,12 +27,18 @@ public class ProductUI : MonoBehaviour {
     [SerializeField]private GameObject researchButton;
     [SerializeField]private GameObject upgradeButton;
 
-    private void Awake() {
-        gameObject.AddComponent<FirstSiblingUI>();
-
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void OnBeforeSceneLoadRuntimeMethod() { //Loads events out of scene
         EventHandlerUI.setProduct.AddListener(SetProduct);
         EventHandlerUI.setGalaxy.AddListener(SetGalaxy);
         EventHandlerUI.setDay.AddListener(SetDay);
+    }
+
+    private void Awake() {
+        gameObject.AddComponent<FirstSiblingUI>();
+
+        updateInfo.AddListener(UpdateInfo);
+        updateDay.AddListener(UpdateDay);
     }
 
     private void Start() {
@@ -123,20 +133,21 @@ public class ProductUI : MonoBehaviour {
 
     #region Setters
 
-        private void SetProduct(Product product) {
+        private static void SetProduct(Product product) {
             productId = product.GetId();
-            UpdateInfo();
+            
+            updateInfo.Invoke();
         }
 
         private static void SetGalaxy(Galaxy galaxy) {
             galaxyId = galaxy.GetId();
         }
 
-        private void SetDay(int day) {
+        private static void SetDay(int day) {
             dayId = day;
 
-            UpdateDay();
-            UpdateInfo();
+            updateDay.Invoke();
+            updateInfo.Invoke();
         }
 
     #endregion
