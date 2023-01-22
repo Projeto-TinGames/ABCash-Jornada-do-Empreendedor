@@ -5,7 +5,9 @@ using TMPro;
 
 public class SectorUI : MonoBehaviour {
     private static int tab;
-    private static Sector sector = new Sector();
+    private static string closeScene;
+    private static Sector sector;
+
     [SerializeField]private GameObject productsUI;
     [SerializeField]private TextMeshProUGUI productsText;
 
@@ -16,7 +18,7 @@ public class SectorUI : MonoBehaviour {
     private static void OnBeforeSceneLoadRuntimeMethod() { //Loads events out of scene
         EventHandlerUI.setSector.AddListener(SetSector);
         EventHandlerUI.setProduct.AddListener(SetProduct);
-        EventHandlerUI.setGalaxy.AddListener(SetGalaxy);
+        EventHandlerUI.selectGalaxy.AddListener(SetGalaxy);
     }
 
     private void Start() {
@@ -47,8 +49,12 @@ public class SectorUI : MonoBehaviour {
     }
 
     public void Finish() {
-        EventHandlerUI.setSector.Invoke(sector);
-        SceneController.instance.Load("sc_branch_creation");
+        tab = 0;
+
+        EventHandlerUI.setSector.Invoke(new Sector(new SectorData(sector)));
+        SectorEmployeesUI.ResetAliens();
+
+        SceneController.instance.Load(closeScene);
     }
 
     #region Getters
@@ -62,15 +68,27 @@ public class SectorUI : MonoBehaviour {
     #region Setters
 
         public static void SetSector(Sector value) {
-            sector = value;
+            if (value != null) {
+                EventHandlerUI.setProduct.Invoke(value.GetProduct());
+                EventHandlerUI.selectGalaxy.Invoke(value.GetGalaxy());
+                sector = value;
+            }
         }
 
         public static void SetProduct(Product product) {
-            sector.SetProduct(product);
+            if (sector != null) {
+                sector.SetProduct(product);
+            }
         }
 
         public static void SetGalaxy(Galaxy galaxy) {
-            sector.SetGalaxy(galaxy);
+            if (sector != null) {
+                sector.SetGalaxy(galaxy);
+            }
+        }
+
+        public static void SetCloseScene(string value) {
+            closeScene = value;
         }
 
     #endregion

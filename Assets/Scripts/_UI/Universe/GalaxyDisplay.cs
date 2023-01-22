@@ -64,17 +64,22 @@ public class GalaxyDisplay : ClickableDisplayUI {
     }
 
     public virtual void SelectGalaxy() {
-        EventHandlerUI.setGalaxy.Invoke(galaxy);
+        EventHandlerUI.selectGalaxy.Invoke(galaxy);
         SceneController.instance.LoadPreviousScene();
     }
 
     public void Enter() {
         EventHandlerUI.setGalaxy.Invoke(galaxy);
+        EventHandlerUI.setBranch.Invoke(Company.GetBranches(galaxy.GetId()));
+
+        NavUI.SetBranchScene("sc_branch");
         SceneController.instance.Load("sc_branch");
     }
 
     public void Create() {
         EventHandlerUI.setGalaxy.Invoke(galaxy);
+
+        NavUI.SetBranchScene("sc_branch_creation");
         SceneController.instance.Load("sc_branch_creation");
     }
 

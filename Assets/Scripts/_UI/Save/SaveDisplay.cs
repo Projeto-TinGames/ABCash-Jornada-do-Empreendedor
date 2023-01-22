@@ -20,7 +20,7 @@ public class SaveDisplay : MonoBehaviour {
     [SerializeField]private TextMeshProUGUI timeText;
 
     private void Awake() {
-        filePath = Application.persistentDataPath + "/save" + saveID + ".json";
+        filePath = Application.streamingAssetsPath + "/save" + saveID + ".json";
     }
 
     private void Start() {

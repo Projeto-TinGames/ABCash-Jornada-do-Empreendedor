@@ -15,19 +15,30 @@ public class AlienData {
     [SerializeField]private int agility;
     [SerializeField]private int wisdom;
     [SerializeField]private float salary;
+    [SerializeField]private bool isNull;
+
+    public AlienData() {
+    }
     
     public AlienData(Alien alien) {
-        this.speciesId = alien.GetSpeciesId();
-        this.name = alien.GetName();
-        this.color = new float[]{alien.GetColor().r, alien.GetColor().g, alien.GetColor().b};
-        this.galaxyId = alien.GetGalaxyId();
-        this.productId = alien.GetProductId();
-        this.age = alien.GetAge();
-        this.rank = alien.GetRank();
-        this.status = alien.GetStatus();
-        this.agility = alien.GetAgility();
-        this.wisdom = alien.GetWisdom();
-        this.salary = alien.GetSalary();
+        if (alien == null) {
+            this.isNull = true;
+        }
+
+        else {
+            this.speciesId = alien.GetSpeciesId();
+            this.name = alien.GetName();
+            this.color = new float[]{alien.GetColor().r, alien.GetColor().g, alien.GetColor().b};
+            this.galaxyId = alien.GetGalaxyId();
+            this.productId = alien.GetProductId();
+            this.age = alien.GetAge();
+            this.rank = alien.GetRank();
+            this.status = alien.GetStatus();
+            this.agility = alien.GetAgility();
+            this.wisdom = alien.GetWisdom();
+            this.salary = alien.GetSalary();
+            this.isNull = false;
+        }
     }
 
     #region Getters
@@ -78,6 +89,10 @@ public class AlienData {
 
         public float GetSalary() {
             return salary;
+        }
+
+        public bool GetIsNull() {
+            return isNull;
         }
 
     #endregion

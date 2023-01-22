@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public class NavUI : MonoBehaviour {
-    private static bool blockActive;
+    private static bool activateOnStart;
     private static string branchScene = "sc_universe";
 
     [SerializeField]private GameObject navMenu;
@@ -13,12 +13,12 @@ public class NavUI : MonoBehaviour {
     [SerializeField]private TextMeshProUGUI expandButtonText;
     [SerializeField]private GameObject unfocusPanel;
 
-    private void OnEnable() {
-        Toggle(true);
+    private void Start() {
+        Toggle(false);
 
-        if (blockActive) {
-            Toggle(false);
-            blockActive = false;
+        if (activateOnStart) {
+            Toggle(true);
+            activateOnStart = false;
         }
     }
 
@@ -39,22 +39,21 @@ public class NavUI : MonoBehaviour {
     }
 
     public void Branches() {
+        activateOnStart = true;
         SceneController.instance.Load(branchScene);
     }
 
     public void Employees() {
+        activateOnStart = true;
         SceneController.instance.Load("sc_employees");
     }
 
     public void Products() {
+        activateOnStart = true;
         SceneController.instance.Load("sc_products");
     }
 
     #region Setters
-
-        public static void SetBlockActive(bool value) {
-            blockActive = value;
-        }
 
         public static void SetBranchScene(string value) {
             branchScene = value;

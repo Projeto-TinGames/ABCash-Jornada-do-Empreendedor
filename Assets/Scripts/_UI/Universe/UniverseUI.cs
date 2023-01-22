@@ -6,14 +6,19 @@ public class UniverseUI : MonoBehaviour {
     [SerializeField]private bool select;
     [SerializeField]private GameObject galaxy;
 
+    private int clickId;
     private static int galaxyId;
+
     private List<GalaxyDisplay> displayList = new List<GalaxyDisplay>();
 
     private void Awake() {
-        EventHandlerUI.clickGalaxyDisplay.AddListener(SetGalaxy);
+        EventHandlerUI.clickGalaxyDisplay.AddListener(ClickGalaxy);
+        EventHandlerUI.setGalaxy.AddListener(SetGalaxy);
     }
 
     private void Start() {
+        clickId = galaxyId;
+
         gameObject.AddComponent<FirstSiblingUI>();
         
         if (Universe.GetGalaxies().Count == 0) {
@@ -24,7 +29,7 @@ public class UniverseUI : MonoBehaviour {
     }
 
     private void Update() {
-        displayList[galaxyId].Select();
+        displayList[clickId].Select();
     }
 
     private void FixedUpdate() {
@@ -61,10 +66,14 @@ public class UniverseUI : MonoBehaviour {
 
     #region Setters
 
+        private void ClickGalaxy(Galaxy galaxy) {
+            displayList[clickId].Deselect();
+            clickId = galaxy.GetId();
+            transform.localPosition = -Universe.GetGalaxies(clickId).GetPosition();
+        }
+
         private void SetGalaxy(Galaxy galaxy) {
-            displayList[galaxyId].Deselect();
             galaxyId = galaxy.GetId();
-            transform.localPosition = -Universe.GetGalaxies(galaxyId).GetPosition();
         }
 
     #endregion

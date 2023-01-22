@@ -8,7 +8,6 @@ public class SectorData {
     [SerializeField]private int galaxyId;
     [SerializeField]private int productionTime;
 
-    [SerializeField]private AlienData chief;
     [SerializeField]private List<AlienData> aliens = new List<AlienData>();
 
     public SectorData(Sector sector) {
@@ -16,12 +15,8 @@ public class SectorData {
         this.productId = sector.GetProduct().GetId();
         this.galaxyId = sector.GetGalaxy().GetId();
 
-        this.chief = new AlienData(sector.GetChief());
-        
         foreach (Alien alien in sector.GetAliens()) {
-            if (alien != null) {
-                this.aliens.Add(new AlienData(alien));
-            }
+            this.aliens.Add(new AlienData(alien));
         }
     }
 
@@ -37,10 +32,6 @@ public class SectorData {
 
         public int GetProductId() {
             return productId;
-        }
-
-        public AlienData GetChief() {
-            return chief;
         }
 
         public List<AlienData> GetAliens() {
@@ -65,10 +56,6 @@ public class SectorData {
 
         public void SetProductId(int value) {
             productId = value;
-        }
-
-        public void SetChief(AlienData value) {
-            chief = value;
         }
 
         public void SetEmployees(List<AlienData> value) {

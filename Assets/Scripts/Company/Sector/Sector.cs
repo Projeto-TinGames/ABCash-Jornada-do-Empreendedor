@@ -5,13 +5,9 @@ using UnityEngine;
 public class Sector {
     private Galaxy galaxy; // Galaxy that the sector sell its products to
     private Product product;
-    private Alien chief;
-    private Alien[] aliens = new Alien[4];
+    private Alien[] aliens = new Alien[5];
 
     private int productionTimeCounter;
-    private int alienCounter;
-
-    public Sector() {}
 
     public Sector(Product product, Galaxy galaxy) {
         this.product = product;
@@ -24,16 +20,19 @@ public class Sector {
         this.galaxy = Universe.GetGalaxies(sectorData.GetGalaxyId());
         this.product = ProductManager.GetProducts(sectorData.GetProductId());
 
-        alienGenerator = new AlienGenerator();
-        Alien chief = alienGenerator.LoadAlien(sectorData.GetChief());
-        this.chief = chief;
-
         this.productionTimeCounter = sectorData.GetProductionTime();
 
-        foreach (AlienData alienData in sectorData.GetAliens()) {
-            alienGenerator = new AlienGenerator();
-            Alien alien = alienGenerator.LoadAlien(alienData);
-            AddEmployee(alien);
+        for (int i = 0; i < sectorData.GetAliens().Count; i++) {
+            AlienData alienData = sectorData.GetAliens(i);
+
+            if (!alienData.GetIsNull()) {
+                alienGenerator = new AlienGenerator();
+                Alien alien = alienGenerator.LoadAlien(alienData);
+                this.aliens[i] = alien;
+            }
+            else {
+                this.aliens[i] = null;
+            }
         }
     }
 
@@ -68,11 +67,6 @@ public class Sector {
             productionTimeCounter += value;
         }
 
-        public void AddEmployee(Alien alien) {
-            aliens[alienCounter] = alien;
-            alienCounter++;
-        }
-
     #endregion
 
     #region Remove
@@ -82,17 +76,12 @@ public class Sector {
         }
 
         public void RemoveAlien(Alien alien) {
-            for (int i = 0; i < alienCounter; i++) {
+            for (int i = 0; i < aliens.Length; i++) {
                 if (aliens[i] == alien) {
-                    RemoveAlien(i);
+                    aliens[i] = null;
                     break;
                 }
             }
-        }
-
-        public void RemoveAlien(int index) {
-            aliens[index] = null;
-            alienCounter--;
         }
 
     #endregion
@@ -111,16 +100,33 @@ public class Sector {
             return product;
         }
 
-        public Alien GetChief() {
-            return chief;
-        }
-
         public Alien[] GetAliens() {
             return aliens;
         }
 
         public Alien GetAliens(int index) {
             return aliens[index];
+        }
+
+        public bool GetHasAliens() {
+            for (int i = 0; i < aliens.Length; i++) {
+                if (aliens[i] != null) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int GetAlienCounter() {
+            int alienCounter = 0;
+
+            for (int i = 0; i < aliens.Length; i++) {
+                if (aliens[i] != null) {
+                    alienCounter++;
+                }
+            }
+
+            return alienCounter;
         }
 
     #endregion
@@ -137,10 +143,6 @@ public class Sector {
 
         public void SetProduct(Product value) {
             product = value;
-        }
-
-        public void SetChief(Alien value) {
-            chief = value;
         }
 
         public void SetAliens(Alien[] value) {

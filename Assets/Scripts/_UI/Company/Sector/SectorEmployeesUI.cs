@@ -49,10 +49,11 @@ public class SectorEmployeesUI : MonoBehaviour {
             Alien alien = aliens[i];
             AlienDisplay display = Instantiate(displayPrefab);
 
-            display.SetDisplay(displayList.Count, alien);
+            display.SetDisplay(i, alien);
 
             display.transform.SetParent(alienList);
             display.transform.localScale = Vector3.one;
+            display.transform.SetAsFirstSibling();
 
             displayList.Add(display);
         }
@@ -98,7 +99,11 @@ public class SectorEmployeesUI : MonoBehaviour {
         }
 
         Company.RemoveAlien(alien);
-        
-        aliens[alienId] = alien;
+        SectorUI.GetSector().SetAliens(alienId, alien);
+    }
+
+    public static void ResetAliens() {
+        alienId = 0;
+        aliens = null;
     }
 }

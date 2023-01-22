@@ -13,6 +13,7 @@ public static class EventHandlerUI {
     public static UnityEvent<Branch> setBranch = new UnityEvent<Branch>();
 
     public static UnityEvent<Alien> selectAlien = new UnityEvent<Alien>();
+    public static UnityEvent<Galaxy> selectGalaxy = new UnityEvent<Galaxy>();
 
     public static UnityEvent<Galaxy> clickGalaxyDisplay = new UnityEvent<Galaxy>();
 }

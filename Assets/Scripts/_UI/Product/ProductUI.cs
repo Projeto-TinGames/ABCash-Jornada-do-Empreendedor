@@ -30,7 +30,7 @@ public class ProductUI : MonoBehaviour {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void OnBeforeSceneLoadRuntimeMethod() { //Loads events out of scene
         EventHandlerUI.setProduct.AddListener(SetProduct);
-        EventHandlerUI.setGalaxy.AddListener(SetGalaxy);
+        EventHandlerUI.selectGalaxy.AddListener(SetGalaxy);
         EventHandlerUI.setDay.AddListener(SetDay);
     }
 

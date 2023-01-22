@@ -327,7 +327,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 394686285, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 575778870, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -399,11 +399,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1867910240, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 559.00024
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1867910240, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540.0927
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2144903499, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -862,7 +862,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1038455477}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1777143054}
+        m_TargetAssemblyTypeName: BranchUI, Assembly-CSharp
+        m_MethodName: AddSector
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1489130755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,6 +1100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   branchTitle: {fileID: 1489130757}
+  sectorDisplay: {fileID: 8057207252644271335, guid: eff1d75f04570204d81b92b7d4c95b82, type: 3}
+  addDisplay: {fileID: 1038455475}
+  sectorContainer: {fileID: 45828304}
 --- !u!1 &1938448788
 GameObject:
   m_ObjectHideFlags: 0

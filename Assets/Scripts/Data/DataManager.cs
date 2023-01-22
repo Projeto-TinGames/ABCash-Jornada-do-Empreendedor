@@ -35,8 +35,6 @@ public class DataManager : MonoBehaviour {
 
             Branch branch = new Branch(0, "0,0");
             branch.AddSector(new Sector(ProductManager.GetProducts(0), Universe.GetGalaxies(0)));
-            branch.GetSectors(0).AddEmployee(new Wadop());
-            branch.GetSectors(0).SetChief(new Dodal());
 
             Company.AddAlien(new Repinch());
             Company.AddBranch(branch);

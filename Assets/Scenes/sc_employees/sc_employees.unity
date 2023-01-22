@@ -1892,7 +1892,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 394686285, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 413145339, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -1968,11 +1968,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1867910240, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 559.00024
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1867910240, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -540.0927
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2144903499, guid: 730d1c57e102f674a80952499507b0a4, type: 3}
       propertyPath: m_AnchorMax.y
