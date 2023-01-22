@@ -19,7 +19,7 @@ public class SectorDisplay : ClickableDisplayUI {
     }
 
     private void Update() {
-        TimeConverter time = new TimeConverter(sector.GetProduct().GetProductionTimeCounter() - sector.GetProductionTimeCounter());
+        TimeConverter time = sector.GetRelativeProductionTime();
 
         if (sector.GetHasAliens()) {
             timeText.text = $"Tempo: {time.GetDays()}d {time.GetHours()}h {time.GetMinutes()}m {time.GetSeconds()}s";

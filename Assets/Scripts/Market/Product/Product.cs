@@ -9,7 +9,7 @@ public class Product {
     [SerializeField]private float price;
     [SerializeField]private int level = 1;
 
-    [SerializeField]private int productionTimeCounter;
+    [SerializeField]private float productionTimeCounter;
     private int productionTimeDays;
     private int productionTimeHours;
     private int productionTimeMinutes;
@@ -55,7 +55,7 @@ public class Product {
             return level;
         }
 
-        public int GetProductionTimeCounter() {
+        public float GetProductionTimeCounter() {
             return productionTimeCounter;
         }
 
@@ -108,7 +108,7 @@ public class Product {
             productionTimeCounter = timeConverter.GetCounter();
         }
 
-        public void SetProductionTimeCounter(int value) {
+        public void SetProductionTimeCounter(float value) {
             productionTimeCounter = value;
             SetProductionTimeMetrics();
         }

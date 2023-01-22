@@ -7,7 +7,8 @@ public class Sector {
     private Product product;
     private Alien[] aliens = new Alien[5];
 
-    private int productionTimeCounter;
+    private float productionRate;
+    private float productionTimeCounter;
 
     public Sector(Product product, Galaxy galaxy) {
         this.product = product;
@@ -34,6 +35,8 @@ public class Sector {
                 this.aliens[i] = null;
             }
         }
+
+        this.SetProductionRate();
     }
 
     public void Update() {
@@ -43,22 +46,20 @@ public class Sector {
     private void Produce() {
         Market market = galaxy.GetMarket();
 
-        //Criar lógica para empregados e chefe separados
+        productionTimeCounter += productionRate;
 
-        /*if (aliens.Length > 0) {
-            foreach (Alien alien in aliens) {
-                productionTimeCounter++;
-            }
-            if (productionTimeCounter >= product.GetProductionTimeCounter()) {
-                float money = market.GetTendencies(product).GetProductNormalizedPrice();
-                Company.AddMoney(money);
+        if (productionTimeCounter >= product.GetProductionTimeCounter()) {
+            float money = market.GetTendencies(product).GetProductNormalizedPrice();
+            Company.AddMoney(money);
                 
+            productionTimeCounter -= product.GetProductionTimeCounter();
+
+            if (productionTimeCounter >= product.GetProductionTimeCounter()) {
                 productionTimeCounter = 0;
             }
 
-            TimeConverter time = new TimeConverter(product.GetProductionTimeCounter() - productionTimeCounter, aliens.Count);
-            //Debug.Log($"{time.GetDays()}, {time.GetHours()}, {time.GetMinutes()}, {time.GetSeconds()}");
-        }*/
+            Debug.Log(Company.GetMoney());
+        }
     }
 
     #region Add
@@ -88,7 +89,11 @@ public class Sector {
 
     #region Getters
 
-        public int GetProductionTimeCounter() {
+        public TimeConverter GetRelativeProductionTime() {
+            return new TimeConverter(product.GetProductionTimeCounter() - productionTimeCounter,productionRate);
+        }
+
+        public float GetProductionTimeCounter() {
             return productionTimeCounter;
         }
 
@@ -133,7 +138,7 @@ public class Sector {
 
     #region Setters
 
-        public void SetProductionTimeCounter(int value) {
+        public void SetProductionTimeCounter(float value) {
             productionTimeCounter = value;
         }
 
@@ -151,6 +156,26 @@ public class Sector {
 
         public void SetAliens(int index, Alien value) {
             aliens[index] = value;
+        }
+
+        public void SetProductionRate() {
+            float managerBonus = 0f;
+            float employeeBonus = 0f;
+
+            productionRate = 1f;
+
+            if (aliens[0] != null) {
+                managerBonus = (float)(aliens[0].GetWisdom()/100f);
+            }
+
+            for (int i = 1; i < aliens.Length; i++) {
+                Alien alien = aliens[i];
+
+                if (alien != null) {
+                    employeeBonus = (float)(alien.GetAgility()/100f);
+                    productionRate += (float)(managerBonus + employeeBonus);
+                }
+            }
         }
 
     #endregion

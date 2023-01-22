@@ -6,7 +6,7 @@ public static class Universe {
     private static List<Galaxy> galaxies = new List<Galaxy>();
     private static Dictionary<int,Dictionary<int,Galaxy>> galaxyMatrix = new Dictionary<int,Dictionary<int,Galaxy>>();
 
-    private static int marketUpdateCounter;
+    private static float marketUpdateCounter;
 
     public static void Update() {
         if (marketUpdateCounter <= 0) {
@@ -90,7 +90,7 @@ public static class Universe {
 
     #region Getters
 
-        public static int GetMarketUpdateCounter() {
+        public static float GetMarketUpdateCounter() {
             return marketUpdateCounter;
         }
 

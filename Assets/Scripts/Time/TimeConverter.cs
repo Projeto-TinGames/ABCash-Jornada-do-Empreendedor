@@ -7,14 +7,14 @@ public class TimeConverter {
     private int minutes;
     private int seconds;
 
-    private int counter;
-    private int updateRate = 1;
+    private float counter;
+    private float updateRate = 1f;
 
-    public TimeConverter(int counter, int updateRate = 1) {
+    public TimeConverter(float counter, float productionRate = 1f) {
         this.counter = counter;
-        this.updateRate = updateRate;
+        this.updateRate = productionRate;
 
-        seconds = counter/updateRate;
+        seconds = (int)(counter/productionRate);
 
         minutes = seconds / 60;
         seconds -= minutes * 60;
@@ -41,16 +41,16 @@ public class TimeConverter {
 
     #region Getters
 
-        public int GetCounter() {
+        public float GetCounter() {
             return counter;
         }
 
-        public int GetUpdateRate() {
+        public float GetUpdateRate() {
             return updateRate;
         }
 
         public int GetNormalizedCounter() {
-            return counter/updateRate;
+            return (int)(counter/updateRate);
         }
 
         public int GetDays() {

@@ -6,7 +6,7 @@ using UnityEngine;
 public class SectorData {
     [SerializeField]private int productId;
     [SerializeField]private int galaxyId;
-    [SerializeField]private int productionTime;
+    [SerializeField]private float productionTime;
 
     [SerializeField]private List<AlienData> aliens = new List<AlienData>();
 
@@ -22,7 +22,7 @@ public class SectorData {
 
     #region Getters
 
-        public int GetProductionTime() {
+        public float GetProductionTime() {
             return productionTime;
         }
 
