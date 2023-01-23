@@ -7,7 +7,7 @@ public class Wadop : Alien {
     public Wadop() {
         SetSpeciesId(2);
         
-        SetAvailableNames(new string[]{"Wadopo", "Wadopa", "Wadopio"});
+        SetAvailableNames(new string[]{"Stanley", "Angela", "Oscar"});
         SetAgilityMultiplier(2);
         SetSpecies("Wadop");
 

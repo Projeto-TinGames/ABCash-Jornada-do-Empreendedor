@@ -6,7 +6,7 @@ public class Dodal : Alien {
     public Dodal() {
         SetSpeciesId(0);
         
-        SetAvailableNames(new string[]{"Dodala", "Dodalo", "Dodalio"});
+        SetAvailableNames(new string[]{"Michael", "Jim", "Andy"});
         SetWisdomMultiplier(2);
         SetSpecies("Dodal");
 

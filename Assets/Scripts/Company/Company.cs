@@ -7,7 +7,7 @@ public static class Company {
     private static int id;
     private static string name;
     private static float money = 10000f;
-    private static float salaryPaymentCounter = new TimeConverter(0, 0, 0, 10).GetCounter();
+    private static float salaryPaymentCounter = new TimeConverter(1, 0, 0, 0).GetCounter();
 
     private static Dictionary<int, Branch> branches = new Dictionary<int, Branch>();
     private static List<Alien> unemployedAliens = new List<Alien>();
@@ -16,7 +16,7 @@ public static class Company {
 
     public static void Update() {
         if (salaryPaymentCounter <= 0) {
-            salaryPaymentCounter = new TimeConverter(0, 0, 0, 10).GetCounter();
+            salaryPaymentCounter = new TimeConverter(1, 0, 0, 0).GetCounter();
             PaySalaries();
         }
         salaryPaymentCounter--;
@@ -70,29 +70,11 @@ public static class Company {
 
     public static void PaySalaries() {
         foreach (Alien alien in unemployedAliens) {
-            RemoveMoney(alien.GetSalary());
+            RemoveMoney(alien.GetBaseSalary());
         }
 
-        /*Utilizar esse sistema quando tiver algo que define o valor relativo do salário do funcionário na filial
-        (quando for selecionar o alienígena no setor da filial, realizar o cálculo)
-        
         foreach (Alien alien in employedAliens) {
-            RemoveMoney(alien.GetRelativeSalary());
-        }*/
-
-        foreach (KeyValuePair<int, Branch> branch in Company.GetBranches()) {
-            foreach (Sector sector in branch.Value.GetSectors()) {
-                foreach (Alien alien in sector.GetAliens()) {
-                    if (alien != null) {
-                        Galaxy alienGalaxy = Universe.GetGalaxies(alien.GetGalaxyId());
-                        Galaxy branchGalaxy = Universe.GetGalaxies(branch.Value.GetId());
-
-
-                        int workDistance = Universe.GetDistance(alienGalaxy, branchGalaxy);
-                        RemoveMoney(alien.GetSalary() * (1f + workDistance/10f));
-                    }
-                }
-            }
+            RemoveMoney(alien.GetFinalSalary());
         }
 
         Debug.Log(money);

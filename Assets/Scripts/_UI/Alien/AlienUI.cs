@@ -6,6 +6,7 @@ using TMPro;
 
 public class AlienUI : MonoBehaviour {
     private static int alienId;
+    private static int galaxyId;
 
     private Alien alien;
 
@@ -13,6 +14,7 @@ public class AlienUI : MonoBehaviour {
     [SerializeField]private Transform alienList; 
     [SerializeField]private AlienDisplay contractDisplay; 
 
+    [SerializeField]private TextMeshProUGUI galaxyName;
     [SerializeField]private Transform alienInfo; 
     [SerializeField]private TextMeshProUGUI alienName;
     [SerializeField]private Image alienImage;
@@ -27,10 +29,18 @@ public class AlienUI : MonoBehaviour {
     private List<Alien> aliens = new List<Alien>();
     private List<AlienDisplay> displayList = new List<AlienDisplay>();
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void OnBeforeSceneLoadRuntimeMethod() { //Loads events out of scene
+        EventHandlerUI.selectGalaxy.AddListener(SetGalaxy);
+    }
+
     private void Start() {
         EventHandlerUI.setAlien.AddListener(UpdateInfo);
         aliens = Company.GetUnemployedAliens();
 
+        if (galaxyName != null) {
+            galaxyName.text = Universe.GetGalaxies(galaxyId).GetName();
+        }
         UpdateList();
     }
 
@@ -88,6 +98,9 @@ public class AlienUI : MonoBehaviour {
         Galaxy galaxyValue = Universe.GetGalaxies(alien.GetGalaxyId());
         Product productValue = ProductManager.GetProducts(alien.GetProductId());
 
+        int distance = Universe.GetDistance(galaxyValue, Universe.GetGalaxies(galaxyId));
+        alien.SetFinalSalary(distance);
+
         alienName.text = alien.GetName();
         alienImage.sprite = alien.GetSprite();
         alienImage.color = alien.GetColor();
@@ -95,7 +108,7 @@ public class AlienUI : MonoBehaviour {
         alienProduct.text = $"Produto Favorito: {productValue.GetName()}";
         alienAgility.text = $"Agilidade: {alien.GetAgility().ToString()}";
         alienWisdom.text = $"Sabedoria: {alien.GetWisdom().ToString()}";
-        alienSalary.text = $"Salário: {alien.GetSalary().ToString()}/dia";
+        alienSalary.text = $"Salário: {alien.GetFinalSalary().ToString()}/dia";
     }
 
     public void Contract() {
@@ -107,7 +120,6 @@ public class AlienUI : MonoBehaviour {
     }
 
     public void Select() {
-        Alien alien = displayList[alienId].GetAlien();
         EventHandlerUI.selectAlien.Invoke(alien);
         alienId--;
 
@@ -117,4 +129,20 @@ public class AlienUI : MonoBehaviour {
     public void Close() {
         SceneController.instance.LoadPreviousScene();
     }
+
+    public void SelectGalaxy() {
+        SceneController.instance.Load("sc_universe_select");
+    }
+
+    public void test() {
+        Debug.Log(alien.GetBaseSalary());;
+    }
+
+    #region Setters
+
+        private static void SetGalaxy(Galaxy galaxy) {
+            galaxyId = galaxy.GetId();
+        }
+
+    #endregion
 }

@@ -6,7 +6,7 @@ public class Repinch : Alien {
     
     public Repinch() {
         SetSpeciesId(1);
-        SetAvailableNames(new string[]{"Repincha", "Repincho", "Repinchio"});
+        SetAvailableNames(new string[]{"Pam", "Phyllis", "Dwight"});
         SetSpecies("Repinch");
         
         GenerateStats();

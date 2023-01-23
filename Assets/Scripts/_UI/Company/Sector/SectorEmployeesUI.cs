@@ -7,6 +7,7 @@ using TMPro;
 public class SectorEmployeesUI : MonoBehaviour {
     private static Alien[] aliens = null;
     private static int alienId;
+    private static int galaxyId;
 
     [SerializeField]private AlienDisplay displayPrefab;
     [SerializeField]private Transform alienList; 
@@ -26,14 +27,13 @@ public class SectorEmployeesUI : MonoBehaviour {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void OnBeforeSceneLoadRuntimeMethod() { //Loads events out of scene
         EventHandlerUI.selectAlien.AddListener(SelectAlien);
+        EventHandlerUI.selectGalaxy.AddListener(SetGalaxy);
     }
 
     private void Start() {
         EventHandlerUI.setSectorAlien.AddListener(UpdateInfo);
         
-        if (aliens == null) {
-            aliens = SectorUI.GetSector().GetAliens();
-        }
+        aliens = SectorUI.GetSector().GetAliens();
 
         UpdateList();
     }
@@ -83,6 +83,9 @@ public class SectorEmployeesUI : MonoBehaviour {
         Galaxy galaxyValue = Universe.GetGalaxies(alien.GetGalaxyId());
         Product productValue = ProductManager.GetProducts(alien.GetProductId());
 
+        int distance = Universe.GetDistance(galaxyValue, Universe.GetGalaxies(galaxyId));
+        alien.SetFinalSalary(distance);
+
         alienName.text = alien.GetName();
         alienImage.sprite = alien.GetSprite();
         alienImage.color = alien.GetColor();
@@ -90,7 +93,7 @@ public class SectorEmployeesUI : MonoBehaviour {
         alienProduct.text = $"Produto Favorito: {productValue.GetName()}";
         alienAgility.text = $"Agilidade: {alien.GetAgility().ToString()}";
         alienWisdom.text = $"Sabedoria: {alien.GetWisdom().ToString()}";
-        alienSalary.text = $"Salário: {alien.GetSalary().ToString()}/dia";
+        alienSalary.text = $"Salário: {alien.GetFinalSalary().ToString()}/dia";
     }
 
     public void Change() {
@@ -110,4 +113,12 @@ public class SectorEmployeesUI : MonoBehaviour {
         alienId = 0;
         aliens = null;
     }
+
+    #region Setters
+
+        private static void SetGalaxy(Galaxy galaxy) {
+            galaxyId = galaxy.GetId();
+        }
+
+    #endregion
 }
