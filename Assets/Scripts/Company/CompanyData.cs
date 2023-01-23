@@ -8,7 +8,8 @@ public class CompanyData {
     [SerializeField]private float money;
 
     [SerializeField]private List<BranchData> branches = new List<BranchData>();
-    [SerializeField]private List<AlienData> aliens = new List<AlienData>();
+    [SerializeField]private List<AlienData> unemployedAliens = new List<AlienData>();
+    [SerializeField]private List<AlienData> employedAliens = new List<AlienData>();
     [SerializeField]private List<Product> products = new List<Product>();
 
     public CompanyData() {
@@ -20,8 +21,12 @@ public class CompanyData {
             this.branches.Add(branch);
         }
 
-        foreach (Alien alien in Company.GetAliens()) {
-            this.aliens.Add(new AlienData(alien));
+        foreach (Alien alien in Company.GetUnemployedAliens()) {
+            this.unemployedAliens.Add(new AlienData(alien));
+        }
+
+        foreach (Alien alien in Company.GetEmployedAliens()) {
+            this.employedAliens.Add(new AlienData(alien));
         }
 
         this.products = Company.GetProducts();
@@ -37,12 +42,20 @@ public class CompanyData {
             return money;
         }
 
-        public List<AlienData> GetAliens() {
-            return aliens;
+        public List<AlienData> GetUnemployedAliens() {
+            return unemployedAliens;
         }
 
-        public AlienData GetAliens(int index) {
-            return aliens[index];
+        public AlienData GetUnemployedAliens(int index) {
+            return unemployedAliens[index];
+        }
+
+        public List<AlienData> GetEmployedAliens() {
+            return employedAliens;
+        }
+
+        public AlienData GetEmployedAliens(int index) {
+            return employedAliens[index];
         }
 
         public List<BranchData> GetBranches() {

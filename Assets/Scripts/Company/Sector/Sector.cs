@@ -57,8 +57,6 @@ public class Sector {
             if (productionTimeCounter >= product.GetProductionTimeCounter()) {
                 productionTimeCounter = 0;
             }
-
-            Debug.Log(Company.GetMoney());
         }
     }
 
@@ -162,17 +160,29 @@ public class Sector {
             float managerBonus = 0f;
             float employeeBonus = 0f;
 
-            productionRate = 1f;
+            productionRate = 0f;
 
-            if (aliens[0] != null) {
-                managerBonus = (float)(aliens[0].GetWisdom()/100f);
+            Alien manager = aliens[0];
+            if (manager != null) {
+                managerBonus = (float)(manager.GetWisdom()/100f);
+
+                if (manager.GetProductId() == product.GetId()) {
+                    //managerBonus += .25f;
+                    managerBonus *= 2f;
+                }
             }
 
             for (int i = 1; i < aliens.Length; i++) {
-                Alien alien = aliens[i];
+                Alien employee = aliens[i];
 
-                if (alien != null) {
-                    employeeBonus = (float)(alien.GetAgility()/100f);
+                if (employee != null) {
+                    employeeBonus = (float)(employee.GetAgility()/100f);
+
+                    if (employee.GetProductId() == product.GetId()) {
+                        //employeeBonus += .25f;
+                        employeeBonus *= 2f;
+                    }
+
                     productionRate += (float)(managerBonus + employeeBonus);
                 }
             }

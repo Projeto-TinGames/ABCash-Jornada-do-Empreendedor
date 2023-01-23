@@ -23,10 +23,14 @@ public class SectorEmployeesUI : MonoBehaviour {
 
     private List<AlienDisplay> displayList = new List<AlienDisplay>();
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void OnBeforeSceneLoadRuntimeMethod() { //Loads events out of scene
+        EventHandlerUI.selectAlien.AddListener(SelectAlien);
+    }
+
     private void Start() {
         EventHandlerUI.setSectorAlien.AddListener(UpdateInfo);
-        EventHandlerUI.selectAlien.AddListener(SelectAlien);
-
+        
         if (aliens == null) {
             aliens = SectorUI.GetSector().GetAliens();
         }
@@ -97,8 +101,8 @@ public class SectorEmployeesUI : MonoBehaviour {
         if (aliens[alienId] != null) {
             Company.AddAlien(aliens[alienId]);
         }
-
-        Company.RemoveAlien(alien);
+        
+        Company.EmployAlien(alien);
         SectorUI.GetSector().SetAliens(alienId, alien);
     }
 

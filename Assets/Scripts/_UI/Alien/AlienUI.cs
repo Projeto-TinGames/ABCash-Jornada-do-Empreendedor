@@ -29,7 +29,7 @@ public class AlienUI : MonoBehaviour {
 
     private void Start() {
         EventHandlerUI.setAlien.AddListener(UpdateInfo);
-        aliens = Company.GetAliens();
+        aliens = Company.GetUnemployedAliens();
 
         UpdateList();
     }

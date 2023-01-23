@@ -10,7 +10,7 @@ public static class Universe {
 
     public static void Update() {
         if (marketUpdateCounter <= 0) {
-            marketUpdateCounter = new TimeConverter(0, 0, 1, 0).GetCounter();
+            marketUpdateCounter = new TimeConverter(1, 0, 0, 0).GetCounter();
         }
         marketUpdateCounter--;
 
@@ -26,6 +26,8 @@ public static class Universe {
 
     public static void Load(UniverseData universeData) {
         Reset();
+        
+        marketUpdateCounter = universeData.GetMarketUpdateCounter();
 
         foreach (GalaxyData galaxyData in universeData.GetGalaxies()) {
             Galaxy galaxy = new Galaxy(galaxyData);
@@ -100,6 +102,17 @@ public static class Universe {
 
         public static Galaxy GetGalaxies(int index) {
             return galaxies[index];
+        }
+
+        public static int GetDistance(Galaxy galaxy1, Galaxy galaxy2) {
+            int distance, distanceX, distanceY;
+
+            distanceX = Mathf.Abs(galaxy1.GetX() - galaxy2.GetX());
+            distanceY = Mathf.Abs(galaxy1.GetY() - galaxy2.GetY());
+
+            distance = distanceX + distanceY;
+
+            return distance;
         }
 
     #endregion

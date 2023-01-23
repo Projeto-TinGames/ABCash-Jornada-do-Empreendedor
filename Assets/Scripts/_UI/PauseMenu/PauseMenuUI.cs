@@ -17,7 +17,7 @@ public class PauseMenuUI : MonoBehaviour {
 
     public void Save() {
         menu.SetActive(false);
-        string filePath = Application.persistentDataPath + "/save" + Company.GetId() + ".json";
+        string filePath = Application.streamingAssetsPath + "/save" + Company.GetId() + ".json";
 
         SaveData saveData = new SaveData();
         string dataAsJson = JsonUtility.ToJson(saveData,true);
