@@ -21,8 +21,8 @@ public abstract class Alien {
     private int status = 100;
     private int agility;
     private int wisdom;
-    private float baseSalary;
-    private float finalSalary;
+    private int workGalaxyId;
+    private Salary salary;
 
     public abstract void Work();
 
@@ -88,7 +88,7 @@ public abstract class Alien {
         }
 
         private void GenerateSalary() { //Precisa criar lógica para levar em conta a distância da galáxia em que mora
-            baseSalary = (agility+wisdom)*10;
+            salary = new Salary(this);
         }
 
     #endregion
@@ -155,12 +155,12 @@ public abstract class Alien {
             return wisdom;
         }
 
-        public float GetBaseSalary() {
-            return baseSalary;
+        public int GetWorkGalaxyId() {
+            return workGalaxyId;
         }
 
-        public float GetFinalSalary() {
-            return finalSalary;
+        public Salary GetSalary() {
+            return salary;
         }
 
     #endregion
@@ -178,8 +178,8 @@ public abstract class Alien {
             status = alienData.GetStatus();
             agility = alienData.GetAgility();
             wisdom = alienData.GetWisdom();
-            baseSalary = alienData.GetBaseSalary();
-            finalSalary = alienData.GetFinalSalary();
+            workGalaxyId = alienData.GetWorkGalaxyId();
+            salary = new Salary(this);
         }
 
         protected void SetSpeciesId(int value) {
@@ -242,12 +242,9 @@ public abstract class Alien {
             wisdom = value;
         }
 
-        public void SetBaseSalary(float value) {
-            baseSalary = value;
-        }
-
-        public void SetFinalSalary(int workDistance) {
-            finalSalary = baseSalary * (1f + workDistance/10f);
+        public void SetWorkGalaxyId(int value) {
+            workGalaxyId = value;
+            salary = new Salary(this);
         }
 
     #endregion

@@ -8,7 +8,7 @@ public class AlienUI : MonoBehaviour {
     private static int alienId;
     private static int galaxyId;
 
-    private Alien alien;
+    private static Alien alien;
 
     [SerializeField]private AlienDisplay displayPrefab;
     [SerializeField]private Transform alienList; 
@@ -95,11 +95,10 @@ public class AlienUI : MonoBehaviour {
             }
         }
 
+        alien.SetWorkGalaxyId(galaxyId);
+
         Galaxy galaxyValue = Universe.GetGalaxies(alien.GetGalaxyId());
         Product productValue = ProductManager.GetProducts(alien.GetProductId());
-
-        int distance = Universe.GetDistance(galaxyValue, Universe.GetGalaxies(galaxyId));
-        alien.SetFinalSalary(distance);
 
         alienName.text = alien.GetName();
         alienImage.sprite = alien.GetSprite();
@@ -108,7 +107,7 @@ public class AlienUI : MonoBehaviour {
         alienProduct.text = $"Produto Favorito: {productValue.GetName()}";
         alienAgility.text = $"Agilidade: {alien.GetAgility().ToString()}";
         alienWisdom.text = $"Sabedoria: {alien.GetWisdom().ToString()}";
-        alienSalary.text = $"Salário: {alien.GetFinalSalary().ToString()}/dia";
+        alienSalary.text = $"Salário: {alien.GetSalary().GetFinal().ToString()}/dia";
     }
 
     public void Contract() {
@@ -134,9 +133,13 @@ public class AlienUI : MonoBehaviour {
         SceneController.instance.Load("sc_universe_select");
     }
 
-    public void test() {
-        Debug.Log(alien.GetBaseSalary());;
-    }
+    #region Getters
+
+        public static Alien GetAlien() {
+            return alien;
+        }
+
+    #endregion
 
     #region Setters
 

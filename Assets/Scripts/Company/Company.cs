@@ -69,7 +69,7 @@ public static class Company {
     }
 
     public static void PaySalaries() {
-        foreach (Alien alien in unemployedAliens) {
+        /*foreach (Alien alien in unemployedAliens) {
             RemoveMoney(alien.GetBaseSalary());
         }
 
@@ -77,7 +77,7 @@ public static class Company {
             RemoveMoney(alien.GetFinalSalary());
         }
 
-        Debug.Log(money);
+        Debug.Log(money);*/
     }
 
     #region Add
@@ -90,6 +90,7 @@ public static class Company {
         public static void AddAlien(Alien alien) {
             employedAliens.Remove(alien);
             unemployedAliens.Add(alien);
+            alien.SetWorkGalaxyId(alien.GetGalaxyId());
             //aliens.Insert(0, alien);
         }
 

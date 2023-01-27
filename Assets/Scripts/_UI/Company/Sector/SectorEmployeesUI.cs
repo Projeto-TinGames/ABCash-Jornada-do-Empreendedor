@@ -84,7 +84,6 @@ public class SectorEmployeesUI : MonoBehaviour {
         Product productValue = ProductManager.GetProducts(alien.GetProductId());
 
         int distance = Universe.GetDistance(galaxyValue, Universe.GetGalaxies(galaxyId));
-        alien.SetFinalSalary(distance);
 
         alienName.text = alien.GetName();
         alienImage.sprite = alien.GetSprite();
@@ -93,7 +92,7 @@ public class SectorEmployeesUI : MonoBehaviour {
         alienProduct.text = $"Produto Favorito: {productValue.GetName()}";
         alienAgility.text = $"Agilidade: {alien.GetAgility().ToString()}";
         alienWisdom.text = $"Sabedoria: {alien.GetWisdom().ToString()}";
-        alienSalary.text = $"Salário: {alien.GetFinalSalary().ToString()}/dia";
+        alienSalary.text = $"Salário: {alien.GetSalary().GetFinal().ToString()}/dia";
     }
 
     public void Change() {

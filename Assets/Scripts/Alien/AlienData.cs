@@ -14,13 +14,9 @@ public class AlienData {
     [SerializeField]private int status = 100;
     [SerializeField]private int agility;
     [SerializeField]private int wisdom;
-    [SerializeField]private float baseSalary;
-    [SerializeField]private float finalSalary;
+    [SerializeField]private int workGalaxyId;
     [SerializeField]private bool isNull;
 
-    public AlienData() {
-    }
-    
     public AlienData(Alien alien) {
         if (alien == null) {
             this.isNull = true;
@@ -37,9 +33,8 @@ public class AlienData {
             this.status = alien.GetStatus();
             this.agility = alien.GetAgility();
             this.wisdom = alien.GetWisdom();
-            this.baseSalary = alien.GetBaseSalary();
-            this.finalSalary = alien.GetFinalSalary();
             this.isNull = false;
+            this.workGalaxyId = alien.GetWorkGalaxyId();
         }
     }
 
@@ -89,12 +84,8 @@ public class AlienData {
             return wisdom;
         }
 
-        public float GetBaseSalary() {
-            return baseSalary;
-        }
-
-        public float GetFinalSalary() {
-            return finalSalary;
+        public int GetWorkGalaxyId() {
+            return workGalaxyId;
         }
 
         public bool GetIsNull() {
