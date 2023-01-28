@@ -54,7 +54,7 @@ public class SectorUI : MonoBehaviour {
         sector.SetProductionRate();
         sector.SetProductionTimeCounter(0f);
         EventHandlerUI.setSector.Invoke(new Sector(new SectorData(sector)));
-        SectorEmployeesUI.ResetAliens();
+        //SectorAlienUI.ResetAliens();
 
         SceneController.instance.Load(closeScene);
     }

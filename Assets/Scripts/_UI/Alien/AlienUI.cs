@@ -5,56 +5,37 @@ using UnityEngine.UI;
 using TMPro;
 
 public class AlienUI : MonoBehaviour {
-    private static int alienId;
-    private static int galaxyId;
+    protected static int alienId;
+    protected static int galaxyId;
+    protected static Alien alien;
 
-    private static Alien alien;
+    [SerializeField]protected AlienDisplay displayPrefab;
+    [SerializeField]protected Transform alienList; 
 
-    [SerializeField]private AlienDisplay displayPrefab;
-    [SerializeField]private Transform alienList; 
-    [SerializeField]private AlienDisplay contractDisplay; 
+    [SerializeField]protected Transform alienInfo; 
+    [SerializeField]protected TextMeshProUGUI alienName;
+    [SerializeField]protected Image alienImage;
+    [SerializeField]protected TextMeshProUGUI alienGalaxy;
+    [SerializeField]protected TextMeshProUGUI alienProduct;
+    [SerializeField]protected TextMeshProUGUI alienAgility;
+    [SerializeField]protected TextMeshProUGUI alienWisdom;
+    [SerializeField]protected TextMeshProUGUI alienSalary;
+    [SerializeField]protected GameObject selectButton; 
 
-    [SerializeField]private TextMeshProUGUI galaxyName;
-    [SerializeField]private Transform alienInfo; 
-    [SerializeField]private TextMeshProUGUI alienName;
-    [SerializeField]private Image alienImage;
-    [SerializeField]private TextMeshProUGUI alienGalaxy;
-    [SerializeField]private TextMeshProUGUI alienProduct;
-    [SerializeField]private TextMeshProUGUI alienAgility;
-    [SerializeField]private TextMeshProUGUI alienWisdom;
-    [SerializeField]private TextMeshProUGUI alienSalary;
-    [SerializeField]private GameObject contractButton; 
-    [SerializeField]private GameObject selectButton; 
+    protected List<Alien> aliens = new List<Alien>();
+    protected List<AlienDisplay> displayList = new List<AlienDisplay>();
 
-    private List<Alien> aliens = new List<Alien>();
-    private List<AlienDisplay> displayList = new List<AlienDisplay>();
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void OnBeforeSceneLoadRuntimeMethod() { //Loads events out of scene
-        EventHandlerUI.selectGalaxy.AddListener(SetGalaxy);
-    }
-
-    private void Start() {
-        EventHandlerUI.setAlien.AddListener(UpdateInfo);
-        aliens = Company.GetUnemployedAliens();
-
-        if (galaxyName != null) {
-            galaxyName.text = Universe.GetGalaxies(galaxyId).GetName();
-        }
+    protected virtual void Start() {
         UpdateList();
     }
 
-    private void Update() {
-        displayList[alienId].Select();
+    protected virtual void Update() {
+        if (alienId < displayList.Count) {
+            displayList[alienId].Select();
+        }
     }
 
-    private void UpdateList() {
-        displayList.Clear();
-
-        if (contractDisplay != null) {
-            displayList.Add(contractDisplay);
-        }
-
+    protected virtual void UpdateList() {
         for (int i = 1; i < alienList.childCount; i++) {
             Destroy(alienList.GetChild(i).gameObject);
         }
@@ -70,31 +51,9 @@ public class AlienUI : MonoBehaviour {
 
             displayList.Add(display);
         }
-
-        displayList[alienId].Click();
     }
 
-    private void UpdateInfo(AlienDisplay alienDisplay) {
-        alienId = alienDisplay.GetId();
-        alien = alienDisplay.GetAlien();
-
-        contractButton.SetActive(false);
-
-        if (selectButton != null) {
-            selectButton.SetActive(false);
-        }
-
-        if (alien == null) {
-            contractButton.SetActive(true);
-            AlienGenerator generator = new AlienGenerator();
-            alien = generator.GetRandomAlien();
-        }
-        else {
-            if (selectButton != null) {
-                selectButton.SetActive(true);
-            }
-        }
-
+    protected virtual void UpdateInfo(AlienDisplay alienDisplay) {
         alien.SetWorkGalaxyId(galaxyId);
 
         Galaxy galaxyValue = Universe.GetGalaxies(alien.GetGalaxyId());
@@ -110,29 +69,6 @@ public class AlienUI : MonoBehaviour {
         alienSalary.text = $"Salário: {alien.GetSalary().GetFinal().ToString()}/dia";
     }
 
-    public void Contract() {
-        Company.AddAlien(alien);
-        UpdateList();
-
-        //alienId = 1;
-        //displayList[alienId].Click();
-    }
-
-    public void Select() {
-        EventHandlerUI.selectAlien.Invoke(alien);
-        alienId--;
-
-        Close();
-    }
-
-    public void Close() {
-        SceneController.instance.LoadPreviousScene();
-    }
-
-    public void SelectGalaxy() {
-        SceneController.instance.Load("sc_universe_select");
-    }
-
     #region Getters
 
         public static Alien GetAlien() {
@@ -143,7 +79,7 @@ public class AlienUI : MonoBehaviour {
 
     #region Setters
 
-        private static void SetGalaxy(Galaxy galaxy) {
+        protected static void SetGalaxy(Galaxy galaxy) {
             galaxyId = galaxy.GetId();
         }
 

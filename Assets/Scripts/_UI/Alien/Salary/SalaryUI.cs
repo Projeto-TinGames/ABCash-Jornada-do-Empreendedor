@@ -9,10 +9,6 @@ public class SalaryUI : MonoBehaviour {
     [SerializeField]private TextMeshProUGUI benefitPrefab;
     [SerializeField]private TextMeshProUGUI finalSalary;
 
-    private void Start() {
-        gameObject.SetActive(false);
-    }
-
     private void OnEnable() {
         Salary salary = AlienUI.GetAlien().GetSalary();
 
