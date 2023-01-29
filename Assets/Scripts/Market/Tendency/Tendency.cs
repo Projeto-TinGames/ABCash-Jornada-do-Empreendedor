@@ -17,7 +17,7 @@ public class Tendency {
             this.AddValorization();
         }
 
-        isRumor[0] = false;
+        //isRumor[0] = false;
     }
 
     public Tendency(TendencyData data) {

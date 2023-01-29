@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class SectorUI : MonoBehaviour {
+    private static bool isEditing;
     private static int tab;
     private static string closeScene;
     private static Sector sector;
@@ -22,6 +23,8 @@ public class SectorUI : MonoBehaviour {
     }
 
     private void Start() {
+        isEditing = true;
+
         if (tab == 0) {
             EnableProducts();
         }       
@@ -49,6 +52,7 @@ public class SectorUI : MonoBehaviour {
     }
 
     public void Finish() {
+        isEditing = false;
         tab = 0;
 
         sector.SetProductionRate();
@@ -60,6 +64,10 @@ public class SectorUI : MonoBehaviour {
     }
 
     #region Getters
+
+        public static bool GetIsEditing() {
+            return isEditing;
+        }
 
         public static Sector GetSector() {
             return sector;

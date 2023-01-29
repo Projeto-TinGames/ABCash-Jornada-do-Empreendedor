@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Sector {
-    private const float exportationTax = 50f;
+    private const float exportationTaxPercentage = .5f;
 
     private Galaxy galaxy; // Galaxy that the sector sell its products to
     private Product product;
     private Alien[] aliens = new Alien[5];
 
+    private float exportationTax;
     private float productionRate;
     private float productionTimeCounter;
 
@@ -42,25 +43,25 @@ public class Sector {
     }
 
     public void Update(Galaxy branchGalaxy) {
-        Produce(branchGalaxy);
+        float distance = Universe.GetDistance(galaxy, branchGalaxy);
+        exportationTax = exportationTaxPercentage * distance;
+        
+        Produce();
     }
 
-    private void Produce(Galaxy branchGalaxy) {
+    private void Produce() {
         productionTimeCounter += productionRate;
 
         if (productionTimeCounter >= product.GetProductionTimeCounter()) {
-            Sell(branchGalaxy);
+            Sell();
         }
     }
 
-    private void Sell(Galaxy branchGalaxy) {
+    private void Sell() {
         Market market = galaxy.GetMarket();
         float productPrice = market.GetTendencies(product).GetProductNormalizedPrice();
 
-        float distance = Universe.GetDistance(galaxy, branchGalaxy);
-        float tax = exportationTax * distance;
-
-        float money = productPrice - tax;
+        float money = productPrice - exportationTax;
         Company.AddMoney(money);
             
         productionTimeCounter -= product.GetProductionTimeCounter();
@@ -140,6 +141,10 @@ public class Sector {
             }
 
             return alienCounter;
+        }
+
+        public float GetExportationTax() {
+            return exportationTax;
         }
 
     #endregion

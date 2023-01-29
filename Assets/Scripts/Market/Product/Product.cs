@@ -49,6 +49,10 @@ public class Product {
             return price;
         }
 
+        public float GetUpgradePrice() {
+            return price*level - price;
+        }
+
         public float GetPrice() {
             return price*level;
         }

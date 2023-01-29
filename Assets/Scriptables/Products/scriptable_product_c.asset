@@ -17,4 +17,7 @@ MonoBehaviour:
     name: Produto C
     price: 4
     level: 1
-    productionTimeCounter: 40
+    productionTimeDays: 0
+    productionTimeHours: 0
+    productionTimeMinutes: 0
+    productionTimeSeconds: 40

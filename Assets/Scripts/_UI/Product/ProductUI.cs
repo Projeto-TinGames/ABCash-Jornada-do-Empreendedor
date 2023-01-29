@@ -84,24 +84,26 @@ public class ProductUI : MonoBehaviour {
     }
 
     private void DisplayPrice(Product product) {
-        infoPrice.text = $"Preço: {product.GetPrice().ToString("C2")}";
-        infoPrice.color = Color.white;
+        Tendency tendency = Universe.GetGalaxies(galaxyId).GetMarket().GetTendencies(product);
+        Sector sector = SectorUI.GetSector();
+
+        float price;
 
         researchButton.gameObject.SetActive(false);
-
-        Tendency tendency = Universe.GetGalaxies(galaxyId).GetMarket().GetTendencies(product);
-
+        
         if (tendency.GetIsRumor(dayId)) {
             researchButton.gameObject.SetActive(true);
-            infoPrice.text += $" + ({tendency.GetRumorValorizations(dayId)*100}%)";
-            infoPrice.text += $" = {tendency.GetProductRumorNormalizedPrice(dayId).ToString("C2")}";
-            infoPrice.color = Color.red;
+            price = tendency.GetProductRumorNormalizedPrice(dayId);
         }
         else {
-            infoPrice.text += $" + ({tendency.GetValorizations(dayId)*100}%)";
-            infoPrice.text += $" = {tendency.GetProductNormalizedPrice(dayId).ToString("C2")}";
-            infoPrice.color = Color.green;
+            price = tendency.GetProductNormalizedPrice(dayId);
         }
+
+        if (SectorUI.GetIsEditing()) {
+            price -= sector.GetExportationTax();
+        }
+
+        infoPrice.text = $"Preço: {price.ToString("C2")}";
     }
 
     private void DisplayUpgrade(Product product) {
@@ -136,6 +138,10 @@ public class ProductUI : MonoBehaviour {
         public static Tendency GetTendency() {
             Product product = Company.GetProducts(productId);
             return Universe.GetGalaxies(galaxyId).GetMarket().GetTendencies(product);
+        }
+
+        public static int GetDay() {
+            return dayId;
         }
 
     #endregion
