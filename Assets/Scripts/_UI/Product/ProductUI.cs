@@ -131,6 +131,15 @@ public class ProductUI : MonoBehaviour {
         UpdateInfo();
     }
 
+    #region Getters
+
+        public static Tendency GetTendency() {
+            Product product = Company.GetProducts(productId);
+            return Universe.GetGalaxies(galaxyId).GetMarket().GetTendencies(product);
+        }
+
+    #endregion
+
     #region Setters
 
         private static void SetProduct(Product product) {

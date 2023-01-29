@@ -24,7 +24,7 @@ public class Branch {
 
     public void Update() {
         foreach (Sector sector in sectors) {
-            sector.Update();
+            sector.Update(Universe.GetGalaxies(id));
         }
     }
 

@@ -69,15 +69,17 @@ public static class Company {
     }
 
     public static void PaySalaries() {
-        /*foreach (Alien alien in unemployedAliens) {
-            RemoveMoney(alien.GetBaseSalary());
+        foreach (Alien alien in unemployedAliens) {
+            Salary salary = alien.GetSalary();
+            RemoveMoney(salary.GetFinal() - salary.GetTransportation());
         }
 
         foreach (Alien alien in employedAliens) {
-            RemoveMoney(alien.GetFinalSalary());
+            Salary salary = alien.GetSalary();
+            RemoveMoney(salary.GetFinal() - salary.GetHealthCare());
         }
 
-        Debug.Log(money);*/
+        Debug.Log(money);
     }
 
     #region Add

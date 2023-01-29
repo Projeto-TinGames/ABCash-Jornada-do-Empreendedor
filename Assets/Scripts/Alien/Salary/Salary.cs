@@ -20,12 +20,12 @@ public class Salary {
         GenerateHealthCare(alien);
     }
 
-    private void GenerateBaseSalary(Alien alien) {
+    private void GenerateBaseSalary(Alien alien) { //benefits index = 0
         float baseValue = (alien.GetAgility() + alien.GetWisdom())*10;
         benefits.Add(new Benefit("Salário Base", baseValue));
     }
 
-    private void GenerateTransportation(Alien alien) {
+    private void GenerateTransportation(Alien alien) { //benefits index = 1
         Galaxy homeGalaxy = Universe.GetGalaxies(alien.GetGalaxyId());
         Galaxy workGalaxy = Universe.GetGalaxies(alien.GetWorkGalaxyId());
         int workDistance = Universe.GetDistance(homeGalaxy, workGalaxy);
@@ -35,7 +35,7 @@ public class Salary {
         benefits.Add(new Benefit("Transporte", transportationValue));
     }
 
-    private void GenerateHealthCare(Alien alien) {
+    private void GenerateHealthCare(Alien alien) { //benefits index = 2
         float healthCareValue = healthCare - alien.GetStatus();
         benefits.Add(new Benefit("Plano de Saúde", healthCareValue));
     }
@@ -48,6 +48,18 @@ public class Salary {
 
         public Benefit GetBenefits(int index) {
             return benefits[index];
+        }
+
+        public float GetBase() {
+            return benefits[0].GetValue();
+        }
+
+        public float GetTransportation() {
+            return benefits[1].GetValue();
+        }
+
+        public float GetHealthCare() {
+            return benefits[2].GetValue();
         }
 
         public float GetFinal() {

@@ -68,7 +68,10 @@ public class CompanyAlienUI : AlienUI {
 
     public void Select() {
         EventHandlerUI.selectAlien.Invoke(alien);
-        alienId--;
+        
+        if (alienId >= aliens.Count) {
+            alienId--;
+        }
 
         Close();
     }

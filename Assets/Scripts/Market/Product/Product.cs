@@ -9,11 +9,13 @@ public class Product {
     [SerializeField]private float price;
     [SerializeField]private int level = 1;
 
-    [SerializeField]private float productionTimeCounter;
-    private int productionTimeDays;
-    private int productionTimeHours;
-    private int productionTimeMinutes;
-    private int productionTimeSeconds;
+    private float productionTimeCounter;
+    [SerializeField]private int productionTimeDays;
+    [SerializeField]private int productionTimeHours;
+    [SerializeField]private int productionTimeMinutes;
+    [SerializeField]private int productionTimeSeconds;
+
+    //Criar uma classe de Price que terá todos valores relacionados ao preço do produto, similar ao Salary do alien
 
     private Sprite sprite;
 
