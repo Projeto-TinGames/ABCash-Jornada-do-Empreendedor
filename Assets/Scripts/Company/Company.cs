@@ -25,6 +25,13 @@ public static class Company {
             branch.Value.Update();
         }
 
+        /*
+        if (sectorCreationCounter <= 0) {
+            sectorCreationCounter = new TimeConverter(0, 4, 0, 0).GetCounter();
+            creatableSectors++;
+        }
+        sectorCreationCounter--;
+        */
     }
 
     public static void Reset() {
@@ -58,39 +65,47 @@ public static class Company {
         products = companyData.GetProducts();
     }
 
-    public static bool Pay(float value) {
-        RemoveMoney(value);
+    #region Payment
 
-        if (money >= value) {
-            return true;
-        }
-        
-        return false;
-    }
-
-    public static void PaySalaries() {
-        foreach (Alien alien in unemployedAliens) {
-            Salary salary = alien.GetSalary();
-            RemoveMoney(salary.GetFinal() - salary.GetTransportation());
+        public static bool Pay(float value) {
+            Debug.Log(value);
+            if (money >= value) {
+                RemoveMoney(value);
+                return true;
+            }
+            
+            return false;
         }
 
-        foreach (Alien alien in employedAliens) {
-            Salary salary = alien.GetSalary();
-            RemoveMoney(salary.GetFinal() - salary.GetHealthCare());
+        public static void PaySalaries() {
+            foreach (Alien alien in unemployedAliens) {
+                Salary salary = alien.GetSalary();
+                RemoveMoney(salary.GetFinal() - salary.GetTransportation());
+            }
+
+            foreach (Alien alien in employedAliens) {
+                Salary salary = alien.GetSalary();
+                RemoveMoney(salary.GetFinal() - salary.GetHealthCare());
+            }
+
+            Debug.Log(money);
         }
 
-        Debug.Log(money);
-    }
+    #endregion
 
-    public static void EmployAlien(Alien alien) {
-        unemployedAliens.Remove(alien);
-        employedAliens.Add(alien);
-    }
+    #region Employ
 
-    public static void EmployAlien(int index) {
-        employedAliens.Add(unemployedAliens[index]);
-        unemployedAliens.RemoveAt(index);
-    }
+        public static void EmployAlien(Alien alien) {
+            unemployedAliens.Remove(alien);
+            employedAliens.Add(alien);
+        }
+
+        public static void EmployAlien(int index) {
+            employedAliens.Add(unemployedAliens[index]);
+            unemployedAliens.RemoveAt(index);
+        }
+
+    #endregion
 
     #region Add
 

@@ -12,6 +12,7 @@ public class GalaxyDisplay : ClickableDisplayUI {
     [SerializeField]private GameObject info;
     [SerializeField]private TextMeshProUGUI galaxyName;
     [SerializeField]private Button createButton;
+    [SerializeField]private Button editButton;
     [SerializeField]private Button enterButton;
     [SerializeField]private Button selectButton;
 
@@ -26,25 +27,31 @@ public class GalaxyDisplay : ClickableDisplayUI {
     }
 
     protected virtual void LoadButton() {
-        ChangeColor();
 
         if (select) {
             selectButton.gameObject.SetActive(true);
+            ChangeColor(Color.green);
         }
         else {
-            if (Company.GetBranches(galaxy.GetId()) != null) {
-                enterButton.gameObject.SetActive(true);
+            if (!galaxy.GetHasBranch()) {
+                createButton.gameObject.SetActive(true);
+                ChangeColor(Color.red);
             }
             else {
-                createButton.gameObject.SetActive(true);
+                if (Company.GetBranches(galaxy.GetId()) == null) {
+                    editButton.gameObject.SetActive(true);
+                    ChangeColor(Color.yellow);
+                }
+                else {
+                    enterButton.gameObject.SetActive(true);
+                    ChangeColor(Color.green);
+                }
             }
         }
     }
 
-    private void ChangeColor() {
-        if (Company.GetBranches(galaxy.GetId()) != null) {
-            GetComponent<Image>().color = Color.green;
-        }
+    private void ChangeColor(Color color) {
+        GetComponent<Image>().color = color;
     }
 
     public override void Click() {
@@ -77,6 +84,13 @@ public class GalaxyDisplay : ClickableDisplayUI {
     }
 
     public void Create() {
+        if (Company.Pay(galaxy.GetBranchPrice()) || galaxy.GetHasBranch()) {
+            galaxy.SetHasBranch(true);
+            Edit();
+        }
+    }
+
+    public void Edit() {
         EventHandlerUI.setGalaxy.Invoke(galaxy);
 
         NavUI.SetBranchScene("sc_branch_creation");

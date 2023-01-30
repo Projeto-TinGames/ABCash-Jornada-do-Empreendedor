@@ -17,6 +17,7 @@ public class GalaxyData {
         this.name = galaxy.GetName();
         this.x = galaxy.GetX();
         this.y = galaxy.GetY();
+        this.hasBranch = galaxy.GetHasBranch();
         this.position = new float[]{galaxy.GetPosition().x, galaxy.GetPosition().y, galaxy.GetPosition().z};
         this.market = new MarketData(galaxy.GetMarket());
     }

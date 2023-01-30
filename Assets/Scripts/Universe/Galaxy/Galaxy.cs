@@ -4,12 +4,16 @@ using UnityEngine;
 
 [System.Serializable]
 public class Galaxy {
+    private const int taxPerDistance = 100;
+
     private string[] possibleNames = {"a", "b", "c", "d", "e"};
 
     private int id;
     private string name;
     private int x;
     private int y;
+    private int branchPrice;
+    private bool hasBranch;
     private Vector3 position;
     private Market market;
 
@@ -17,6 +21,7 @@ public class Galaxy {
         this.id = id;
         this.x = x;
         this.y = y;
+        this.branchPrice = (x + y) * taxPerDistance;
 
         //this.name = possibleNames[Random.Range(0,possibleNames.Length)];
         this.name = $"Galáxia {this.x},{this.y}";
@@ -28,6 +33,8 @@ public class Galaxy {
         this.name = data.GetName();
         this.x = data.GetX();
         this.y = data.GetY();
+        this.branchPrice = (this.x + this.y) * taxPerDistance;
+        this.hasBranch = data.GetHasBranch();
         this.position = new Vector3(data.GetPosition(0), data.GetPosition(1), data.GetPosition(2));
         this.market = new Market(data.GetMarket());
     }
@@ -52,6 +59,14 @@ public class Galaxy {
 
         public int GetY() {
             return y;
+        }
+
+        public int GetBranchPrice() {
+            return branchPrice;
+        }
+
+        public bool GetHasBranch() {
+            return hasBranch;
         }
 
         public Vector3 GetPosition() {
@@ -80,6 +95,14 @@ public class Galaxy {
 
         public void SetY(int value) {
             y = value;
+        }
+
+        public void SetBranchPrice(int value) {
+            branchPrice = value;
+        }
+
+        public void SetHasBranch(bool value) {
+            hasBranch = value;
         }
 
         public void SetPosition(Vector3 value) {
