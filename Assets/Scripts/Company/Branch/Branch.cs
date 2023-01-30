@@ -26,6 +26,22 @@ public class Branch {
         foreach (Sector sector in sectors) {
             sector.Update(Universe.GetGalaxies(id));
         }
+
+        /*
+        if (!isCreated) {
+            creationTime--;
+
+            if (creationTime == 0) {
+                isCreated = true;
+            }
+        }
+
+        else {
+            foreach (Sector sector in sectors) {
+                sector.Update(Universe.GetGalaxies(id));
+            }
+        }
+        */
     }
 
     #region Add

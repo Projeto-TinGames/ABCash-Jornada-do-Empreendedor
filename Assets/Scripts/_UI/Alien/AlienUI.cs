@@ -36,16 +36,32 @@ public class AlienUI : MonoBehaviour {
     }
 
     protected virtual void UpdateList() {
-        for (int i = 1; i < alienList.childCount; i++) {
+        for (int i = 0; i < alienList.childCount; i++) {
             Destroy(alienList.GetChild(i).gameObject);
         }
 
         for (int i = 0; i < aliens.Count; i++) {
             Alien alien = aliens[i];
+
             AlienDisplay display = Instantiate(displayPrefab);
-
             display.SetDisplay(displayList.Count, alien);
+            display.transform.SetParent(alienList);
+            display.transform.localScale = Vector3.one;
 
+            displayList.Add(display);
+        }
+    }
+
+    protected virtual void UpdateList(int offset) {
+        for (int i = offset; i < alienList.childCount; i++) {
+            Destroy(alienList.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < aliens.Count; i++) {
+            Alien alien = aliens[i];
+
+            AlienDisplay display = Instantiate(displayPrefab);
+            display.SetDisplay(displayList.Count, alien);
             display.transform.SetParent(alienList);
             display.transform.localScale = Vector3.one;
 

@@ -9,6 +9,7 @@ public class CompanyAlienUI : AlienUI {
 
     [SerializeField]private AlienDisplay contractDisplay; 
     [SerializeField]private GameObject contractButton;
+    [SerializeField]private GameObject dismissButton;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void OnBeforeSceneLoadRuntimeMethod() { //Loads events out of scene
@@ -28,7 +29,8 @@ public class CompanyAlienUI : AlienUI {
     protected override void UpdateList() {
         displayList.Clear();
         displayList.Add(contractDisplay);
-        base.UpdateList();
+
+        base.UpdateList(1);
 
         if (alienId < displayList.Count) {
             displayList[alienId].Click();
@@ -40,6 +42,7 @@ public class CompanyAlienUI : AlienUI {
         alien = alienDisplay.GetAlien();
 
         contractButton.SetActive(false);
+        dismissButton.SetActive(false);
 
         if (selectButton != null) {
             selectButton.SetActive(false);
@@ -51,6 +54,7 @@ public class CompanyAlienUI : AlienUI {
             alien = generator.GetRandomAlien();
         }
         else {
+            dismissButton.SetActive(true);
             if (selectButton != null) {
                 selectButton.SetActive(true);
             }
@@ -66,10 +70,20 @@ public class CompanyAlienUI : AlienUI {
         //displayList[alienId].Click();
     }
 
+    public void Dismiss() {
+        Company.RemoveAlien(alien);
+
+        if (alienId > aliens.Count) {
+            alienId--;
+        }
+
+        UpdateList();
+    }
+
     public void Select() {
         EventHandlerUI.selectAlien.Invoke(alien);
         
-        if (alienId >= aliens.Count) {
+        if (alienId > aliens.Count) {
             alienId--;
         }
 

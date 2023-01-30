@@ -87,7 +87,8 @@ public class Sector {
 
         public void RemoveAlien(Alien alien) {
             for (int i = 0; i < aliens.Length; i++) {
-                if (aliens[i] == alien) {
+                if (aliens[i] == alien && alien != null) {
+                    Company.AddAlien(alien);
                     aliens[i] = null;
                     break;
                 }

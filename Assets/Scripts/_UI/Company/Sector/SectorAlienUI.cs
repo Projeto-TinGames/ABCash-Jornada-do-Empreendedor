@@ -57,10 +57,17 @@ public class SectorAlienUI : AlienUI {
     }
 
     public void Change() {
-        if (aliens[alienId] != null) {
-            Company.AddAlien(aliens[alienId]);
-        }
+        Remove();
         SceneController.instance.Load("sc_employees_select");
+    }
+
+    public void Remove() {
+        Sector sector = SectorUI.GetSector();
+        sector.RemoveAlien(aliens[alienId]);
+        
+        aliens = new List<Alien>(SectorUI.GetSector().GetAliens());
+
+        UpdateList();
     }
 
     private static void SelectAlien(Alien alien) {
@@ -71,5 +78,9 @@ public class SectorAlienUI : AlienUI {
     /*public static void ResetAliens() {
         alienId = 0;
     }*/
+
+    public void Exit() {
+        SceneController.instance.LoadPreviousScene();
+    }
 
 }

@@ -82,6 +82,16 @@ public static class Company {
         Debug.Log(money);
     }
 
+    public static void EmployAlien(Alien alien) {
+        unemployedAliens.Remove(alien);
+        employedAliens.Add(alien);
+    }
+
+    public static void EmployAlien(int index) {
+        employedAliens.Add(unemployedAliens[index]);
+        unemployedAliens.RemoveAt(index);
+    }
+
     #region Add
 
         public static void AddMoney(float value) {
@@ -112,13 +122,17 @@ public static class Company {
             money = (float)Math.Round(money - value, 2);
         }
 
-        public static void EmployAlien(Alien alien) {
+        public static void RemoveAlien(Alien alien) {
+            Salary salary = alien.GetSalary();
+            RemoveMoney(salary.GetFinal() - salary.GetTransportation());
+
             unemployedAliens.Remove(alien);
-            employedAliens.Add(alien);
         }
 
-        public static void EmployAlien(int index) {
-            employedAliens.Add(unemployedAliens[index]);
+        public static void RemoveAlien(int index) {
+            Salary salary = unemployedAliens[index].GetSalary();
+            RemoveMoney(salary.GetFinal() - salary.GetTransportation());
+
             unemployedAliens.RemoveAt(index);
         }
 

@@ -38,12 +38,14 @@ public class ProductPriceUI : MonoBehaviour {
         if (tendency.GetIsRumor(dayId)) {
             float valorization = tendency.GetProductRumorNormalizedPrice(dayId) - product.GetPrice();
             float percentage = tendency.GetRumorValorizations(dayId);
-            marketValorization.text = $"+ Valorização: {valorization.ToString("C2")} ({percentage}%)";
+            marketValorization.text = $"+ Rumor de Valorização: {valorization.ToString("C2")} ({percentage}%)";
+            marketValorization.color = Color.red;
         }
         else {
             float valorization = tendency.GetProductNormalizedPrice(dayId) - product.GetPrice();
             float percentage = tendency.GetValorizations(dayId);
             marketValorization.text = $"+ Valorização: {valorization.ToString("C2")} ({percentage}%)";
+            marketValorization.color = Color.green;
         }
 
         if (SectorUI.GetIsEditing() && sector.GetExportationTax() > 0f) {
