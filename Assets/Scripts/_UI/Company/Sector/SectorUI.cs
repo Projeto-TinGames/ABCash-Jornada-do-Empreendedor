@@ -4,7 +4,11 @@ using UnityEngine;
 using TMPro;
 
 public class SectorUI : MonoBehaviour {
+    private const int changeProductCost = 200;
+
     private static bool isEditing;
+    private static bool isCreating;
+    private static bool changedProduct;
     private static int tab;
     private static string closeScene;
     private static Sector sector;
@@ -52,15 +56,18 @@ public class SectorUI : MonoBehaviour {
     }
 
     public void Finish() {
-        isEditing = false;
-        tab = 0;
+        if (isCreating || !changedProduct || (changedProduct && Company.Pay(changeProductCost))) {
+            isEditing = false;
+            isCreating = false;
+            tab = 0;
 
-        sector.SetProductionRate();
-        sector.SetProductionTimeCounter(0f);
-        EventHandlerUI.setSector.Invoke(new Sector(new SectorData(sector)));
-        //SectorAlienUI.ResetAliens();
+            sector.SetProductionRate();
+            sector.SetProductionTimeCounter(0f);
+            EventHandlerUI.setSector.Invoke(new Sector(new SectorData(sector)));
+            //SectorAlienUI.ResetAliens();
 
-        SceneController.instance.Load(closeScene);
+            SceneController.instance.Load(closeScene);
+        }
     }
 
     #region Getters
@@ -87,6 +94,12 @@ public class SectorUI : MonoBehaviour {
 
         public static void SetProduct(Product product) {
             if (sector != null) {
+                if (product.GetId() != sector.GetProduct().GetId()) {
+                    changedProduct = true;
+                }
+                else {
+                    changedProduct = false;
+                }
                 sector.SetProduct(product);
             }
         }
@@ -99,6 +112,10 @@ public class SectorUI : MonoBehaviour {
 
         public static void SetCloseScene(string value) {
             closeScene = value;
+        }
+
+        public static void SetIsCreating(bool value) {
+            isCreating = value;
         }
 
     #endregion

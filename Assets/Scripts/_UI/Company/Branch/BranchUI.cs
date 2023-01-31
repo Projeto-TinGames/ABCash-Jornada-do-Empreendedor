@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 
 public class BranchUI : MonoBehaviour {
+    private const int sectorTax = 100;
+
     private static bool adding;
     private static Branch branch;
     private List<SectorDisplay> sectorDisplayList = new List<SectorDisplay>();
@@ -60,14 +62,19 @@ public class BranchUI : MonoBehaviour {
     }
 
     public void AddSector() {
-        adding = true;
+        float price = sectorTax * branch.GetSectors().Count;
 
-        Product product = Company.GetProducts(0);
-        Galaxy galaxy = Universe.GetGalaxies(branch.GetId());
-        EventHandlerUI.setSector.Invoke(new Sector(product,galaxy));
+        if (Company.Pay(price)) {
+            adding = true;
 
-        SectorUI.SetCloseScene("sc_branch");
-        SceneController.instance.Load("sc_sector");
+            Product product = Company.GetProducts(0);
+            Galaxy galaxy = Universe.GetGalaxies(branch.GetId());
+            EventHandlerUI.setSector.Invoke(new Sector(product,galaxy));
+
+            SectorUI.SetIsCreating(true);
+            SectorUI.SetCloseScene("sc_branch");
+            SceneController.instance.Load("sc_sector");
+        }
     }
 
     public void Close() {

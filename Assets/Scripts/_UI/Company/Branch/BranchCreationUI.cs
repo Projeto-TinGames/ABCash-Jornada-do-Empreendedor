@@ -29,6 +29,8 @@ public class BranchCreationUI : MonoBehaviour {
     }
 
     public void Select() {
+        SectorUI.SetIsCreating(true);
+        
         if (sector != null) {
             EventHandlerUI.setSector.Invoke(sector);
         }

@@ -24,14 +24,6 @@ public static class Company {
         foreach (KeyValuePair<int, Branch> branch in Company.GetBranches()) {
             branch.Value.Update();
         }
-
-        /*
-        if (sectorCreationCounter <= 0) {
-            sectorCreationCounter = new TimeConverter(0, 4, 0, 0).GetCounter();
-            creatableSectors++;
-        }
-        sectorCreationCounter--;
-        */
     }
 
     public static void Reset() {
