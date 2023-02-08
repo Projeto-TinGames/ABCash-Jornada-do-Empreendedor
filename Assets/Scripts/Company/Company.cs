@@ -178,6 +178,10 @@ public static class Company {
             products.RemoveAt(index);
         }
 
+        public static void RemoveCompTime(float value) {
+            compTime -= value;
+        }
+
     #endregion
 
     #region Getters

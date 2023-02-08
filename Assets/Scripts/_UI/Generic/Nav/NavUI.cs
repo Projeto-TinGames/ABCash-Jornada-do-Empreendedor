@@ -8,6 +8,7 @@ public class NavUI : MonoBehaviour {
     private static bool activateOnStart;
     private static string branchScene = "sc_universe";
 
+    [SerializeField]private GameObject controlUI;
     [SerializeField]private GameObject navMenu;
     [SerializeField]private Button expandButton;
     [SerializeField]private TextMeshProUGUI expandButtonText;

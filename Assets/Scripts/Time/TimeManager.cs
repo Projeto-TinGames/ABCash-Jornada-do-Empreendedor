@@ -23,10 +23,6 @@ public class TimeManager : MonoBehaviour {
     }
 
     private void Start() {
-        Pause();
-        for (int i = 0; i < Company.GetCompTime(); i++) {
-            UpdateGame();
-        }
         Play();
     }
 
@@ -50,6 +46,22 @@ public class TimeManager : MonoBehaviour {
         Pause();
 
         this.speed = 1f/speed;
+
+        Play();
+    }
+
+    public void SkipTime() {
+        Pause();
+
+        TimeData timeData = new TimeData(1,0,0,0);
+        if (Company.GetCompTime() > timeData.GetCounter()) {
+            Company.RemoveCompTime(timeData.GetCounter());
+
+            for (int i = 0; i < timeData.GetCounter(); i++) {
+                Debug.Log(i);
+                UpdateGame();
+            }
+        }
 
         Play();
     }
