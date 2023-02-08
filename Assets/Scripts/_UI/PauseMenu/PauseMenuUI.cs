@@ -6,9 +6,10 @@ public class PauseMenuUI : MonoBehaviour {
     SaveData saveData;
     [SerializeField]private GameObject menu;
 
-    private string filePath = Application.streamingAssetsPath + "/save" + Company.GetId() + ".json";
+    private string filePath;
 
     private void Start() {
+        filePath = Application.persistentDataPath + "/save" + Company.GetId() + ".json";
         menu.transform.SetAsLastSibling();
     }
 

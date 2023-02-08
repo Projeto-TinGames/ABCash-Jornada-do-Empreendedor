@@ -55,7 +55,7 @@ public class ProductEditor : Editor {
 
     private void LoadData() {
         /*if (string.IsNullOrEmpty(filePath)) {
-            filePath = EditorUtility.OpenFilePanel("Select localization data file", Application.streamingAssetsPath, "json");
+            filePath = EditorUtility.OpenFilePanel("Select localization data file", Application.persistentDataPath, "json");
         }*/
 
         string filePath = Application.streamingAssetsPath + "/Products/products.json";
