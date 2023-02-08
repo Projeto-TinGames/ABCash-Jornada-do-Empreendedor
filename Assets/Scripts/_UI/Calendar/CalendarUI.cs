@@ -40,13 +40,13 @@ public class CalendarUI : MonoBehaviour {
     }
 
     private void Update() {
-        TimeConverter timeConverter = new TimeConverter(0);
+        TimeData timeData = new TimeData(0);
 
         if (timeCounter > 0) {
-            timeConverter = new TimeConverter(timeCounter - TimeManager.instance.GetPlayTimeCounter());
+            timeData = new TimeData(timeCounter - TimeManager.instance.GetPlayTimeCounter());
         }
         
-        time.text = $"Tempo: {timeConverter.GetDays()}d {timeConverter.GetHours()}h {timeConverter.GetMinutes()}m {timeConverter.GetSeconds()}s";
+        time.text = $"Tempo: {timeData.GetDays()}d {timeData.GetHours()}h {timeData.GetMinutes()}m {timeData.GetSeconds()}s";
     }
 
     public void Close() {

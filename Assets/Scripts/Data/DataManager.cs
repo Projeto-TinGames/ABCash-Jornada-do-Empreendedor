@@ -17,6 +17,8 @@ public class DataManager : MonoBehaviour {
     private void Awake() {
         if (instance == null) {
             instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
         }
         else {
             Destroy(gameObject);
@@ -52,7 +54,7 @@ public class DataManager : MonoBehaviour {
                 FinishLoadEvent.Invoke(dataAsJson);
             }
             else {
-                FinishLoadEvent.Invoke(string.Empty);
+                StartCoroutine(WebGetRequest(filePath, FinishLoadEvent));
             }
         #endif
 
@@ -80,7 +82,7 @@ public class DataManager : MonoBehaviour {
         yield return webRequest.SendWebRequest();
 
         if (webRequest.result == UnityWebRequest.Result.ProtocolError) {
-            Debug.LogError(webRequest.error);
+            //Debug.LogError(webRequest.error);
             FinishLoadEvent.Invoke(string.Empty);
         }
         else {

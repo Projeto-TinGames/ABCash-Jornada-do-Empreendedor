@@ -2,12 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public static class Company {
     private static int id;
     private static string name;
     private static float money = 10000f;
-    private static float salaryPaymentCounter = new TimeConverter(1, 0, 0, 0).GetCounter();
+
+    private static bool isLoading = true;
+    private static float compTime;
+    private static float salaryPaymentCounter = new TimeData(1, 0, 0, 0).GetCounter();
 
     private static Dictionary<int, Branch> branches = new Dictionary<int, Branch>();
     private static List<Alien> unemployedAliens = new List<Alien>();
@@ -16,7 +20,7 @@ public static class Company {
 
     public static void Update() {
         if (salaryPaymentCounter <= 0) {
-            salaryPaymentCounter = new TimeConverter(1, 0, 0, 0).GetCounter();
+            salaryPaymentCounter = new TimeData(1, 0, 0, 0).GetCounter();
             PaySalaries();
         }
         salaryPaymentCounter--;
@@ -36,6 +40,7 @@ public static class Company {
 
         name = companyData.GetName();
         money = companyData.GetMoney();
+        compTime = companyData.GetCompTime();
 
         foreach (BranchData branchData in companyData.GetBranches()) {
             Branch branch = new Branch(branchData);
@@ -55,6 +60,19 @@ public static class Company {
         }
 
         products = companyData.GetProducts();
+
+        string dateUrl = "http://worldtimeapi.org/api/ip";
+        UnityEvent<string> LoadTimeCompEvent = new UnityEvent<string>();
+        LoadTimeCompEvent.AddListener(LoadTimeComp);
+
+        DataManager.instance.Load(dateUrl, LoadTimeCompEvent);
+    }
+
+    private static void LoadTimeComp(string dataAsJson) {
+        TimeData timeData = new TimeData(dataAsJson);
+        compTime = timeData.GetCounter() - compTime;
+        Debug.Log(compTime);
+        isLoading = false;
     }
 
     #region Payment
@@ -173,6 +191,14 @@ public static class Company {
 
         public static float GetMoney() {
             return money;
+        }
+
+        public static float GetCompTime() {
+            return compTime;
+        }
+
+        public static bool GetIsLoading() {
+            return isLoading;
         }
 
         public static List<Alien> GetUnemployedAliens() {

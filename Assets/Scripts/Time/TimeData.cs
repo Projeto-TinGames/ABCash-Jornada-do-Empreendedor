@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using UnityEngine;
 
-public class TimeConverter {
+public class TimeData {
     private int days;
     private int hours;
     private int minutes;
@@ -10,7 +13,7 @@ public class TimeConverter {
     private float counter;
     private float updateRate = 1f;
 
-    public TimeConverter(float counter, float productionRate = 1f) {
+    public TimeData(float counter, float productionRate = 1f) {
         this.counter = counter;
         this.updateRate = productionRate;
 
@@ -26,7 +29,7 @@ public class TimeConverter {
         hours -= days * 24;
     }
 
-    public TimeConverter(int days, int hours, int minutes, int seconds) {
+    public TimeData(int days, int hours, int minutes, int seconds) {
         this.days = days;
         this.hours = hours;
         this.minutes = minutes;
@@ -37,6 +40,26 @@ public class TimeConverter {
         seconds += minutes * 60;
         
         this.counter = seconds;
+    }
+
+    struct RealTime {
+        public string datetime;
+    }
+
+    public TimeData(string dataAsJson) {
+        RealTime realTime = JsonUtility.FromJson<RealTime>(dataAsJson);
+
+		string date = Regex.Match(realTime.datetime, @"^\d{4}-\d{2}-\d{2}").Value;
+		string time = Regex.Match(realTime.datetime, @"\d{2}:\d{2}:\d{2}").Value;
+
+		DateTime dateTime = DateTime.Parse(string.Format("{0} {1}", date, time));
+
+        this.seconds = dateTime.Second;
+        this.minutes = dateTime.Minute;
+        this.hours = dateTime.Hour;
+        this.days = (2023-dateTime.Year)*365 + dateTime.Month*30 + dateTime.Day;
+
+        this.counter = this.seconds + 60*(this.minutes + 60*(this.hours + this.days*24));
     }
 
     #region Getters

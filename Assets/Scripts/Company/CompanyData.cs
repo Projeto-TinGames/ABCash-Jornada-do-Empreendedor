@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class CompanyData {
+    private bool isLoading = true;
     [SerializeField]private string name;
     [SerializeField]private float money;
+    [SerializeField]private float compTime;
 
     [SerializeField]private List<BranchData> branches = new List<BranchData>();
     [SerializeField]private List<AlienData> unemployedAliens = new List<AlienData>();
@@ -29,10 +32,28 @@ public class CompanyData {
             this.employedAliens.Add(new AlienData(alien));
         }
 
+        string dateUrl = "http://worldtimeapi.org/api/ip";
+        UnityEvent<string> LoadTimeCompEvent = new UnityEvent<string>();
+        LoadTimeCompEvent.AddListener(LoadTimeComp);
+
+        if (DataManager.instance != null) {
+            DataManager.instance.Load(dateUrl, LoadTimeCompEvent);
+        }
+
         this.products = Company.GetProducts();
     }
 
+    private void LoadTimeComp(string dataAsJson) {
+        TimeData timeData = new TimeData(dataAsJson);
+        this.compTime = timeData.GetCounter();
+        isLoading = false;
+    }
+
     #region Getters
+
+        public bool GetIsLoading() {
+            return isLoading;
+        }
 
         public string GetName() {
             return name;
@@ -40,6 +61,10 @@ public class CompanyData {
 
         public float GetMoney() {
             return money;
+        }
+
+        public float GetCompTime() {
+            return compTime;
         }
 
         public List<AlienData> GetUnemployedAliens() {

@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class SaveDisplay : MonoBehaviour {
     [SerializeField]private int saveID;
+    private SaveData saveData;
 
     private string dataAsJson;
     private string filePath;
@@ -28,15 +29,20 @@ public class SaveDisplay : MonoBehaviour {
         DataManager.instance.Load(filePath, FinishLoadEvent);
     }
 
+    private void Update() {
+        if (!Company.GetIsLoading() && saveData != null) {
+            SceneController.instance.Load(saveData.GetScene());
+        }
+    }
+
     public void StartGame() {
         Company.SetId(saveID);
 
         if (dataAsJson != string.Empty) {
-            SaveData saveData = JsonUtility.FromJson<SaveData>(dataAsJson);
+            saveData = JsonUtility.FromJson<SaveData>(dataAsJson);
 
             Universe.Load(saveData.GetGalaxyMap());
             Company.Load(saveData.GetCompany());
-            SceneController.instance.Load(saveData.GetScene());
         }
         else {
             SceneController.instance.Load("sc_company_creation");

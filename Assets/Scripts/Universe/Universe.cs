@@ -10,7 +10,7 @@ public static class Universe {
 
     public static void Update() {
         if (marketUpdateCounter <= 0) {
-            marketUpdateCounter = new TimeConverter(1, 0, 0, 0).GetCounter();
+            marketUpdateCounter = new TimeData(1, 0, 0, 0).GetCounter();
         }
         marketUpdateCounter--;
 

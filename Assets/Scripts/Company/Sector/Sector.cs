@@ -99,8 +99,8 @@ public class Sector {
 
     #region Getters
 
-        public TimeConverter GetRelativeProductionTime() {
-            return new TimeConverter(product.GetProductionTimeCounter() - productionTimeCounter,productionRate);
+        public TimeData GetRelativeProductionTime() {
+            return new TimeData(product.GetProductionTimeCounter() - productionTimeCounter,productionRate);
         }
 
         public float GetProductionTimeCounter() {

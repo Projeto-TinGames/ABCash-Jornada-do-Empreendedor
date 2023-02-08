@@ -110,8 +110,8 @@ public class Product {
         }
 
         public void SetProductionTimeCounter() {
-            TimeConverter timeConverter = new TimeConverter(productionTimeDays, productionTimeHours, productionTimeMinutes, productionTimeSeconds);
-            productionTimeCounter = timeConverter.GetCounter();
+            TimeData timeData = new TimeData(productionTimeDays, productionTimeHours, productionTimeMinutes, productionTimeSeconds);
+            productionTimeCounter = timeData.GetCounter();
         }
 
         public void SetProductionTimeCounter(float value) {
@@ -120,12 +120,12 @@ public class Product {
         }
 
         public void SetProductionTimeMetrics() {
-            TimeConverter timeConverter = new TimeConverter(productionTimeCounter);
+            TimeData timeData = new TimeData(productionTimeCounter);
 
-            productionTimeDays = timeConverter.GetDays();
-            productionTimeHours = timeConverter.GetHours();
-            productionTimeMinutes = timeConverter.GetMinutes();
-            productionTimeSeconds = timeConverter.GetSeconds();
+            productionTimeDays = timeData.GetDays();
+            productionTimeHours = timeData.GetHours();
+            productionTimeMinutes = timeData.GetMinutes();
+            productionTimeSeconds = timeData.GetSeconds();
         }
 
         public void SetProductionTimeDays(int value) {
