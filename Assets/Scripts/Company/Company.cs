@@ -11,6 +11,7 @@ public static class Company {
 
     private static bool isLoading = true;
     private static float compTime;
+    private static float lastOnline;
     private static float salaryPaymentCounter = new TimeData(1, 0, 0, 0).GetCounter();
 
     private static Dictionary<int, Branch> branches = new Dictionary<int, Branch>();
@@ -41,6 +42,7 @@ public static class Company {
         name = companyData.GetName();
         money = companyData.GetMoney();
         compTime = companyData.GetCompTime();
+        lastOnline = companyData.GetLastOnline();
 
         foreach (BranchData branchData in companyData.GetBranches()) {
             Branch branch = new Branch(branchData);
@@ -70,8 +72,7 @@ public static class Company {
 
     private static void LoadTimeComp(string dataAsJson) {
         TimeData timeData = new TimeData(dataAsJson);
-        compTime = timeData.GetCounter() - compTime;
-        Debug.Log(compTime);
+        compTime += timeData.GetCounter() - lastOnline;
         isLoading = false;
     }
 

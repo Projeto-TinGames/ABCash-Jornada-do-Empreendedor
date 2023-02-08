@@ -1,8 +1,9 @@
 {
     "company": {
-        "name": "teste",
+        "name": "a",
         "money": 10000.0,
-        "compTime": 5872774.0,
+        "lastOnline": 5919574.0,
+        "compTime": 7.0,
         "branches": [],
         "unemployedAliens": [],
         "employedAliens": [],
@@ -31,7 +32,7 @@
         ]
     },
     "universe": {
-        "marketUpdateCounter": 86398.0,
+        "marketUpdateCounter": 86397.0,
         "galaxies": [
             {
                 "id": 0,

@@ -8,6 +8,7 @@ public class CompanyData {
     private bool isLoading = true;
     [SerializeField]private string name;
     [SerializeField]private float money;
+    [SerializeField]private float lastOnline;
     [SerializeField]private float compTime;
 
     [SerializeField]private List<BranchData> branches = new List<BranchData>();
@@ -18,6 +19,7 @@ public class CompanyData {
     public CompanyData() {
         this.name = Company.GetName();
         this.money = Company.GetMoney();
+        this.compTime = Company.GetCompTime();
 
         foreach (KeyValuePair<int, Branch> entry in Company.GetBranches()) {
             BranchData branch = new BranchData(entry.Value);
@@ -34,7 +36,7 @@ public class CompanyData {
 
         string dateUrl = "http://worldtimeapi.org/api/ip";
         UnityEvent<string> LoadTimeCompEvent = new UnityEvent<string>();
-        LoadTimeCompEvent.AddListener(LoadTimeComp);
+        LoadTimeCompEvent.AddListener(LoadLastOnline);
 
         if (DataManager.instance != null) {
             DataManager.instance.Load(dateUrl, LoadTimeCompEvent);
@@ -43,9 +45,9 @@ public class CompanyData {
         this.products = Company.GetProducts();
     }
 
-    private void LoadTimeComp(string dataAsJson) {
+    private void LoadLastOnline(string dataAsJson) {
         TimeData timeData = new TimeData(dataAsJson);
-        this.compTime = timeData.GetCounter();
+        this.lastOnline = timeData.GetCounter();
         isLoading = false;
     }
 
@@ -61,6 +63,10 @@ public class CompanyData {
 
         public float GetMoney() {
             return money;
+        }
+
+        public float GetLastOnline() {
+            return lastOnline;
         }
 
         public float GetCompTime() {

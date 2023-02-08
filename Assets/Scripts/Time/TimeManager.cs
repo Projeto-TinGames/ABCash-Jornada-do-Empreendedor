@@ -23,6 +23,10 @@ public class TimeManager : MonoBehaviour {
     }
 
     private void Start() {
+        Pause();
+        for (int i = 0; i < Company.GetCompTime(); i++) {
+            UpdateGame();
+        }
         Play();
     }
 
