@@ -4,14 +4,47 @@ using UnityEngine;
 
 [System.Serializable]
 public class SaveData {
-    public CompanyData company;
-    public GalaxyMapData galaxyMap;
-    public string scene;
-    //public int timePlayed;
+    [SerializeField]private CompanyData company;
+    [SerializeField]private UniverseData universe;
+    [SerializeField]private string scene;
+    //[SerializeField]private int timePlayed;
 
     public SaveData() {
         this.company = new CompanyData();
-        this.galaxyMap = new GalaxyMapData();
-        this.scene = SceneController.instance.currentScene;
+        this.universe = new UniverseData();
+        this.scene = "sc_universe";
+        //this.scene = SceneController.instance.GetScene();
     }
+
+    #region Getters
+
+        public CompanyData GetCompany() {
+            return company;
+        }
+
+        public UniverseData GetGalaxyMap() {
+            return universe;
+        }
+
+        public string GetScene() {
+            return scene;
+        }
+
+    #endregion
+
+    #region Setters
+
+        public void SetCompany(CompanyData value) {
+            company = value;
+        }
+
+        public void SetGalaxyMap(UniverseData value) {
+            universe = value;
+        }
+
+        public void SetScene(string value) {
+            scene = value;
+        }
+
+    #endregion
 }

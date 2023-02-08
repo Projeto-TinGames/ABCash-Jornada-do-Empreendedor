@@ -5,11 +5,13 @@ using UnityEngine;
 public class Wadop : Alien {
     
     public Wadop() {
-        speciesId = 2;
+        SetSpeciesId(2);
         
-        namesArray = new string[]{"Wadopo", "Wadopa", "Wadopio"};
-        agilityMultiplier = 2;
-        species = "Wadop";
+        SetAvailableNames(new string[]{"Stanley", "Angela", "Oscar"});
+        SetAgilityMultiplier(2);
+        SetSpecies("Wadop");
+
+        GenerateStats();
     }
 
     public override void Work() {

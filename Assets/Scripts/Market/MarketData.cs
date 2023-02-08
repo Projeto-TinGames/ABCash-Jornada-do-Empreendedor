@@ -4,9 +4,23 @@ using UnityEngine;
 
 [System.Serializable]
 public class MarketData {
-    public List<float> percentages = new List<float>();
+    [SerializeField]private List<TendencyData> tendencies = new List<TendencyData>();
 
     public MarketData(Market market) {
-        percentages = market.percentages;
+        foreach (Tendency tendency in market.GetTendencies()) {
+            tendencies.Add(new TendencyData(tendency));
+        }
     }
+
+    #region Getters
+
+        public List<TendencyData> GetTendencies() {
+            return tendencies;
+        }
+
+        public TendencyData GetTendencies(int index) {
+            return tendencies[index];
+        }
+
+    #endregion
 }

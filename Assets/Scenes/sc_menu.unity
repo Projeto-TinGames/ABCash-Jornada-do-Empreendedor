@@ -662,7 +662,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1268805926}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1268805926}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: LoadGame
         m_Mode: 1
@@ -1155,6 +1155,14 @@ PrefabInstance:
     - target: {fileID: 8753244549954530611, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -82.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504592, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_text
+      value: Company Money
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504594, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_Name
+      value: Company Money
       objectReference: {fileID: 0}
     - target: {fileID: 8753244550571204263, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2057,7 +2065,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1268805926}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: LoadGame
         m_Mode: 1
@@ -2152,7 +2160,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1268805924}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb16a98af8c319f429c09ed128a99b77, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ac4dfab5c1e52d43863e621821cdf4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1550582448
@@ -2348,7 +2356,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1268805926}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -2423,6 +2431,14 @@ PrefabInstance:
     - target: {fileID: 8753244549954530611, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -82.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504592, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_text
+      value: Company Money
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504594, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_Name
+      value: Company Money
       objectReference: {fileID: 0}
     - target: {fileID: 8753244550571204263, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2809,6 +2825,14 @@ PrefabInstance:
     - target: {fileID: 8753244549954530611, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -82.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504592, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_text
+      value: Company Money
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753244550308504594, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
+      propertyPath: m_Name
+      value: Company Money
       objectReference: {fileID: 0}
     - target: {fileID: 8753244550571204263, guid: 8653cf1e8a92a0d4c8a19b531bc68548, type: 3}
       propertyPath: m_AnchorMax.y

@@ -4,18 +4,67 @@ using UnityEngine;
 
 [System.Serializable]
 public class SectorData {
-    public int work;
-    public int productId;
-    public MarketData market;
-    public List<AlienData> employees = new List<AlienData>();
+    [SerializeField]private int productId;
+    [SerializeField]private int galaxyId;
+    [SerializeField]private float productionTime;
+
+    [SerializeField]private List<AlienData> aliens = new List<AlienData>();
 
     public SectorData(Sector sector) {
-        this.work = sector.work;
-        this.productId = sector.product.id;
-        this.market = new MarketData(sector.market);
-        
-        foreach (Alien employee in sector.employees) {
-            this.employees.Add(new AlienData(employee));
+        this.productionTime = sector.GetProductionTimeCounter();
+        this.productId = sector.GetProduct().GetId();
+        this.galaxyId = sector.GetGalaxy().GetId();
+
+        foreach (Alien alien in sector.GetAliens()) {
+            this.aliens.Add(new AlienData(alien));
         }
     }
+
+    #region Getters
+
+        public float GetProductionTime() {
+            return productionTime;
+        }
+
+        public int GetGalaxyId() {
+            return galaxyId;
+        }
+
+        public int GetProductId() {
+            return productId;
+        }
+
+        public List<AlienData> GetAliens() {
+            return aliens;
+        }
+
+        public AlienData GetAliens(int index) {
+            return aliens[index];
+        }
+
+    #endregion
+
+    #region Setters
+
+        public void SetProductionTime(int value) {
+            productionTime = value;
+        }
+
+        public void SetGalaxyId(int value) {
+            galaxyId = value;
+        }
+
+        public void SetProductId(int value) {
+            productId = value;
+        }
+
+        public void SetEmployees(List<AlienData> value) {
+            aliens = value;
+        }
+
+        public void SetEmployees(int index, AlienData value) {
+            aliens[index] = value;
+        }
+
+    #endregion
 }

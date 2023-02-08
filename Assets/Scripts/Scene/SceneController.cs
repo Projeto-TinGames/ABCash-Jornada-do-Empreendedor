@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
     public static SceneController instance;
-    [System.NonSerialized]public string currentScene = "sc_galaxyMap";
+    private string scene;
+    private Stack<string> sceneStack = new Stack<string>();
 
     //[SerializeField]private Animator crossfade;
     //private float transitionTime = .2f;
@@ -14,6 +15,10 @@ public class SceneController : MonoBehaviour {
     private void Awake() {
         if (instance == null) {
             instance = this;
+            scene = string.Copy(SceneManager.GetActiveScene().name);
+
+            transform.parent = null;
+            DontDestroyOnLoad(gameObject);
         }
         else {
             Destroy(gameObject);
@@ -21,7 +26,9 @@ public class SceneController : MonoBehaviour {
     }
 
     public void Load(string scene) {
-        currentScene = scene;
+        this.sceneStack.Push(string.Copy(this.scene));
+        this.scene = string.Copy(scene);
+        
         SceneManager.LoadScene(scene);
         //StartCoroutine(LoadScene(scene));
     }
@@ -34,6 +41,24 @@ public class SceneController : MonoBehaviour {
         SceneManager.LoadScene(scene);
     }*/
 
-    
+    public void LoadPreviousScene() {
+        scene = sceneStack.Peek();
+        SceneManager.LoadScene(sceneStack.Pop());
+    }
 
+    #region Getters
+
+        public string GetScene() {
+            return scene;
+        }
+
+    #endregion
+
+    #region Setters
+
+        public void SetScene(string value) {
+            scene = value;
+        }
+
+    #endregion
 }

@@ -3,23 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Market {
-    public List<Product> products = new List<Product>();
-    public List<float> percentages = new List<float>(); //Porcentagem de valorização
+    private List<Tendency> tendencies = new List<Tendency>();
 
     public Market() {
         foreach (Product product in ProductManager.GetProducts()) {
-            products.Add(product);
-            
-            float percentage = (float)Random.Range(-100, 101)/100;
-            percentages.Add(percentage);
+            AddTendency(product.GetId());
         }
     }
 
-    public Market(MarketData marketData) {
-        foreach (Product product in ProductManager.GetProducts()) {
-            products.Add(product);
+    public Market(MarketData data) {
+        foreach (TendencyData tendency in data.GetTendencies()) {
+            tendencies.Add(new Tendency(tendency));
         }
-        
-        this.percentages = marketData.percentages;
     }
+
+    public void Update() {
+        if (Universe.GetMarketUpdateCounter() <= 0) {
+            foreach (Tendency tendency in tendencies) {
+                tendency.Update();
+            }
+        }
+    }
+
+    #region Add
+
+        public void AddTendency(int productId) {
+            Tendency tendency = new Tendency(productId);
+            tendencies.Add(tendency);
+        }
+
+    #endregion
+
+    #region Remove
+
+        public void RemoveTendency(Tendency tendency) {
+            tendencies.Remove(tendency);
+        }
+
+        public void RemoveTendency(int index) {
+            tendencies.RemoveAt(index);
+        }
+
+    #endregion
+
+    #region Getters
+
+        public List<Tendency> GetTendencies() {
+            return tendencies;
+        }
+
+        public Tendency GetTendencies(int index) {
+            return tendencies[index];
+        }
+
+        public Tendency GetTendencies(Product product) {
+            return tendencies.Find(tendency => tendency.GetProductId() == product.GetId());
+        }
+
+    #endregion
 }

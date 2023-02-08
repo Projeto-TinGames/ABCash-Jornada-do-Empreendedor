@@ -4,27 +4,48 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public static class ProductManager {
+    private static bool started;
+
     private static List<Product> loadedProducts;
     private static UnityEvent<string> FinishLoadEvent = new UnityEvent<string>();
+    private static string filePath = Application.streamingAssetsPath + "/Products/products.json";
+
+    public static void Start() {
+        if (!started) {
+            Load();
+        }
+    }
 
     public static void Load() {
-        string filePath = Application.streamingAssetsPath + "/Products/products.json";
         FinishLoadEvent.AddListener(DefineProducts);
         DataManager.instance.Load(filePath, FinishLoadEvent);
     }
 
     private static void DefineProducts(string dataAsJson) {
-        ProductData data = JsonUtility.FromJson<ProductData>(dataAsJson);
-        loadedProducts = data.products;
+        if (loadedProducts == null) {
+            ProductData data = JsonUtility.FromJson<ProductData>(dataAsJson);
 
-        GalaxyMap.GenerateMap(null);
-    }
+            foreach (Product product in data.GetProducts()) {
+                product.SetSprite();
+                product.SetProductionTimeMetrics();
+            }
+            loadedProducts = data.GetProducts();
 
-    public static Product GetProduct(int id) {
-        return loadedProducts[id];
+            if (Company.GetProducts().Count == 0) {
+                for (int i = 0; i < 3; i++) {
+                    Company.AddProduct(loadedProducts[i]);
+                }
+            }
+
+            Universe.Generate();
+        }
     }
 
     public static List<Product> GetProducts() {
         return loadedProducts;
+    }
+
+    public static Product GetProducts(int id) {
+        return loadedProducts[id];
     }
 }

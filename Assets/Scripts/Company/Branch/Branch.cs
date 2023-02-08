@@ -3,22 +3,88 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Branch {
-    public int id;
-    public Market market;
-    public List<Sector> sectors = new List<Sector>();
+    private int id;
+    private string name;
+    private List<Sector> sectors = new List<Sector>();
 
-    public Branch(int id, Market market) {
+    public Branch(int id, string name) {
         this.id = id;
-        this.market = market;
+        this.name = name;
     }
 
     public Branch(BranchData branchData) {
-        this.id = branchData.id;
-        this.market = new Market(branchData.market);
+        this.id = branchData.GetId();
+        this.name = branchData.GetName();
         
-        foreach (SectorData sectorData in branchData.sectors) {
+        foreach (SectorData sectorData in branchData.GetSectors()) {
             Sector sector = new Sector(sectorData);
             this.sectors.Add(sector);
         }
     }
+
+    public void Update() {
+        foreach (Sector sector in sectors) {
+            sector.Update(Universe.GetGalaxies(id));
+        }
+    }
+
+    #region Add
+
+        public void AddSector(Sector sector) {
+            sectors.Add(sector);
+        }
+
+    #endregion
+
+    #region Remove
+
+        public void RemoveSector(Sector sector) {
+            sectors.Remove(sector);
+        }
+
+        public void RemoveSector(int index) {
+            sectors.RemoveAt(index);
+        }
+
+    #endregion
+
+    #region Getters
+
+        public int GetId() {
+            return id;
+        }
+
+        public string GetName() {
+            return name;
+        }
+
+        public List<Sector> GetSectors() {
+            return sectors;
+        }
+
+        public Sector GetSectors(int index) {
+            return sectors[index];
+        }
+
+    #endregion
+
+    #region Setters
+
+        public void SetId(int value) {
+            id = value;
+        }
+
+        public void SetName(string value) {
+            name = value;
+        }
+
+        public void SetSectors(List<Sector> value) {
+            sectors = value;
+        }
+
+        public void SetSectors(int index, Sector value) {
+            sectors[index] = value;
+        }
+
+    #endregion
 }

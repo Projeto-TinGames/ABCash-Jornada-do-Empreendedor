@@ -17,9 +17,31 @@ public class DataManager : MonoBehaviour {
     private void Awake() {
         if (instance == null) {
             instance = this;
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
         }
         else {
             Destroy(gameObject);
+        }
+
+        ProductManager.Start();
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.L)) { //Premade load for testing
+            Company.Reset();
+            Universe.Reset();
+
+            Universe.Generate();
+            Universe.Generate(Universe.GetGalaxies(0));
+
+            Branch branch = new Branch(0, "0,0");
+            branch.AddSector(new Sector(ProductManager.GetProducts(0), Universe.GetGalaxies(0)));
+
+            Company.AddAlien(new Repinch());
+            Company.AddBranch(branch);
+
+            SceneController.instance.Load("sc_universe");
         }
     }
     
@@ -32,7 +54,7 @@ public class DataManager : MonoBehaviour {
                 FinishLoadEvent.Invoke(dataAsJson);
             }
             else {
-                FinishLoadEvent.Invoke(string.Empty);
+                StartCoroutine(WebGetRequest(filePath, FinishLoadEvent));
             }
         #endif
 
@@ -60,7 +82,7 @@ public class DataManager : MonoBehaviour {
         yield return webRequest.SendWebRequest();
 
         if (webRequest.result == UnityWebRequest.Result.ProtocolError) {
-            Debug.LogError(webRequest.error);
+            //Debug.LogError(webRequest.error);
             FinishLoadEvent.Invoke(string.Empty);
         }
         else {

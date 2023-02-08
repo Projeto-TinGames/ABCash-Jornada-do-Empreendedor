@@ -15,8 +15,8 @@ public class AlienGenerator {
     }
 
     public Alien LoadAlien(AlienData alienData) {
-        Alien alien = species[alienData.speciesId];
-        alien.SetStats(alienData);
+        Alien alien = species[alienData.GetSpeciesId()];
+        alien.LoadStats(alienData);
         return alien;
     }
 }

@@ -4,29 +4,93 @@ using UnityEngine;
 
 [System.Serializable]
 public class AlienData {
-    public int speciesId;
-    public string name;
-    public float[] color;
-    public string planet;
-    public string sector;
-    public int age;
-    public int rank;
-    public int status = 100;
-    public int agility;
-    public int knowledge;
-    public float salary;
-    
+    [SerializeField]private int speciesId;
+    [SerializeField]private string name;
+    [SerializeField]private float[] color;
+    [SerializeField]private int galaxyId;
+    [SerializeField]private int productId;
+    [SerializeField]private int age;
+    [SerializeField]private int rank;
+    [SerializeField]private int status = 100;
+    [SerializeField]private int agility;
+    [SerializeField]private int wisdom;
+    [SerializeField]private int workGalaxyId;
+    [SerializeField]private bool isNull;
+
     public AlienData(Alien alien) {
-        this.speciesId = alien.speciesId;
-        this.name = alien.name;
-        this.color = new float[]{alien.color.r, alien.color.g, alien.color.b};
-        this.planet = alien.planet;
-        this.sector = alien.sector;
-        this.age = alien.age;
-        this.rank = alien.rank;
-        this.status = alien.status;
-        this.agility = alien.agility;
-        this.knowledge = alien.knowledge;
-        this.salary = alien.salary;
+        if (alien == null) {
+            this.isNull = true;
+        }
+
+        else {
+            this.speciesId = alien.GetSpeciesId();
+            this.name = alien.GetName();
+            this.color = new float[]{alien.GetColor().r, alien.GetColor().g, alien.GetColor().b};
+            this.galaxyId = alien.GetGalaxyId();
+            this.productId = alien.GetProductId();
+            this.age = alien.GetAge();
+            this.rank = alien.GetRank();
+            this.status = alien.GetStatus();
+            this.agility = alien.GetAgility();
+            this.wisdom = alien.GetWisdom();
+            this.isNull = false;
+            this.workGalaxyId = alien.GetWorkGalaxyId();
+        }
     }
+
+    #region Getters
+
+        public int GetSpeciesId() {
+            return speciesId;
+        }
+
+        public string GetName() {
+            return name;
+        }
+
+        public float[] GetColor() {
+            return color;
+        }
+
+        public float GetColor(int index) {
+            return color[index];
+        }
+
+        public int GetGalaxyId() {
+            return galaxyId;
+        }
+
+        public int GetProductId() {
+            return productId;
+        }
+
+        public int GetAge() {
+            return age;
+        }
+
+        public int GetRank() {
+            return rank;
+        }
+
+        public int GetStatus() {
+            return status;
+        }
+
+        public int GetAgility() {
+            return agility;
+        }
+
+        public int GetWisdom() {
+            return wisdom;
+        }
+
+        public int GetWorkGalaxyId() {
+            return workGalaxyId;
+        }
+
+        public bool GetIsNull() {
+            return isNull;
+        }
+
+    #endregion
 }
